@@ -103,10 +103,7 @@ public class MainActivity extends AppCompatActivity
         minDay = formateador.format(cal2.getTime());
         System.out.println("MINIMO DIA: " + minDay);
 
-        bundleP = new Bundle();
-        bundleS = new Bundle();
-        bundleT = new Bundle();
-        bundleC = new Bundle();
+
 
         pri = new primera();
         seg = new segunda();
@@ -145,6 +142,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void ejecutar1erJSON(){
+        bundleP = new Bundle();
+        bundleS = new Bundle();
+        bundleT = new Bundle();
+        bundleC = new Bundle();
+
+
         JSONCargarEventos json = new JSONCargarEventos(this, minDay, false);
         json.execute();
 
@@ -154,7 +157,11 @@ public class MainActivity extends AppCompatActivity
         JSONEventosUsuario jsonE = new JSONEventosUsuario(this, formateador.format(cal2.getTime()), "Jose", false); //cal.getTime()),"Jose");
         jsonE.execute();
     }
+
+    //yeaaaaaa
     public void ReloadALL(Boolean fromPopUP){
+        //Determina cual es el fragment activo y recargar ese
+        //Recargar ese y los del costado
         if (fromPopUP){
             System.out.println("ITEMMMMMMMMMMMMMMMMMMMMMMMM: " + mViewPager.getCurrentItem());
             switch (mViewPager.getCurrentItem()) {
@@ -181,8 +188,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void  JSONEventos(Boolean fromPopUP) {
-        //Determina cual es el fragment activo y recargar ese
-        //Recargar ese y los del costado
 
         ejecutar1erJSON();
 

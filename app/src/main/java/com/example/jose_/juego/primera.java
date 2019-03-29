@@ -62,7 +62,6 @@ public class primera extends android.support.v4.app.Fragment {
     }
 
     public void Refresh(){
-        LimpiarTodo();
         getEventosSemana();
         getEventosUsuario();
     }
@@ -74,9 +73,8 @@ public class primera extends android.support.v4.app.Fragment {
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
-        Refresh();
+  //      Refresh();
 
-     //   Refresh();
     }
 
     public void getDiaSemana(){

@@ -82,7 +82,7 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
                 //BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder sb = new StringBuilder("");
                 String line = "";
-                while ( reader.readLine() != null) {
+                while ((line = reader.readLine()) != null) {
                     System.out.println("borrarParticipacion TOSTRING: " + reader.readLine());
                     sb.append(line);
                 }
