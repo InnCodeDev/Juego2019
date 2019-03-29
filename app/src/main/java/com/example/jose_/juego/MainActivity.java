@@ -154,6 +154,8 @@ public class MainActivity extends AppCompatActivity
         JSONEventosUsuario jsonE = new JSONEventosUsuario(this, formateador.format(cal2.getTime()), "Jose", false); //cal.getTime()),"Jose");
         jsonE.execute();
     }
+
+    //yeaaaaaa
     public void ReloadALL(Boolean fromPopUP){
         if (fromPopUP){
             System.out.println("ITEMMMMMMMMMMMMMMMMMMMMMMMM: " + mViewPager.getCurrentItem());
@@ -163,6 +165,7 @@ public class MainActivity extends AppCompatActivity
                     seg.RELOADFRAGMENT();
                     break;
                 case 1:
+
                     pri.RELOADFRAGMENT();
                     seg.RELOADFRAGMENT();
                     ter.RELOADFRAGMENT();
