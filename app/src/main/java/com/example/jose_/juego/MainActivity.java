@@ -633,7 +633,7 @@ public class MainActivity extends AppCompatActivity
 
     public void continuarJSONPopUP(boolean fromPopU) {
         JSONEventos(fromPopU);
-        this.ReloadALL(fromPopU);
+        this.ReloadALL(true);
         this.popEvento.dismiss();
     }
 
