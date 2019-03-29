@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.jose_.juego">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--
+
+    SHA-1
+    69:BF:BE:80:38:C1:AF:A2:C8:94:5E:9E:4D:32:1D:1D:F3:FC:5A:F9
+
+    ID CLIENTE GOOGLE
+     978743906549-od0a4npfhpokhqdlu808grkske4979ep.apps.googleusercontent.com
+
+     Google Sign-In
+    978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com
+    -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".LoginActivity"
+            android:label="LoginActivity" />
+        <activity
+            android:name=".Disponibilidad"
+            android:label="disponibilidad" />
+<!--
+                <meta-data
+                    android:name="com.google.android.version" />
+                    android:value="978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com" />
+-->
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

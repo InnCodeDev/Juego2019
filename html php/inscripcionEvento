@@ -1,0 +1,33 @@
+<?php
+	include ("serverID.php");
+	header('Content-Type: application/json;  charset=UTF-8');
+
+	echo "INICIANDO PHP ";
+
+	$Fecha = $_GET['fecha'];
+	$idTurno = $_GET['turno'];
+  $idUsuario = $_GET['user'];
+
+	$con = mysql_connect(DBserver, DBuser, DBpass);
+
+	if (!$con){
+		die('Could not connect: ' + mysql_error());
+	}
+
+	mysql_select_db(DBname, $con);
+
+	//$id = mysql_result(mysql_query("SELECT MAX(id) FROM Locales"), 0)+2;
+
+
+  $sql = mysql_query( "INSERT INTO Eventos (turno, fecha, usuario) VALUES ('".$idTurno."', '".$Fecha."', '".$idUsuario."')");
+  echo $sql;
+  echo '<br />';
+
+  mysql_query($sql);
+
+//	$salida = $output;
+//	print(json_encode($salida));
+
+
+	mysql_close($con); // Cerramos la conexion con la base de datos
+?>

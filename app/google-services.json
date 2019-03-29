@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "978743906549",
+    "firebase_url": "https://juego-218123.firebaseio.com",
+    "project_id": "juego-218123",
+    "storage_bucket": "juego-218123.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978743906549:android:bb6c27c7e2b06fcd",
+        "android_client_info": {
+          "package_name": "com.example.jose_.juego"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978743906549-od0a4npfhpokhqdlu808grkske4979ep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jose_.juego",
+            "certificate_hash": "69bfbe8038c1afa2c8945e9e4d321d1df3fc5af9"
+          }
+        },
+        {
+          "client_id": "978743906549-dso3e40n4fgh9hi6hvo043orgibndb0t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jose_.juego",
+            "certificate_hash": "38cbc197162df8c2b4b3423258b0cc33a663212c"
+          }
+        },
+        {
+          "client_id": "978743906549-pah03t5sv8a7iffsv7bfatqcjavecuau.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABzTxSKMDX121DTQoyv9Lek8tKab-VlDU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978743906549-pah03t5sv8a7iffsv7bfatqcjavecuau.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

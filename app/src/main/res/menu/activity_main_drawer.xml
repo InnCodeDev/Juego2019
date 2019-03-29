@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/MiDisponibilidad"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Mi Disponibilidad" />
+        <item
+            android:id="@+id/info"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Informacion" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title=" " />
+        <item
+            android:id="@+id/cerrar_sesion"
+            android:icon="@android:drawable/ic_lock_power_off"
+            android:title="Cerrar Sesion" />
+    </group>
+
+    <item android:title="Comunicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Compartir" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Enviar Mensaje" />
+        </menu>
+    </item>
+
+</menu>
