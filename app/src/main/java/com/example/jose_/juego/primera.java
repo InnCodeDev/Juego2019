@@ -171,8 +171,8 @@ public class primera extends android.support.v4.app.Fragment {
         this.LimpiarTodo();
 
         getDiaSemana();
-        getEventosSemana();
-        getEventosUsuario();
+      //  getEventosSemana();
+      //  getEventosUsuario();
 
         TextView d1 = (TextView) view.findViewById(R.id.textView1001);
         cal2.add(Calendar.DAY_OF_WEEK,0);
