@@ -61,10 +61,17 @@ public class tercera extends android.support.v4.app.Fragment {
         return v;
     }
 
-    public void RELOADFRAGMENT (){
+    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b){
+        bundle = bu;
+        tercera = a;
+        terceraM = b;
+
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
+
+        Refresh();
     }
+
     public void getDiaSemana(){
         switch (cal4.get(Calendar.DAY_OF_WEEK)){
             case 1: //Domingo
@@ -90,44 +97,50 @@ public class tercera extends android.support.v4.app.Fragment {
                 break;
         }
     }
-    public void getEventosSemana(){ //View view){
-     if (tercera != null && tercera.size() >0) {
-         Iterator I = tercera.iterator();
-         int resID;
-         while (I.hasNext()) {
-             String txt = (String) I.next(); //2*textView10728
-             //  System.out.println("PRIIIIIIIIIIIIIII: " + txt);
 
-             String cant = txt.substring(0, txt.indexOf("*"));
-             //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
-             String txF = txt.substring(txt.indexOf("*") + 1, txt.length());
-             System.out.println("PRI3: " + txF);
+    public void getEventosSemana(){//View view){
+        if (tercera != null && tercera.size()>0){
+            System.out.println("tercera !! ... tiene " + tercera.size());
+            Iterator I = tercera.iterator();
+            int resID;
+            while(I.hasNext()){
+                String txt = (String) I.next(); //2*textView10728
+                if (txt.length()>1){
+                    String cant = txt.substring(0,txt.indexOf("*"));
+                    //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
+                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    System.out.println("TER1: " + txt + " -- " + txF);
 
-             resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
-             TextView ta = (TextView) this.getActivity().findViewById(resID);
-             ta.setText(cant);
-         }
-     }
+                    resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
+                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    ta.setText(cant);
+                }
+            }
+        }else{
+            System.out.println("......tercera es NULL o IGUAL A CERO...");
+        }
     }
-    public void getEventosUsuario(){ //View view){
-        // primera.add(cant + "*" + "textView" + semana +  turn + r);
-        if (terceraM != null && terceraM.size() > 0) {
+
+    public void getEventosUsuario(){
+        if (terceraM != null && terceraM.size()>0){
+            System.out.println("terceraM !! ... tiene " + terceraM.size());
             Iterator I = terceraM.iterator();
             int resID;
-            while (I.hasNext()) {
+            while(I.hasNext()){
                 String txt = (String) I.next(); //2*textView10728
-                //    String cant = txt.substring(0,txt.indexOf("*"));
-                if (txt.length() > 1) {
-                    String txF = txt.substring(txt.indexOf("*") + 1, txt.length());
-                    System.out.println("TER_ev_user: " + txF);
+                if (txt.length()>1){
+                        String cant = txt.substring(0,txt.indexOf("*"));
+                    String txF = txt.substring(txt.indexOf("*")+1,txt.length());
 
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
-                    TextView ta = (TextView) this.getActivity().findViewById(resID);
-                    // ta.setText(cant);
+                    TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
+                     ta.setText(cant);
+                    System.out.println("terceraM: " + txt + " -- " + txF );
                     ta.setBackgroundColor(Color.GREEN);
                 }
-
             }
+        }else{
+            System.out.println("......terceraM es NULL o IGUAL A CERO...");
         }
     }
 
@@ -147,9 +160,11 @@ public class tercera extends android.support.v4.app.Fragment {
             }
         }
     }
+
     public void Refresh(){
-        getEventosSemana(); //this.getView());
-        getEventosUsuario(); //this.getView());
+        LimpiarTodo();
+        getEventosSemana();
+        getEventosUsuario();
     }
 
     public void onViewCreated (View view, Bundle savedInstanceState){
