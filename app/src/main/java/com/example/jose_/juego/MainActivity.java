@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity
                     seg.RELOADFRAGMENT();
                     break;
                 case 1:
+
                     pri.RELOADFRAGMENT();
                     seg.RELOADFRAGMENT();
                     ter.RELOADFRAGMENT();
