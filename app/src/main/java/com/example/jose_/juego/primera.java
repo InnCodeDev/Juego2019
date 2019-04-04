@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -62,19 +63,27 @@ public class primera extends android.support.v4.app.Fragment {
     }
 
     public void Refresh(){
+        LimpiarTodo();
         getEventosSemana();
         getEventosUsuario();
     }
 
-    public void RELOADFRAGMENT (){
-
-        //getEventosSemana();
-        //getEventosUsuario();
+    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b){
+        bundle = bu;
+        primera = a;
+        primeraM = b;
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
-  //      Refresh();
 
+        Refresh();
+
+    }
+
+    public void actualizarBundle (Bundle bu, ArrayList a, ArrayList b){
+        bundle = bu;
+        primera = a;
+        primeraM = b;
     }
 
     public void getDiaSemana(){
@@ -105,12 +114,14 @@ public class primera extends android.support.v4.app.Fragment {
 
     public void getEventosSemana(){//View view){
         if (primera != null && primera.size()>0){
+            System.out.println("PRIMERA !! ... tiene " + primera.size());
             Iterator I = primera.iterator();
             int resID;
             while(I.hasNext()){
                 String txt = (String) I.next(); //2*textView10728
                 if (txt.length()>1){
                     String cant = txt.substring(0,txt.indexOf("*"));
+                    System.out.println("STRIIIIIIIIIIIING " + txt + " - " + cant);
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
                     String txF = txt.substring(txt.indexOf("*")+1, txt.length());
                     System.out.println("PRI1: " + txt + " -- " + txF);
@@ -120,18 +131,21 @@ public class primera extends android.support.v4.app.Fragment {
                     ta.setText(cant);
                 }
             }
+        }else{
+            System.out.println("......primera es NULL o IGUAL A CERO...");
         }
     }
 
     public void getEventosUsuario(){
         // primera.add(cant + "*" + "textView" + semana +  turn + r);
-        if (primeraM != null ){ //.size()>0){
+        if (primeraM != null && primeraM.size()>0){
+            System.out.println("PRIMERAMMM !! ... tiene " + primeraM.size());
             Iterator I = primeraM.iterator();
             int resID;
             while(I.hasNext()){
                 String txt = (String) I.next(); //2*textView10728
                 if (txt.length()>1){
-                    //    String cant = txt.substring(0,txt.indexOf("*"));
+               //         String cant = txt.substring(0,txt.indexOf("*"));
                     String txF = txt.substring(txt.indexOf("*")+1,txt.length());
 
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
@@ -142,8 +156,8 @@ public class primera extends android.support.v4.app.Fragment {
                 }
             }
         }else{
-            System.out.println("PrimeraM es NULL!!.....");}
-
+            System.out.println("......primeraM es NULL o IGUAL A CERO...");
+        }
     }
 
     public void LimpiarTodo (){
@@ -169,8 +183,8 @@ public class primera extends android.support.v4.app.Fragment {
         this.LimpiarTodo();
 
         getDiaSemana();
-      //  getEventosSemana();
-      //  getEventosUsuario();
+        //  getEventosSemana();
+        //  getEventosUsuario();
 
         TextView d1 = (TextView) view.findViewById(R.id.textView1001);
         cal2.add(Calendar.DAY_OF_WEEK,0);
@@ -196,9 +210,7 @@ public class primera extends android.support.v4.app.Fragment {
 
         System.out.println("ENTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 1" );
 
-        this.LimpiarTodo();
         Refresh();
-
     }
 
     public String getMinDay(){

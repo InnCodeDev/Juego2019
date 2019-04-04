@@ -103,7 +103,10 @@ public class MainActivity extends AppCompatActivity
         minDay = formateador.format(cal2.getTime());
         System.out.println("MINIMO DIA: " + minDay);
 
-
+        bundleP = new Bundle();
+        bundleS = new Bundle();
+        bundleT = new Bundle();
+        bundleC = new Bundle();
 
         pri = new primera();
         seg = new segunda();
@@ -146,8 +149,6 @@ public class MainActivity extends AppCompatActivity
         bundleS = new Bundle();
         bundleT = new Bundle();
         bundleC = new Bundle();
-
-
         JSONCargarEventos json = new JSONCargarEventos(this, minDay, false);
         json.execute();
 
@@ -160,35 +161,35 @@ public class MainActivity extends AppCompatActivity
 
     //yeaaaaaa
     public void ReloadALL(Boolean fromPopUP){
-        //Determina cual es el fragment activo y recargar ese
-        //Recargar ese y los del costado
         if (fromPopUP){
+            //Determina cual es el fragment activo y recargar ese
+            //Recargar ese y los del costado
             System.out.println("ITEMMMMMMMMMMMMMMMMMMMMMMMM: " + mViewPager.getCurrentItem());
             switch (mViewPager.getCurrentItem()) {
                 case 0:
-                    pri.RELOADFRAGMENT();
-                    seg.RELOADFRAGMENT();
+                    pri.RELOADFRAGMENT(bundleP, primera, primeraM);;
+                    seg.RELOADFRAGMENT(bundleS, segunda, segundaM);
                     break;
                 case 1:
-
-                    pri.RELOADFRAGMENT();
-                    seg.RELOADFRAGMENT();
-                    ter.RELOADFRAGMENT();
+                    pri.RELOADFRAGMENT(bundleP, primera, primeraM);;
+                    seg.RELOADFRAGMENT(bundleS, segunda, segundaM);
+                    ter.RELOADFRAGMENT(bundleT, tercera, terceraM);
                     break;
                 case 2:
-                    seg.RELOADFRAGMENT();
-                    ter.RELOADFRAGMENT();
-                    cuar.RELOADFRAGMENT();
+                    seg.RELOADFRAGMENT(bundleS, segunda, segundaM);
+                    ter.RELOADFRAGMENT(bundleT, tercera, terceraM);
+                    cuar.RELOADFRAGMENT(bundleC, cuarta, cuartaM);
                     break;
                 case 3:
-                    ter.RELOADFRAGMENT();
-                    cuar.RELOADFRAGMENT();
+                    ter.RELOADFRAGMENT(bundleT, tercera, terceraM);
+                    cuar.RELOADFRAGMENT(bundleC, cuarta, cuartaM);
                     break;
             }
         }
     }
 
     public void  JSONEventos(Boolean fromPopUP) {
+
 
         ejecutar1erJSON();
 
@@ -199,6 +200,8 @@ public class MainActivity extends AppCompatActivity
         bundleS.putStringArrayList("a", segunda);
         bundleT.putStringArrayList("a", tercera);
         bundleC.putStringArrayList("a", cuarta);
+        cargarBundleEventosUsuario ();
+
     }
 
     public void cargarBundleEventosUsuario (){
@@ -206,6 +209,7 @@ public class MainActivity extends AppCompatActivity
         bundleS.putStringArrayList("b", segundaM);
         bundleT.putStringArrayList("b", terceraM);
         bundleC.putStringArrayList("b", cuartaM);
+        this.terminarJSONEVENTOS();
     }
 
     public void terminarJSONEVENTOS(){
@@ -213,6 +217,10 @@ public class MainActivity extends AppCompatActivity
         seg.setArguments(bundleS);
         ter.setArguments(bundleT);
         cuar.setArguments(bundleC);
+
+      //  pri.actualizarBundle(bundleP, primera, primeraM);
+      //  seg.actualizarBundle(bundleS, segunda, segundaM);
+        this.ReloadALL(true);
 
         System.out.println("...........SALIENDO DE JSONEVENTOS................");
     }
@@ -323,10 +331,11 @@ public class MainActivity extends AppCompatActivity
 
         Iterator I = arrayEvento.iterator();
         while (I.hasNext()) {
-            String t = (String) I.next();  //7*28-09-2018*2
-            //       System.out.println("BBBBBBBBB: " + t); //2*02-11-2018*7
+            String t = (String) I.next();  //7*28-09-2018 turno*fecha
+                   System.out.println("BBBBBBBBB: " + t); //2*02-11-2018*7
             String turno = t.substring(0, t.indexOf("*"));
             fecha = t.substring(t.indexOf("*") + 1, t.length());
+//            int cant = Integer.valueOf(t.substring(t.lastIndexOf("*")+1),t.length());
 
             String dia = (fecha.substring(0, fecha.indexOf("-")));
             turn = "";
@@ -346,18 +355,15 @@ public class MainActivity extends AppCompatActivity
             da.setMonth(mes - 1);
             da.setYear(ano - 1900);
 
-            semana = 0;
             try {
                 long sem = 0;
                 Date dat2 = formateador.parse(minDay);//pri.getMinDay());
-                //        System.out.println(da.toLocaleString() + " -- " + dat2.toLocaleString());
                 sem = (da.getTime() - dat2.getTime()) / (1000 * 60 * 60 * 24);
 
-
-                if ((sem / 6) < 1) {
+                if ((sem / 6) <= 1) {
                     semana = 1;
                 } else {
-                    if ((sem / 6) < 2) {
+                    if ((sem / 6) <= 2) {
                         semana = 2;
                     } else {
                         if ((sem / 6) <= 3) {
@@ -447,16 +453,13 @@ public class MainActivity extends AppCompatActivity
                 resID = getResources().getIdentifier(txF, "id", this.getPackageName());
                 TextView ta = (TextView) this.findViewById(resID);
                // ta.setText(cant1);
-                ta.setBackgroundColor(Color.GREEN);
+//                ta.setBackgroundColor(Color.GREEN);
 
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
         cargarBundleEventos ();
-        cargarBundleEventosUsuario ();
-        this.terminarJSONEVENTOS();
-
     }
 
     public void continuarJSONCargarEventos(ArrayList a, boolean fromPopUp) {
@@ -509,10 +512,10 @@ public class MainActivity extends AppCompatActivity
                 //Fecha del evento - Fecha Menor dia de esa semana
                 sem = (da.getTime() - dat2.getTime()) / (1000 * 60 * 60 * 24); //Diferencia de dias entre ambas fechas
 
-                if ((sem / 6) < 1) {
+                if ((sem / 6) <= 1) {
                     semana = 1;
                 } else {
-                    if ((sem / 6) < 2) {
+                    if ((sem / 6) <= 2) {
                         semana = 2;
                     } else {
                         if ((sem / 6) <= 3) {
@@ -559,7 +562,7 @@ public class MainActivity extends AppCompatActivity
                 cal2 = cal;
 
                 switch (semana1) {
-                    case "1":
+                    case "01":
                         System.out.println("FECH 1: " + fech);
 
                         System.out.println("MINIMO DIA 1: " + formateador.format(cal2.getTime()));
@@ -571,7 +574,7 @@ public class MainActivity extends AppCompatActivity
                         primera.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         break;
 
-                    case "2":
+                    case "02":
                         System.out.println("FECH 2: " + fech);
                         cal2.add(Calendar.DAY_OF_MONTH, 7);
                         System.out.println("MINIMO DIA 2: " + formateador.format(cal2.getTime()));
@@ -586,7 +589,7 @@ public class MainActivity extends AppCompatActivity
                         cal2.add(Calendar.DAY_OF_MONTH, -7);
                         break;
 
-                    case "3":
+                    case "03":
                         System.out.println("FECH 3: " + fech);
 
                         cal2.add(Calendar.DAY_OF_MONTH, 14);
@@ -602,7 +605,7 @@ public class MainActivity extends AppCompatActivity
                         cal2.add(Calendar.DAY_OF_MONTH, -14);
                         break;
 
-                    case "4":
+                    case "04":
                         System.out.println("FECH 4: " + fech);
                         cal2.add(Calendar.DAY_OF_MONTH, 21);
                         System.out.println("MINIMO DIA 4: " + formateador.format(cal2.getTime()));
@@ -620,13 +623,13 @@ public class MainActivity extends AppCompatActivity
                         break;
                 }
 
-                String txF = txt.substring(txt.indexOf("*") + 1, txt.indexOf("w") + 2) + tur + r;
+         /*       String txF = txt.substring(txt.indexOf("*") + 1, txt.indexOf("w") + 2) + tur + r;
                 System.out.println("PRII: " + txF + " - Cant: " + cant1);
 
                 resID = getResources().getIdentifier(txF, "id", this.getPackageName());
                 TextView ta = (TextView) this.findViewById(resID);
                 ta.setText(cant1);
-
+*/
             } catch (ParseException e) {
                 e.printStackTrace();
             }

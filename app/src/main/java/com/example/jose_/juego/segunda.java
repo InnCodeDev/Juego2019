@@ -57,15 +57,29 @@ public class segunda extends android.support.v4.app.Fragment {
         View v = inflater.inflate(R.layout.fragment_segunda, container, false);
         return v;
     }
+
     public void Refresh(){
         LimpiarTodo();
-        getEventosSemana(); //this.getView());
-        getEventosUsuario(); //this.getView());
+        getEventosSemana();
+        getEventosUsuario();
     }
-    public void RELOADFRAGMENT (){
+
+    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b){
+        bundle = bu;
+        segunda = a;
+        segundaM = b;
+
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
+
+        Refresh();
     }
+    public void actualizarBundle (Bundle bu, ArrayList a, ArrayList b){
+        bundle = bu;
+        segunda = a;
+        segundaM = b;
+    }
+
     public void getDiaSemana(){
         switch (cal3.get(Calendar.DAY_OF_WEEK)){
             case 1: //Domingo
@@ -92,46 +106,50 @@ public class segunda extends android.support.v4.app.Fragment {
         }
     }
 
-    public void getEventosSemana(){
-    //    if (segunda != null){
+    public void getEventosSemana(){//View view){
         if (segunda != null && segunda.size()>0){
+            System.out.println("PRIMERA !! ... tiene " + segunda.size());
             Iterator I = segunda.iterator();
             int resID;
-            while (I.hasNext()) {
-                String txt = (String) I.next(); //6*textView2122
+            while(I.hasNext()){
+                String txt = (String) I.next(); //2*textView10728
                 if (txt.length()>1){
-                    String cant = txt.substring(0, txt.indexOf("*"));
-                    String txF = txt.substring(txt.indexOf("*") + 1, txt.length());
-                    System.out.println("PRI2: " + txt + " -- " + txF);
+                    String cant = txt.substring(0,txt.indexOf("*"));
+                    //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
+                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    System.out.println("SEG1: " + txt + " -- " + txF);
 
-                    resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
-                    TextView ta = (TextView) this.getActivity().findViewById(resID);
+                    resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
+                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
                     ta.setText(cant);
                 }
-
             }
+        }else{
+            System.out.println("......segunda es NULL o IGUAL A CERO...");
         }
     }
 
     public void getEventosUsuario(){
         // primera.add(cant + "*" + "textView" + semana +  turn + r);
         if (segundaM != null && segundaM.size()>0){
+            System.out.println("PRIMERAMMM !! ... tiene " + segundaM.size());
             Iterator I = segundaM.iterator();
             int resID;
-            while (I.hasNext()) {
+            while(I.hasNext()){
                 String txt = (String) I.next(); //2*textView10728
                 if (txt.length()>1){
-                    //    String cant = txt.substring(0,txt.indexOf("*"));
-                    String txF = txt.substring(txt.indexOf("*") + 1, txt.length());
-                    System.out.println("SEG_ev_user: " + txF);
+                        String cant = txt.substring(0,txt.indexOf("*"));
+                    String txF = txt.substring(txt.indexOf("*")+1,txt.length());
 
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
-                    TextView ta = (TextView) this.getActivity().findViewById(resID);
-                    // ta.setText(cant);
+                    TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
+                     ta.setText(cant);
+                    System.out.println("segundaM: " + txt + " -- " + txF );
                     ta.setBackgroundColor(Color.GREEN);
                 }
-
             }
+        }else{
+            System.out.println("......segundaM es NULL o IGUAL A CERO...");
         }
     }
 
@@ -155,44 +173,38 @@ public class segunda extends android.support.v4.app.Fragment {
     public void onViewCreated (View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
+        this.LimpiarTodo();
+
         getDiaSemana();
+
+        TextView d1 = (TextView) view.findViewById(R.id.textView2001);
+        cal3.add(Calendar.DAY_OF_WEEK,7);
+        d1.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
+
+        //     SimpleDateFormat formateador = new SimpleDateFormat("dd/mm/yyyy");
+        //     minDay = formateador.format(cal3); //cal2.getTime();
+
+        TextView d2 = (TextView) view.findViewById(R.id.textView2002);
+        cal3.add(Calendar.DAY_OF_WEEK,1);
+        d2.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
+        TextView d3 = (TextView) view.findViewById(R.id.textView2003);
+        cal3.add(Calendar.DAY_OF_WEEK,1);
+        d3.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
+        TextView d4 = (TextView) view.findViewById(R.id.textView2004);
+        cal3.add(Calendar.DAY_OF_WEEK,1);
+        d4.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
+        TextView d5 = (TextView) view.findViewById(R.id.textView2005);
+        cal3.add(Calendar.DAY_OF_WEEK,1);
+        d5.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
+        TextView d6 = (TextView) view.findViewById(R.id.textView2006);
+        cal3.add(Calendar.DAY_OF_WEEK,1);
+        d6.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
+
+        cal3.add(Calendar.DAY_OF_WEEK,-12);
         getEventosSemana();
-        getEventosUsuario();
-
-      //  if (creado == false){
-            creado = true;
-
-            //   System.out.println("22222222222222222222   " + cal3.get(Calendar.DAY_OF_MONTH)+ " - " +cal3.get(Calendar.DAY_OF_MONTH));
-
-            TextView d1 = (TextView) view.findViewById(R.id.textView2001);
-            cal3.add(Calendar.DAY_OF_WEEK,7);
-            d1.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
-
-            //     SimpleDateFormat formateador = new SimpleDateFormat("dd/mm/yyyy");
-            //     minDay = formateador.format(cal3); //cal2.getTime();
-
-            TextView d2 = (TextView) view.findViewById(R.id.textView2002);
-            cal3.add(Calendar.DAY_OF_WEEK,1);
-            d2.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
-            TextView d3 = (TextView) view.findViewById(R.id.textView2003);
-            cal3.add(Calendar.DAY_OF_WEEK,1);
-            d3.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
-            TextView d4 = (TextView) view.findViewById(R.id.textView2004);
-            cal3.add(Calendar.DAY_OF_WEEK,1);
-            d4.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
-            TextView d5 = (TextView) view.findViewById(R.id.textView2005);
-            cal3.add(Calendar.DAY_OF_WEEK,1);
-            d5.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
-            TextView d6 = (TextView) view.findViewById(R.id.textView2006);
-            cal3.add(Calendar.DAY_OF_WEEK,1);
-            d6.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
-
-            cal3.add(Calendar.DAY_OF_WEEK,-12);
-            getEventosSemana(); //view);
-  //      }
 
         System.out.println("ENTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 2");
-        this.LimpiarTodo();
+
         this.Refresh();
     }
 
