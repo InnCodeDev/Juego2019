@@ -478,6 +478,7 @@ public class MainActivity extends AppCompatActivity
         int semana = 0;
         while (I.hasNext()) {
             String t = (String) I.next();  //7*28-09-2018*2
+            System.out.println("AAAAAAAAAA... " + t);
             turno = t.substring(0, t.indexOf("*"));
             fecha = t.substring(t.indexOf("*") + 1, t.lastIndexOf("*"));
             cant = t.substring(t.lastIndexOf("*") + 1, t.length());
@@ -562,9 +563,8 @@ public class MainActivity extends AppCompatActivity
                 cal2 = cal;
 
                 switch (semana1) {
-                    case "01":
+                    case "1":
                         System.out.println("FECH 1: " + fech);
-
                         System.out.println("MINIMO DIA 1: " + formateador.format(cal2.getTime()));
                         date2 = formateador.parse(minDay);
                         r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
@@ -574,7 +574,7 @@ public class MainActivity extends AppCompatActivity
                         primera.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         break;
 
-                    case "02":
+                    case "2":
                         System.out.println("FECH 2: " + fech);
                         cal2.add(Calendar.DAY_OF_MONTH, 7);
                         System.out.println("MINIMO DIA 2: " + formateador.format(cal2.getTime()));
@@ -589,7 +589,7 @@ public class MainActivity extends AppCompatActivity
                         cal2.add(Calendar.DAY_OF_MONTH, -7);
                         break;
 
-                    case "03":
+                    case "3":
                         System.out.println("FECH 3: " + fech);
 
                         cal2.add(Calendar.DAY_OF_MONTH, 14);
@@ -605,7 +605,7 @@ public class MainActivity extends AppCompatActivity
                         cal2.add(Calendar.DAY_OF_MONTH, -14);
                         break;
 
-                    case "04":
+                    case "4":
                         System.out.println("FECH 4: " + fech);
                         cal2.add(Calendar.DAY_OF_MONTH, 21);
                         System.out.println("MINIMO DIA 4: " + formateador.format(cal2.getTime()));

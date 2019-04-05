@@ -74,11 +74,6 @@ public class segunda extends android.support.v4.app.Fragment {
 
         Refresh();
     }
-    public void actualizarBundle (Bundle bu, ArrayList a, ArrayList b){
-        bundle = bu;
-        segunda = a;
-        segundaM = b;
-    }
 
     public void getDiaSemana(){
         switch (cal3.get(Calendar.DAY_OF_WEEK)){
@@ -138,13 +133,13 @@ public class segunda extends android.support.v4.app.Fragment {
             while(I.hasNext()){
                 String txt = (String) I.next(); //2*textView10728
                 if (txt.length()>1){
-                        String cant = txt.substring(0,txt.indexOf("*"));
+                    //         String cant = txt.substring(0,txt.indexOf("*"));
                     String txF = txt.substring(txt.indexOf("*")+1,txt.length());
 
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
-                     ta.setText(cant);
-                    System.out.println("segundaM: " + txt + " -- " + txF );
+                    // ta.setText(cant);
+                    System.out.println("SegundaM: " + txt + " -- " + txF );
                     ta.setBackgroundColor(Color.GREEN);
                 }
             }

@@ -129,12 +129,12 @@ public class tercera extends android.support.v4.app.Fragment {
             while(I.hasNext()){
                 String txt = (String) I.next(); //2*textView10728
                 if (txt.length()>1){
-                        String cant = txt.substring(0,txt.indexOf("*"));
+                 //       String cant = txt.substring(0,txt.indexOf("*"));
                     String txF = txt.substring(txt.indexOf("*")+1,txt.length());
 
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
-                     ta.setText(cant);
+                  //   ta.setText(cant);
                     System.out.println("terceraM: " + txt + " -- " + txF );
                     ta.setBackgroundColor(Color.GREEN);
                 }
@@ -170,42 +170,41 @@ public class tercera extends android.support.v4.app.Fragment {
     public void onViewCreated (View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
+        this.LimpiarTodo();
+
         getDiaSemana();
-        getEventosSemana(); //this.getView());
-        getEventosUsuario(); //this.getView());
 
-   //     if (creado == false){
-            creado = true;
+        System.out.println("33333333333333333333   " + cal4.get(Calendar.DAY_OF_MONTH) + " - " +cal4.get(Calendar.DAY_OF_MONTH));
 
-            System.out.println("33333333333333333333   " + cal4.get(Calendar.DAY_OF_MONTH) + " - " +cal4.get(Calendar.DAY_OF_MONTH));
+        TextView d1 = (TextView) view.findViewById(R.id.textView3001);
+        cal4.add(Calendar.DAY_OF_WEEK,14);
+        d1.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
 
+        //      SimpleDateFormat formateador = new SimpleDateFormat("dd/mm/yyyy");
+        //      minDay = formateador.format(cal4); //cal2.getTime();
 
-            TextView d1 = (TextView) view.findViewById(R.id.textView3001);
-            cal4.add(Calendar.DAY_OF_WEEK,14);
-            d1.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
+        TextView d2 = (TextView) view.findViewById(R.id.textView3002);
+        cal4.add(Calendar.DAY_OF_WEEK,1);
+        d2.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
+        TextView d3 = (TextView) view.findViewById(R.id.textView3003);
+        cal4.add(Calendar.DAY_OF_WEEK,1);
+        d3.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
+        TextView d4 = (TextView) view.findViewById(R.id.textView3004);
+        cal4.add(Calendar.DAY_OF_WEEK,1);
+        d4.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
+        TextView d5 = (TextView) view.findViewById(R.id.textView3005);
+        cal4.add(Calendar.DAY_OF_WEEK,1);
+        d5.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
+        TextView d6 = (TextView) view.findViewById(R.id.textView3006);
+        cal4.add(Calendar.DAY_OF_WEEK,1);
+        d6.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
 
-            //      SimpleDateFormat formateador = new SimpleDateFormat("dd/mm/yyyy");
-            //      minDay = formateador.format(cal4); //cal2.getTime();
+        cal4.add(Calendar.DAY_OF_WEEK,-19);
+        getEventosSemana();
 
-            TextView d2 = (TextView) view.findViewById(R.id.textView3002);
-            cal4.add(Calendar.DAY_OF_WEEK,1);
-            d2.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
-            TextView d3 = (TextView) view.findViewById(R.id.textView3003);
-            cal4.add(Calendar.DAY_OF_WEEK,1);
-            d3.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
-            TextView d4 = (TextView) view.findViewById(R.id.textView3004);
-            cal4.add(Calendar.DAY_OF_WEEK,1);
-            d4.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
-            TextView d5 = (TextView) view.findViewById(R.id.textView3005);
-            cal4.add(Calendar.DAY_OF_WEEK,1);
-            d5.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
-            TextView d6 = (TextView) view.findViewById(R.id.textView3006);
-            cal4.add(Calendar.DAY_OF_WEEK,1);
-            d6.setText(String.valueOf(cal4.get(Calendar.DAY_OF_MONTH )));
+        System.out.println("ENTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 2");
 
-            cal4.add(Calendar.DAY_OF_WEEK,-19);
-            getEventosSemana(); //view);
-    //    }
+        this.Refresh();
 
     }
 

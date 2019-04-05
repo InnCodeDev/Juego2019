@@ -80,12 +80,6 @@ public class primera extends android.support.v4.app.Fragment {
 
     }
 
-    public void actualizarBundle (Bundle bu, ArrayList a, ArrayList b){
-        bundle = bu;
-        primera = a;
-        primeraM = b;
-    }
-
     public void getDiaSemana(){
         switch (cal2.get(Calendar.DAY_OF_WEEK)){
             case 1: //Domingo
@@ -112,7 +106,7 @@ public class primera extends android.support.v4.app.Fragment {
         }
     }
 
-    public void getEventosSemana(){//View view){
+    public void getEventosSemana(){  //(cant1 + "*" + "textView" + semana1 + tur + r);
         if (primera != null && primera.size()>0){
             System.out.println("PRIMERA !! ... tiene " + primera.size());
             Iterator I = primera.iterator();
@@ -137,7 +131,7 @@ public class primera extends android.support.v4.app.Fragment {
     }
 
     public void getEventosUsuario(){
-        // primera.add(cant + "*" + "textView" + semana +  turn + r);
+        // primeraM.add("textView" + semana +  turn + r);
         if (primeraM != null && primeraM.size()>0){
             System.out.println("PRIMERAMMM !! ... tiene " + primeraM.size());
             Iterator I = primeraM.iterator();
