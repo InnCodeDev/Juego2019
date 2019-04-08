@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,19 +64,19 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Set up the ViewPager with the sections adapter.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter); //adapter); //mSectionsPagerAdapter);
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) { //adapter.getCount(); i++) {
             mViewPager.getChildAt(i + 1);
         }
 
         //Aca estaba codigo de Floating Button
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,13 +87,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         // final
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -126,12 +127,12 @@ public class MainActivity extends AppCompatActivity
             FB_foto = this.getIntent().getStringExtra("FotoURL"); //mAuth.getCurrentUser().getPhotoUrl().toString();
             System.out.println("Foto: " + FB_foto + " --- " + mAuth.getCurrentUser().getPhotoUrl().toString());
 
-            TextView t_user = (TextView) headerLayout.findViewById(R.id.nombreUser); //navigationView.findViewById(R.id.nombreUser);
+            TextView t_user = headerLayout.findViewById(R.id.nombreUser); //navigationView.findViewById(R.id.nombreUser);
             t_user.setText(FB_user);
-            TextView t_mail = (TextView) headerLayout.findViewById(R.id.mailUser); //navigationView.findViewById(R.id.mailUser);
+            TextView t_mail = headerLayout.findViewById(R.id.mailUser); //navigationView.findViewById(R.id.mailUser);
             t_mail.setText(FB_mail);
 
-            ImageView t_img = (ImageView) headerLayout.findViewById(R.id.imageUser);
+            ImageView t_img = headerLayout.findViewById(R.id.imageUser);
 
             Glide.with(this).load(mAuth.getCurrentUser().getPhotoUrl().toString())
                     .crossFade()
@@ -167,11 +168,11 @@ public class MainActivity extends AppCompatActivity
             System.out.println("ITEMMMMMMMMMMMMMMMMMMMMMMMM: " + mViewPager.getCurrentItem());
             switch (mViewPager.getCurrentItem()) {
                 case 0:
-                    pri.RELOADFRAGMENT(bundleP, primera, primeraM);;
+                    pri.RELOADFRAGMENT(bundleP, primera, primeraM);
                     seg.RELOADFRAGMENT(bundleS, segunda, segundaM);
                     break;
                 case 1:
-                    pri.RELOADFRAGMENT(bundleP, primera, primeraM);;
+                    pri.RELOADFRAGMENT(bundleP, primera, primeraM);
                     seg.RELOADFRAGMENT(bundleS, segunda, segundaM);
                     ter.RELOADFRAGMENT(bundleT, tercera, terceraM);
                     break;
@@ -189,10 +190,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void  JSONEventos(Boolean fromPopUP) {
-
-
         ejecutar1erJSON();
-
     }
 
     public void cargarBundleEventos (){
@@ -201,7 +199,6 @@ public class MainActivity extends AppCompatActivity
         bundleT.putStringArrayList("a", tercera);
         bundleC.putStringArrayList("a", cuarta);
         cargarBundleEventosUsuario ();
-
     }
 
     public void cargarBundleEventosUsuario (){
@@ -225,6 +222,38 @@ public class MainActivity extends AppCompatActivity
         System.out.println("...........SALIENDO DE JSONEVENTOS................");
     }
 
+    public void onClickUsuarios (View v){
+
+String t = getResources().getResourceEntryName(v.getId());
+        int resID = getResources().getIdentifier(t, "id", this.getPackageName());
+        TextView btn = findViewById(resID);
+
+        //TextView btn = findViewById(R.id.lbl_participantes);
+        EditText edit = findViewById(R.id.editText);
+        System.out.println("ON CLICK USUARIOSSS " + btn.getText().toString());
+
+
+        if (btn.getText().toString().compareTo("Ver participantes") == 0){
+            edit.setHeight(125);
+            btn.setText("Ocultar Participantes");
+        }else{
+            edit.setHeight(1);
+            btn.setText("Ocultar Participantes");
+        }
+
+    }
+    public void continuarJSONEmostrarUsuarios(ArrayList a){
+        ArrayList usuarios = a;
+
+        Iterator I = usuarios.iterator();
+        while (I.hasNext()) {
+            String user = (String) I.next();
+            System.out.println("USUARIOS: " + user);
+
+
+        }
+
+    }
     public void onClickEvento(View v) {
         //   Toast.makeText(this,"UID: " + mAuth.getCurrentUser().getIdToken(true).toString(),Toast.LENGTH_SHORT).show();
         //   System.out.println("UID: " + mAuth.getCurrentUser().getIdToken(true).toString());
@@ -299,7 +328,7 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
             resID = getResources().getIdentifier(btn, "id", this.getPackageName());
-            TextView tview = (TextView) findViewById(resID);
+            TextView tview = findViewById(resID);
 
             //Si BackgroundColor es Verde; esta inscripto.. si es gris (o no verde) se puede inscribir = falso
             boolean inscripto = false;
@@ -451,7 +480,7 @@ public class MainActivity extends AppCompatActivity
                 System.out.println("eventosUsuario  TXF: " + txF);
 
                 resID = getResources().getIdentifier(txF, "id", this.getPackageName());
-                TextView ta = (TextView) this.findViewById(resID);
+                TextView ta = this.findViewById(resID);
                // ta.setText(cant1);
 //                ta.setBackgroundColor(Color.GREEN);
 
@@ -674,7 +703,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -728,7 +757,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 

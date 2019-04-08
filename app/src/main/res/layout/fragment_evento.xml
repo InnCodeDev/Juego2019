@@ -89,7 +89,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="5dp"
         android:background="#a1a0a0"
         android:gravity="bottom|center_horizontal"
         android:onClick="onClickEvento"
@@ -97,5 +97,30 @@
         android:singleLine="true"
         android:text="PARTICIPAR !!"
         android:textColor="#fefefe" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:id="@+id/lbl_participantes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickUsuarios"
+            android:text="Ver participantes"
+            android:gravity="bottom|center_horizontal"
+            android:textStyle="normal|bold" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:ems="10"
+        android:inputType="textMultiLine" />
 
 </LinearLayout>
