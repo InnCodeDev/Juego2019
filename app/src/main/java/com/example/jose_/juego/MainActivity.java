@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +39,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
 
 public class MainActivity extends AppCompatActivity
@@ -164,7 +168,6 @@ public class MainActivity extends AppCompatActivity
         jsonE.execute();
     }
 
-    //yeaaaaaa
     public void ReloadALL(Boolean fromPopUP){
         if (fromPopUP){
             //Determina cual es el fragment activo y recargar ese
@@ -226,19 +229,41 @@ public class MainActivity extends AppCompatActivity
         System.out.println("...........SALIENDO DE JSONEVENTOS................");
     }
 
+    public void continuarJSONEmostrarUsuarios(View v, TextView bt, TextView s, ArrayList a){
 
-    public void continuarJSONEmostrarUsuarios(ArrayList a){
         ArrayList usuarios = a;
+        TextView btn = bt; //getResources().getResourceEntryName( R.id.lbl_participantes);
+        TextView sc = s; //getResources().getResourceEntryName(R.id.sc_participantes);
 
-        Iterator I = usuarios.iterator();
-        while (I.hasNext()) {
-            String user = (String) I.next();
-            System.out.println("USUARIOS: " + user);
 
+        System.out.println("ON CLICK USUARIOSSS " + btn.getText());
+
+        if (btn.getText().toString().compareTo("Ver Participantes") == 0){
+      //      sc.setHeight(150);
+            btn.setText("Ocultar Participantes");
+
+            ArrayList <String> text = new ArrayList<String>();
+            text.add("PARTICIPANTES: <br>");
+
+            Iterator I = usuarios.iterator();
+            while (I.hasNext()) {
+                String user = (String) I.next();
+                System.out.println("USUARIOS: " + user);
+                text.add("<b>" + user + "</b>");
+                text.add("<b>" + "joseee" + "</b>");
+                text.add("<b>" + "jooo" + "</b>");
+            }
+            sc.setText(Html.fromHtml(text.toString()));
+        }else{
+            sc.setText("");
+         //   sc.setHeight(1);
+            btn.setText("Ver Participantes");
 
         }
 
+
     }
+
     public void onClickEvento(View v) {
         //   Toast.makeText(this,"UID: " + mAuth.getCurrentUser().getIdToken(true).toString(),Toast.LENGTH_SHORT).show();
         //   System.out.println("UID: " + mAuth.getCurrentUser().getIdToken(true).toString());

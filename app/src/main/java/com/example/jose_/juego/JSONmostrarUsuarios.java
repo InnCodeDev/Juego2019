@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,21 +27,22 @@ public class JSONmostrarUsuarios extends AsyncTask<String, String, String>
     ArrayList<String> arrayDispo = new ArrayList <String> ();
     ProgressDialog pDialog;
     Context context;
-    String minFecha="";
+    String dia="";
     String turno="";
     boolean popup;
-
-
+View view;
+TextView btn, sc;
     public ArrayList <String> getarrayDispo (){
         return arrayDispo;
     }
 
-    public JSONmostrarUsuarios (MainActivity disp, String fecha, String turn, boolean pop){//Ademas tiene que recibir el nombre de usuario loggeado
-        //User = u;
-        popup = pop;
+    public JSONmostrarUsuarios(View v, MainActivity disp, String turn, String di, TextView bt, TextView s){//Ademas tiene que recibir el nombre de usuario loggeado
+        view = v;
         context = disp;
-        minFecha = fecha;
         turno = turn;
+        dia = di;
+        btn = bt;
+        sc = s;
         pDialog = new ProgressDialog(disp);
         pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
         pDialog.setMessage("Cargando participantes... \n\nPor favor espere..");
@@ -60,8 +63,7 @@ public class JSONmostrarUsuarios extends AsyncTask<String, String, String>
         int responseCode=0;
         try{
             ServerID server = ServerID.getInstance();
-            System.out.println("min fecha:   " + minFecha);
-            String urlString = server.DBserver+"mostrarUsuarios.php?fecha="+minFecha+"&turno="+turno; //Pasar la fecha a partir de cuando filtrar
+            String urlString = server.DBserver+"mostrarUsuarios.php?fecha="+dia+"&turno="+turno; //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
             URL url = new URL(urlString);
@@ -84,7 +86,7 @@ public class JSONmostrarUsuarios extends AsyncTask<String, String, String>
                 StringBuilder sb = new StringBuilder("");
                 String line = "";
                 while ((line = reader.readLine()) != null) {
-                    System.out.println("TOSTRING: " + reader.readLine());
+                    System.out.println("TOSTRING USUARIOS: " + reader.readLine());
                     sb.append(line);
                 }
                 isr.close();
@@ -99,7 +101,7 @@ public class JSONmostrarUsuarios extends AsyncTask<String, String, String>
         String s = "";
 
         try {
-            System.out.println("JSONListaCategorias : " + result);
+            System.out.println("JSONListaUsuarios : " + result);
 
             if (result != null){
 
@@ -114,17 +116,17 @@ public class JSONmostrarUsuarios extends AsyncTask<String, String, String>
 
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);
-                    String turno = (String) b.get("turno");
-                    String dia = (String) b.get("fecha");
-                    String usuario = (String) b.get("usuario");
-                    System.out.println("Turno: " + turno + " - Dia: " + dia  +  " - Usuario: " + usuario);
+                   // String turno = (String) b.get("turno");
+                  //  String dia = (String) b.get("fecha");
+                    String usuario = (String) b.get("USUARIO");
+                    System.out.println("Usuario: " + usuario);
 
                     s =  usuario; //turno + "*" + dia; //Formato: "turno":"2","fecha":"13-11-2018"
                     arrayDispo.add(s); //Agrega cada combinacion Turno-Dia en el Array
                 }
             }
         }catch (Exception e){
-            Log.e("log_tag", "JSONEventosUsuario - Error analizando Archivo JSON from PHP- " + e.toString());
+            Log.e("log_tag", "JSONListaUsuario - Error analizando Archivo JSON from PHP- " + e.toString());
         }
 
         return AsyncTask.Status.FINISHED.toString();
@@ -139,7 +141,7 @@ public class JSONmostrarUsuarios extends AsyncTask<String, String, String>
         try {
             pDialog.dismiss();
             this.cancel(true); //finalize();d
-            ((MainActivity) context).continuarJSONEmostrarUsuarios(arrayDispo);
+            ((MainActivity) context).continuarJSONEmostrarUsuarios(view, btn, sc, arrayDispo);
         } catch (Throwable e) {
             e.printStackTrace();
         }

@@ -15,7 +15,7 @@
     android:paddingBottom="20dp">
 
     <TextView
-        android:id="@+id/lbl_your_name"
+        android:id="@+id/lbl_titulo"
         android:text="EVENTO"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -32,10 +32,10 @@
         android:layout_marginBottom="15dp">
 
         <TextView
-            android:id="@+id/lbl_your_name"
-            android:text="Turno: "
+            android:id="@+id/lbl_turno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Turno: "
             android:textStyle="normal|bold" />
 
         <TextView
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/lbl_your_name"
+            android:id="@+id/lbl_dia"
             android:text="Dia: "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
         android:layout_marginTop="20dp">
 
         <TextView
-            android:id="@+id/lbl_your_name"
+            android:id="@+id/lbl_inscriptos"
             android:text="Inscriptos: "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,18 +109,24 @@
             android:id="@+id/lbl_participantes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClickUsuarios"
-            android:text="Ver participantes"
             android:gravity="bottom|center_horizontal"
+            android:onClick="onClickUsuarios"
+            android:text="Ver Participantes"
             android:textStyle="normal|bold" />
-
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:id="@+id/sc_participantes"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:contextClickable="false"></TextView>
+    </LinearLayout>
 
 </LinearLayout>

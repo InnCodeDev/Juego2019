@@ -30,6 +30,7 @@ public class PopUpEvento extends DialogFragment {
         args.putString("insc", inscriptos);
         args.putBoolean("bolinsc", inscripto);
         pop.setArguments(args);
+
         return pop;
     }
 
@@ -42,7 +43,7 @@ public class PopUpEvento extends DialogFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Get field from view
+
         TextView turno = (TextView) view.findViewById(R.id.textView3);
         TextView dia = (TextView) view.findViewById(R.id.textView4);
         TextView ins = (TextView) view.findViewById(R.id.textView5);
@@ -68,7 +69,7 @@ public class PopUpEvento extends DialogFragment {
                 if (getArguments().getBoolean("bolinsc") == true){
                     System.out.println("Se va a dar de bajar?");
                     try {
-                        JSONBorrarParticipacion json = new JSONBorrarParticipacion((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"));
+                        JSONBorrarParticipacion json = new JSONBorrarParticipacion((MainActivity) c,getArguments().getString("turn"), getArguments().getString("user"), getArguments().getString("di"));
                         json.execute();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -83,27 +84,24 @@ public class PopUpEvento extends DialogFragment {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
 
+        TextView btn = view.findViewById(R.id.lbl_participantes);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("MOSTRAR USUARIOS... !!");
+                try {
+                    JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("turn"), getArguments().getString("di"), (TextView)view.findViewById(R.id.lbl_participantes), (TextView)view.findViewById(R.id.sc_participantes));
+                    json.execute();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    public void onClickUsuarios (View v){
-
-        TextView btn = v.findViewById(R.id.lbl_participantes);
-        TextView sc = v.findViewById(R.id.sc_participantes);
-
-        System.out.println("ON CLICK USUARIOSSS " + btn.getText());
-
-        if (btn.getText().toString().compareTo("Ver Participantes") == 0){
-            sc.setHeight(150);
-            btn.setText("Ocultar Participantes");
-        }else{
-            sc.setHeight(1);
-            btn.setText("Ver Participantes");
-        }
-
-    }
 
 
 
