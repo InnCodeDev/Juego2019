@@ -129,11 +129,12 @@ public class tercera extends android.support.v4.app.Fragment {
             while(I.hasNext()){
                 String txt = (String) I.next(); //2*textView10728
                 if (txt.length()>1){
-                 //       String cant = txt.substring(0,txt.indexOf("*"));
+  //                      String cant = txt.substring(0,txt.indexOf("*"));
                     String txF = txt.substring(txt.indexOf("*")+1,txt.length());
 
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
+   //                  ta.setText(cant);
                   //   ta.setText(cant);
                     System.out.println("terceraM: " + txt + " -- " + txF );
                     ta.setBackgroundColor(Color.GREEN);
@@ -167,7 +168,7 @@ public class tercera extends android.support.v4.app.Fragment {
         getEventosUsuario();
     }
 
-    public void onViewCreated (View view, Bundle savedInstanceState){
+    public void onViewCreated (View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         this.LimpiarTodo();
@@ -202,10 +203,9 @@ public class tercera extends android.support.v4.app.Fragment {
         cal4.add(Calendar.DAY_OF_WEEK,-19);
         getEventosSemana();
 
-        System.out.println("ENTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 2");
+        System.out.println("ENTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 3" );
 
-        this.Refresh();
-
+        Refresh();
     }
 
     public String getMinDay(){

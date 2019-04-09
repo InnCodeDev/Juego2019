@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -156,7 +160,7 @@ public class MainActivity extends AppCompatActivity
     }
     public void ejecutar2doJSON(){
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
-        JSONEventosUsuario jsonE = new JSONEventosUsuario(this, formateador.format(cal2.getTime()), "Jose", false); //cal.getTime()),"Jose");
+        JSONEventosUsuario jsonE = new JSONEventosUsuario(this, formateador.format(cal2.getTime()), FB_user, false); //cal.getTime()),"Jose");
         jsonE.execute();
     }
 
@@ -222,26 +226,7 @@ public class MainActivity extends AppCompatActivity
         System.out.println("...........SALIENDO DE JSONEVENTOS................");
     }
 
-    public void onClickUsuarios (View v){
 
-String t = getResources().getResourceEntryName(v.getId());
-        int resID = getResources().getIdentifier(t, "id", this.getPackageName());
-        TextView btn = findViewById(resID);
-
-        //TextView btn = findViewById(R.id.lbl_participantes);
-        EditText edit = findViewById(R.id.editText);
-        System.out.println("ON CLICK USUARIOSSS " + btn.getText().toString());
-
-
-        if (btn.getText().toString().compareTo("Ver participantes") == 0){
-            edit.setHeight(125);
-            btn.setText("Ocultar Participantes");
-        }else{
-            edit.setHeight(1);
-            btn.setText("Ocultar Participantes");
-        }
-
-    }
     public void continuarJSONEmostrarUsuarios(ArrayList a){
         ArrayList usuarios = a;
 
@@ -336,12 +321,9 @@ String t = getResources().getResourceEntryName(v.getId());
             if (((ColorDrawable) tview.getBackground()).getColor() == Color.GREEN) {
                 inscripto = true;
             }
-
-            popEvento = PopUpEvento.newInstance(this, tviewTurno, tviewDia, inscriptos, "Jose", inscripto, turno);
+            popEvento = PopUpEvento.newInstance(this, tviewTurno, tviewDia, inscriptos, FB_user, inscripto, turno);
             popEvento.show(getFragmentManager(), "Evento"); //turno, dia, "user"); //fm, "fragment_edit_name");
-
         }
-
     }
 
     //Obtiene los turnos y fechas que esta inscripto dicho usuario
@@ -356,138 +338,147 @@ String t = getResources().getResourceEntryName(v.getId());
         String turn = "";
         int semana = 0;
 
-        ArrayList<String> arrayEvento = a; //new ArrayList<String>();
+        if (a.size() > 0){
+            ArrayList<String> arrayEvento = a; //new ArrayList<String>();
 
-        Iterator I = arrayEvento.iterator();
-        while (I.hasNext()) {
-            String t = (String) I.next();  //7*28-09-2018 turno*fecha
-                   System.out.println("BBBBBBBBB: " + t); //2*02-11-2018*7
-            String turno = t.substring(0, t.indexOf("*"));
-            fecha = t.substring(t.indexOf("*") + 1, t.length());
+            Iterator I = arrayEvento.iterator();
+            while (I.hasNext()) {
+                String t = (String) I.next();  //7*28-09-2018 turno*fecha
+                System.out.println("BBBBBBBBB: " + t); //2*02-11-2018*7
+                String turno = t.substring(0, t.indexOf("*"));
+                fecha = t.substring(t.indexOf("*") + 1, t.length());
 //            int cant = Integer.valueOf(t.substring(t.lastIndexOf("*")+1),t.length());
 
-            String dia = (fecha.substring(0, fecha.indexOf("-")));
-            turn = "";
-            if (turno.length() == 1)
-                turn = "0" + turno;
-            else turn = turno;
+                String dia = (fecha.substring(0, fecha.indexOf("-")));
+                turn = "";
+                if (turno.length() == 1)
+                    turn = "0" + turno;
+                else turn = turno;
 
-            if (dia.length() == 1)
-                dia = "0" + dia;
-            int mes = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 1, fecha.lastIndexOf("-")));
-            int ano = Integer.valueOf(fecha.substring(fecha.lastIndexOf("-") + 1, fecha.length()));
-            //      System.out.println("------ " + t + " --- " + dia + " /-/ " + mes + " /-/ " + ano);
+                if (dia.length() == 1)
+                    dia = "0" + dia;
+                int mes = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 1, fecha.lastIndexOf("-")));
+                int ano = Integer.valueOf(fecha.substring(fecha.lastIndexOf("-") + 1, fecha.length()));
+                //      System.out.println("------ " + t + " --- " + dia + " /-/ " + mes + " /-/ " + ano);
 
-            Date da = new Date();
-            SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
-            da.setDate(Integer.valueOf(dia));
-            da.setMonth(mes - 1);
-            da.setYear(ano - 1900);
+                Date da = new Date();
+                SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+                da.setDate(Integer.valueOf(dia));
+                da.setMonth(mes - 1);
+                da.setYear(ano - 1900);
 
-            try {
-                long sem = 0;
-                Date dat2 = formateador.parse(minDay);//pri.getMinDay());
-                sem = (da.getTime() - dat2.getTime()) / (1000 * 60 * 60 * 24);
+                try {
+                    long sem = 0;
+                    Date dat2 = formateador.parse(minDay);//pri.getMinDay());
 
-                if ((sem / 6) <= 1) {
-                    semana = 1;
-                } else {
-                    if ((sem / 6) <= 2) {
-                        semana = 2;
+                    //Fecha del evento - Fecha Menor dia de la primer semana
+                    sem = (da.getTime() - dat2.getTime()) / (1000 * 60 * 60 * 24); //Diferencia de dias entre ambas fechas
+                    float div = (float)sem/6;
+                    BigDecimal bigDecimal = new BigDecimal(div).setScale(2, RoundingMode.UP);
+
+                    if (bigDecimal.doubleValue() < 1) {
+                        semana = 1;
                     } else {
-                        if ((sem / 6) <= 3) {
-                            semana = 3;
+                        if (bigDecimal.doubleValue() <= 2) {
+                            semana = 2;
                         } else {
-                            semana = 4;
+                            if (bigDecimal.doubleValue() <= 3) {
+                                semana = 3;
+                            } else {
+                                semana = 4;
+                            }
                         }
                     }
-                }
-                //       System.out.println("SEM: " + semana);
-                //       System.out.println("LAAAA textView" + semana + "-" + turn + "/" + formateador.format(da));
-                eventosUsuario.add("textView" + semana + "-" + turn + "/" + formateador.format(da));
+                    System.out.println("SEMMM_CargarEventosUSUARIO " + sem + " -- " + semana + " -- " + bigDecimal.doubleValue());
 
-            } catch (ParseException e) {
-                e.printStackTrace();
+                    //       System.out.println("SEM: " + semana);
+                    //       System.out.println("LAAAA textView" + semana + "-" + turn + "/" + formateador.format(da));
+                    eventosUsuario.add("textView" + semana + "-" + turn + "/" + formateador.format(da));
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
-        Iterator I2 = eventosUsuario.iterator();
-        int resID = 0;
-        while (I2.hasNext()) {
-            String txt = (String) I2.next(); //  textView1-02/13/11/2018
-            String tur = txt.substring(txt.indexOf("-") + 1, txt.indexOf("/"));
-            String semana1 = txt.substring(txt.indexOf("w") + 1, txt.indexOf("w") + 2);
-            String fech = txt.substring(txt.indexOf("/") + 1, txt.length()); //Fecha real del evento
+            SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+            Iterator I2 = eventosUsuario.iterator();
+            int resID = 0;
+            while (I2.hasNext()) {
+                String txt = (String) I2.next(); //  textView1-02/13/11/2018
+                String tur = txt.substring(txt.indexOf("-") + 1, txt.indexOf("/"));
+                String semana1 = txt.substring(txt.indexOf("w") + 1, txt.indexOf("w") + 2);
+                String fech = txt.substring(txt.indexOf("/") + 1, txt.length()); //Fecha real del evento
 
-            long r = 0;
-            try {
-                Date date1 = new Date();
-                date1.setDate(Integer.valueOf(fech.substring(0, 2)));
-                date1.setMonth(Integer.valueOf(fech.substring(3, 5)) - 1);
-                date1.setYear(Integer.valueOf(fech.substring(6, fech.length())) - 1900);
-                date1.setHours(0);
-                date1.setMinutes(0);
-                date1.setSeconds(0);
-                Date date2;
-                cal2 = cal;
-                switch (semana1) {
-                    case "1":
-                        cal2.add(Calendar.DAY_OF_MONTH, 0);
-                        System.out.println("MINIMO-DIA-1: " + formateador.format(cal2.getTime()));
-                        date2 = formateador.parse(formateador.format(cal2.getTime()));
+                long r = 0;
+                try {
+                    Date date1 = new Date();
+                    date1.setDate(Integer.valueOf(fech.substring(0, 2)));
+                    date1.setMonth(Integer.valueOf(fech.substring(3, 5)) - 1);
+                    date1.setYear(Integer.valueOf(fech.substring(6, fech.length())) - 1900);
+                    date1.setHours(0);
+                    date1.setMinutes(0);
+                    date1.setSeconds(0);
+                    Date date2;
+                    cal2 = cal;
+                    switch (semana1) {
+                        case "1":
+                            cal2.add(Calendar.DAY_OF_MONTH, 0);
+                            System.out.println("MINIMO-DIA-1: " + formateador.format(cal2.getTime()));
+                            date2 = formateador.parse(formateador.format(cal2.getTime()));
 
-                        r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
-                        System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
-                        primeraM.add("textView" + semana1 + tur + r);
-                        cal2.add(Calendar.DAY_OF_MONTH, 0);
-                        break;
+                            r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
+                            System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
+                            primeraM.add("textView" + semana1 + tur + r);
+                            cal2.add(Calendar.DAY_OF_MONTH, 0);
+                            break;
 
-                    case "2":
-                        cal2.add(Calendar.DAY_OF_MONTH, 7);
-                        System.out.println("MINIMO-DIA-2: " + formateador.format(cal2.getTime()));
-                        date2 = formateador.parse(formateador.format(cal2.getTime()));
+                        case "2":
+                            cal2.add(Calendar.DAY_OF_MONTH, 7);
+                            System.out.println("MINIMO-DIA-2: " + formateador.format(cal2.getTime()));
+                            date2 = formateador.parse(formateador.format(cal2.getTime()));
 
-                        r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
-                        System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
-                        segundaM.add("textView" + semana1 + tur + r);
-                        cal2.add(Calendar.DAY_OF_MONTH, -7);
-                        break;
+                            r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
+                            System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
+                            segundaM.add("textView" + semana1 + tur + r);
+                            cal2.add(Calendar.DAY_OF_MONTH, -7);
+                            break;
 
-                    case "3":
-                        cal2.add(Calendar.DAY_OF_MONTH, 14);
-                        System.out.println("MINIMO-DIA-3: " + formateador.format(cal2.getTime()));
-                        date2 = formateador.parse(formateador.format(cal2.getTime()));
+                        case "3":
+                            cal2.add(Calendar.DAY_OF_MONTH, 14);
+                            System.out.println("MINIMO-DIA-3: " + formateador.format(cal2.getTime()));
+                            date2 = formateador.parse(formateador.format(cal2.getTime()));
 
-                        r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
-                        System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
-                        terceraM.add("textView" + semana1 + tur + r);
-                        cal2.add(Calendar.DAY_OF_MONTH, -14);
-                        break;
+                            r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
+                            System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
+                            terceraM.add("textView" + semana1 + tur + r);
+                            cal2.add(Calendar.DAY_OF_MONTH, -14);
+                            break;
 
-                    case "4":
-                        cal2.add(Calendar.DAY_OF_MONTH, 21);
-                        System.out.println("MINIMO-DIA-4: " + formateador.format(cal2.getTime()));
-                        date2 = formateador.parse(formateador.format(cal2.getTime()));
+                        case "4":
+                            cal2.add(Calendar.DAY_OF_MONTH, 21);
+                            System.out.println("MINIMO-DIA-4: " + formateador.format(cal2.getTime()));
+                            date2 = formateador.parse(formateador.format(cal2.getTime()));
 
-                        r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
-                        System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
-                        cuartaM.add("textView" + semana1 + tur + r);
-                        cal2.add(Calendar.DAY_OF_MONTH, -21);
-                        break;
-                }
+                            r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
+                            System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
+                            cuartaM.add("textView" + semana1 + tur + r);
+                            cal2.add(Calendar.DAY_OF_MONTH, -21);
+                            break;
+                    }
 
-                String txF = txt.substring(0, txt.indexOf("w") + 2) + tur + r;
-                System.out.println("eventosUsuario  TXF: " + txF);
+                    String txF = txt.substring(0, txt.indexOf("w") + 2) + tur + r;
+                    System.out.println("eventosUsuario  TXF: " + txF);
 
-                resID = getResources().getIdentifier(txF, "id", this.getPackageName());
-                TextView ta = this.findViewById(resID);
-               // ta.setText(cant1);
+                    resID = getResources().getIdentifier(txF, "id", this.getPackageName());
+                    TextView ta = (TextView) this.findViewById(resID);
+                    // ta.setText(cant1);
 //                ta.setBackgroundColor(Color.GREEN);
 
-            } catch (ParseException e) {
-                e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
         cargarBundleEventos ();
     }
 
@@ -496,7 +487,7 @@ String t = getResources().getResourceEntryName(v.getId());
         segunda = new ArrayList();
         tercera = new ArrayList();
         cuarta = new ArrayList();
-        //turno + "*" + dia + "*" + cantidad
+
         ArrayList eventosSemana = new ArrayList();
         ArrayList arrayEvento = a; //new ArrayList<String>();
 
@@ -505,8 +496,8 @@ String t = getResources().getResourceEntryName(v.getId());
         Date da = new Date();
 
         int semana = 0;
-        while (I.hasNext()) {
-            String t = (String) I.next();  //7*28-09-2018*2
+        while (I.hasNext()) {               //turno + "*" + dia + "*" + cantidad
+            String t = (String) I.next();   //7*28-09-2018*2
             System.out.println("AAAAAAAAAA... " + t);
             turno = t.substring(0, t.indexOf("*"));
             fecha = t.substring(t.indexOf("*") + 1, t.lastIndexOf("*"));
@@ -521,7 +512,7 @@ String t = getResources().getResourceEntryName(v.getId());
                 dia = "0" + dia;
             int mes = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 1, fecha.indexOf("-") + 3));
             int ano = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 4, fecha.length()));
-            System.out.println("------ " + t + " --- " + dia + " /-/ " + mes + " /-/ " + ano);  //t = 12*15-11-2018*9
+            //System.out.println("------ " + t + " --- " + dia + " /-/ " + mes + " /-/ " + ano);  //t = 12*15-11-2018*9
 
             SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
             da.setDate(Integer.valueOf(dia));
@@ -539,24 +530,27 @@ String t = getResources().getResourceEntryName(v.getId());
                 da.setYear(Integer.valueOf(formatoDelTexto.format(minDay).substring(formatoDelTexto.format(minDay).lastIndexOf("/")+1, formatoDelTexto.format(minDay).length())) - 1900);
        */         //formateador.parse(minDay);
 
-                //Fecha del evento - Fecha Menor dia de esa semana
+                //Fecha del evento - Fecha Menor dia de la primer semana
                 sem = (da.getTime() - dat2.getTime()) / (1000 * 60 * 60 * 24); //Diferencia de dias entre ambas fechas
+                float div = (float)sem/6;
+                BigDecimal bigDecimal = new BigDecimal(div).setScale(2, RoundingMode.UP);
 
-                if ((sem / 6) <= 1) {
+                if (bigDecimal.doubleValue() < 1) {
                     semana = 1;
                 } else {
-                    if ((sem / 6) <= 2) {
+                    if (bigDecimal.doubleValue() <= 2) {
                         semana = 2;
                     } else {
-                        if ((sem / 6) <= 3) {
+                        if (bigDecimal.doubleValue() <= 3) {
                             semana = 3;
                         } else {
                             semana = 4;
                         }
                     }
                 }
+                System.out.println("SEMMM_CargarEventos " + sem + " -- " + semana + " -- " + bigDecimal.doubleValue());
 
-                System.out.println("SEMANA: " + da.toLocaleString() + "  - " + semana + " -- " + cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da) + " -- " + da.getTime() + " -- " + formateador.format(dat2) + " - " + dat2.getTime());
+                System.out.println("SEMANA: " + da.toLocaleString() + "  - Semana: " + semana + " -- " + cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da) + " -- " + formateador.format(dat2));
 
                 eventosSemana.add(cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da));
 

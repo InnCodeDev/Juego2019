@@ -88,6 +88,22 @@ public class PopUpEvento extends DialogFragment {
         });
     }
 
+    public void onClickUsuarios (View v){
+
+        TextView btn = v.findViewById(R.id.lbl_participantes);
+        TextView sc = v.findViewById(R.id.sc_participantes);
+
+        System.out.println("ON CLICK USUARIOSSS " + btn.getText());
+
+        if (btn.getText().toString().compareTo("Ver Participantes") == 0){
+            sc.setHeight(150);
+            btn.setText("Ocultar Participantes");
+        }else{
+            sc.setHeight(1);
+            btn.setText("Ver Participantes");
+        }
+
+    }
 
 
 

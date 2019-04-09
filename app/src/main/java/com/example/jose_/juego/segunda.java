@@ -103,7 +103,7 @@ public class segunda extends android.support.v4.app.Fragment {
 
     public void getEventosSemana(){//View view){
         if (segunda != null && segunda.size()>0){
-            System.out.println("PRIMERA !! ... tiene " + segunda.size());
+            System.out.println("Segunda !! ... tiene " + segunda.size());
             Iterator I = segunda.iterator();
             int resID;
             while(I.hasNext()){
@@ -127,17 +127,22 @@ public class segunda extends android.support.v4.app.Fragment {
     public void getEventosUsuario(){
         // primera.add(cant + "*" + "textView" + semana +  turn + r);
         if (segundaM != null && segundaM.size()>0){
-            System.out.println("PRIMERAMMM !! ... tiene " + segundaM.size());
+            System.out.println("SegundaM !! ... tiene " + segundaM.size());
             Iterator I = segundaM.iterator();
             int resID;
             while(I.hasNext()){
                 String txt = (String) I.next(); //2*textView10728
                 if (txt.length()>1){
+//                        String cant = txt.substring(0,txt.indexOf("*"));
+
                     //         String cant = txt.substring(0,txt.indexOf("*"));
                     String txF = txt.substring(txt.indexOf("*")+1,txt.length());
 
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
+
+//                     ta.setText(cant);
+                    System.out.println("segundaM: " + txt + " -- " + txF );
                     // ta.setText(cant);
                     System.out.println("SegundaM: " + txt + " -- " + txF );
                     ta.setBackgroundColor(Color.GREEN);

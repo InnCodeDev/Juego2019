@@ -97,7 +97,8 @@ public class cuarta extends android.support.v4.app.Fragment {
                 break;
         }
     }
-    public void getEventosSemana(){//View view){
+
+    public void getEventosSemana(){
         if (cuarta != null && cuarta.size()>0){
             System.out.println("cuarta !! ... tiene " + cuarta.size());
             Iterator I = cuarta.iterator();
@@ -129,11 +130,14 @@ public class cuarta extends android.support.v4.app.Fragment {
             while(I.hasNext()){
                 String txt = (String) I.next(); //2*textView10728
                 if (txt.length()>1){
+ //                       String cant = txt.substring(0,txt.indexOf("*"));
+
                //         String cant = txt.substring(0,txt.indexOf("*"));
                     String txF = txt.substring(txt.indexOf("*")+1,txt.length());
 
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
+  //                   ta.setText(cant);
                 //     ta.setText(cant);
                     System.out.println("cuartaM: " + txt + " -- " + txF );
                     ta.setBackgroundColor(Color.GREEN);
@@ -155,48 +159,51 @@ public class cuarta extends android.support.v4.app.Fragment {
                 int resID = getResources().getIdentifier("textView4"+S+j, "id", getActivity().getPackageName());
                 TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
                 ta.setText("-");
+
+               // ta.setBackgroundColor(Color.GREEN);
+
                 ta.setBackgroundColor(Color.TRANSPARENT);
             }
         }
     }
 //    @Override
-public void onViewCreated (View view, Bundle savedInstanceState){
-    super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated (View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-    this.LimpiarTodo();
+        this.LimpiarTodo();
 
-    getDiaSemana();
+        getDiaSemana();
 
-    System.out.println("4444444444444444444   " + cal5.get(Calendar.DAY_OF_MONTH) + " - " +cal5.get(Calendar.DAY_OF_MONTH));
+        System.out.println("4444444444444444444   " + cal5.get(Calendar.DAY_OF_MONTH) + " - " + cal5.get(Calendar.DAY_OF_MONTH));
 
-    TextView d1 = (TextView) view.findViewById(R.id.textView4001);
-    cal5.add(Calendar.DAY_OF_WEEK,21); //21
-    d1.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH )));
+        TextView d1 = (TextView) view.findViewById(R.id.textView4001);
+        cal5.add(Calendar.DAY_OF_WEEK, 21); //21
+        d1.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH)));
 
-    //     SimpleDateFormat formateador = new SimpleDateFormat("dd/mm/yyyy");
-    //     minDay = formateador.format(cal5); //cal2.getTime();
+        TextView d2 = (TextView) view.findViewById(R.id.textView4002);
+        cal5.add(Calendar.DAY_OF_WEEK, 1);
+        d2.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH)));
+        TextView d3 = (TextView) view.findViewById(R.id.textView4003);
+        cal5.add(Calendar.DAY_OF_WEEK, 1);
+        d3.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH)));
+        TextView d4 = (TextView) view.findViewById(R.id.textView4004);
+        cal5.add(Calendar.DAY_OF_WEEK, 1);
+        d4.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH)));
+        TextView d5 = (TextView) view.findViewById(R.id.textView4005);
+        cal5.add(Calendar.DAY_OF_WEEK, 1);
+        d5.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH)));
+        TextView d6 = (TextView) view.findViewById(R.id.textView4006);
+        cal5.add(Calendar.DAY_OF_WEEK, 1);
+        d6.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH)));
 
-    TextView d2 = (TextView) view.findViewById(R.id.textView4002);
-    cal5.add(Calendar.DAY_OF_WEEK,1);
-    d2.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH )));
-    TextView d3 = (TextView) view.findViewById(R.id.textView4003);
-    cal5.add(Calendar.DAY_OF_WEEK,1);
-    d3.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH )));
-    TextView d4 = (TextView) view.findViewById(R.id.textView4004);
-    cal5.add(Calendar.DAY_OF_WEEK,1);
-    d4.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH )));
-    TextView d5 = (TextView) view.findViewById(R.id.textView4005);
-    cal5.add(Calendar.DAY_OF_WEEK,1);
-    d5.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH )));
-    TextView d6 = (TextView) view.findViewById(R.id.textView4006);
-    cal5.add(Calendar.DAY_OF_WEEK,1);
-    d6.setText(String.valueOf(cal5.get(Calendar.DAY_OF_MONTH )));
+        cal5.add(Calendar.DAY_OF_WEEK, -26);
+        getEventosSemana();
 
-    cal5.add(Calendar.DAY_OF_WEEK,-26);
-    getEventosSemana();
+        System.out.println("ENTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 4");
 
-    this.Refresh();
+        Refresh();
     }
+
 
     public String getMinDay(){
         return minDay;
