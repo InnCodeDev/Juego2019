@@ -87,13 +87,13 @@ public class PopUpEvento extends DialogFragment {
             }
         });
 
-        TextView btn = view.findViewById(R.id.lbl_participantes);
+        final TextView btn = view.findViewById(R.id.lbl_participantes);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("MOSTRAR USUARIOS... !!");
                 try {
-                    JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("turn"), getArguments().getString("di"), (TextView)view.findViewById(R.id.lbl_participantes), (TextView)view.findViewById(R.id.sc_participantes));
+                    JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("turn"), getArguments().getString("di"), (TextView)view.findViewById(R.id.lbl_participantes), btn);
                     json.execute();
                 } catch (Exception e) {
                     e.printStackTrace();

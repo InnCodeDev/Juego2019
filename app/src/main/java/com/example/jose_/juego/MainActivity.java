@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -234,29 +235,31 @@ public class MainActivity extends AppCompatActivity
         ArrayList usuarios = a;
         TextView btn = bt; //getResources().getResourceEntryName( R.id.lbl_participantes);
         TextView sc = s; //getResources().getResourceEntryName(R.id.sc_participantes);
-
+        sc.setMovementMethod(new ScrollingMovementMethod());
+//TextView sc = findViewById(R.id.sc_participantes);
 
         System.out.println("ON CLICK USUARIOSSS " + btn.getText());
 
         if (btn.getText().toString().compareTo("Ver Participantes") == 0){
-      //      sc.setHeight(150);
+           // sc.setHeight(150);
             btn.setText("Ocultar Participantes");
 
-            ArrayList <String> text = new ArrayList<String>();
-            text.add("PARTICIPANTES: <br>");
-
             Iterator I = usuarios.iterator();
-            while (I.hasNext()) {
-                String user = (String) I.next();
-                System.out.println("USUARIOS: " + user);
-                text.add("<b>" + user + "</b>");
-                text.add("<b>" + "joseee" + "</b>");
-                text.add("<b>" + "jooo" + "</b>");
+            System.out.println("Cantidad de participantes: " + usuarios.size());
+
+            if (usuarios.size() > 0) {
+                sc.append("PARTICIPANTES:"+ "\n");
+                while (I.hasNext()) {
+                    String user = (String) I.next();
+                    System.out.println("USUARIOS: " + user);
+                    sc.append(user + "\n");
+                    sc.append("joseee" + "\n");
+                    sc.append("jooo");
+                }
             }
-            sc.setText(Html.fromHtml(text.toString()));
         }else{
             sc.setText("");
-         //   sc.setHeight(1);
+            //sc.setHeight(1);
             btn.setText("Ver Participantes");
 
         }
@@ -283,7 +286,7 @@ public class MainActivity extends AppCompatActivity
         TextView ta;
         String tviewTurno = ""; //textView1010 - 1020 - 1030
         String tviewDia = ""; //textView1001 - 1006
-        String inscriptos = "";
+
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
         Calendar aux = cal;
         Date date1 = new Date();
@@ -346,6 +349,7 @@ public class MainActivity extends AppCompatActivity
             if (((ColorDrawable) tview.getBackground()).getColor() == Color.GREEN) {
                 inscripto = true;
             }
+            String inscriptos = tview.getText().toString();
             popEvento = PopUpEvento.newInstance(this, tviewTurno, tviewDia, inscriptos, FB_user, inscripto, turno);
             popEvento.show(getFragmentManager(), "Evento"); //turno, dia, "user"); //fm, "fragment_edit_name");
         }
