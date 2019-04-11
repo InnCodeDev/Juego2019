@@ -4,7 +4,7 @@
     android:id="@+id/linearLayout"
     style="@style/Animation.AppCompat.Dialog"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:baselineAligned="false"
     android:gravity="center_vertical|center_horizontal"
@@ -84,47 +84,45 @@
             android:text="New Text" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="5dp"
-        android:background="#a1a0a0"
-        android:gravity="bottom|center_horizontal"
-        android:onClick="onClickEvento"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:text="PARTICIPAR !!"
-        android:textColor="#fefefe" />
-
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="top|center_horizontal"
-        android:orientation="horizontal">
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="7dp"
-        android:gravity="top|center_horizontal"
+        android:layout_marginTop="3dp"
+        android:gravity="top"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/lbl_participantes"
+            android:id="@+id/textView6"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="5dp"
+            android:background="#a1a0a0"
+            android:gravity="top|center_horizontal"
+            android:onClick="onClickEvento"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:text="PARTICIPAR !!"
+            android:textColor="#fefefe" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:gravity="top|center_horizontal"
+            android:orientation="vertical">
 
-            android:onClick="onClickUsuarios"
-            android:text="Ver Participantes"
-            android:textAlignment="center"
-            android:textStyle="normal|bold" />
+            <TextView
+                android:id="@+id/lbl_participantes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:onClick="onClickUsuarios"
+                android:text="Ver Participantes"
+                android:textAlignment="center"
+                android:textStyle="normal|bold" />
+
+        </LinearLayout>
 
         <View
             android:id="@+id/divider"
@@ -135,10 +133,17 @@
         <TextView
             android:id="@+id/sc_participantes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="5dp"
             android:layout_gravity="top"
             android:layout_marginTop="10dp"
+            android:clickable="false"
             android:contextClickable="false"
+            android:editable="false"
+            android:isScrollContainer="true"
+            android:maxHeight="10dp"
+            android:maxLines="5"
+            android:minHeight="2dp"
+            android:onClick="none"
             android:textAlignment="textStart"
             tools:text="@tools:sample/full_names"></TextView>
     </LinearLayout>
