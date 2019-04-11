@@ -242,21 +242,21 @@ public class MainActivity extends AppCompatActivity
 
         if (btn.getText().toString().compareTo("Ver Participantes") == 0){
            // sc.setHeight(150);
-            btn.setText("Ocultar Participantes");
+            btn.setText("Ocultar Participantes\n\n");
 
             Iterator I = usuarios.iterator();
             System.out.println("Cantidad de participantes: " + usuarios.size());
 
             if (usuarios.size() > 0) {
-                sc.append("PARTICIPANTES:"+ "\n");
+                sc.append("PARTICIPANTES: \n");
                 while (I.hasNext()) {
                     String user = (String) I.next();
                     System.out.println("USUARIOS: " + user);
                     sc.append(user + "\n");
-                    sc.append("joseee" + "\n");
-                    sc.append("jooo");
                 }
             }
+            sc.setMaxLines(5);
+
         }else{
             sc.setText("");
             //sc.setHeight(1);
