@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity
 
         System.out.println("ON CLICK USUARIOSSS " + btn.getText());
 
-        if (btn.getText().toString().compareTo("Ver Participantes") == 0){
+        if (btn.getText().toString().compareTo("Ver P<articipantes") == 0){
            // sc.setHeight(150);
             btn.setText("Ocultar Participantes\n\n");
 
