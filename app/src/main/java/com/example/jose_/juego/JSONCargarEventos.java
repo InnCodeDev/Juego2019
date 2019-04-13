@@ -120,7 +120,7 @@ public class JSONCargarEventos extends AsyncTask<String, String, String>{
                     String dia = (String) b.get("fecha");
                     String cantidad = (String) b.get("Cantidad");
                     String cancha = (String) b.get("cancha");
-                    System.out.println("Turno: " + turno + " - Dia: " + dia + " - Cantidad: " + cantidad);
+                    System.out.println("Turno: " + turno + " - Dia: " + dia + " - Cantidad: " + cantidad + " - Cancha: " + cancha);
 
                     s =  turno + "*" + dia + "*" + cantidad+ "/"+ cancha; //Formato: 10-2-16/5
                     arrayDispo.add(s); //Agrega cada combinacion Turno-Dia en el Array
