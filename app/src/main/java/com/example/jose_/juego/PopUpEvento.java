@@ -18,17 +18,20 @@ public class PopUpEvento extends DialogFragment {
     public PopUpEvento(){
 
     }
-
-    public static PopUpEvento newInstance(MainActivity cont, String turno, String dia, String inscriptos, String usuario, boolean inscripto, String nroturno) {
+                                                    //this, turno, dia, FB_user, inscripto, turno, cantF5, cantF7);
+    public static PopUpEvento newInstance(MainActivity cont, String turno, String dia, String usuario, String Nrotur, boolean inscripto, String F5, String F7) {
         PopUpEvento pop = new PopUpEvento();
         c=cont;
+        int cantTotal = Integer.valueOf(F5) + Integer.valueOf(F7);
         Bundle args = new Bundle();
         args.putString("turn", turno);
-        args.putString("Nroturn", nroturno);
+        args.putString("Nroturn", Nrotur);
         args.putString("di", dia);
         args.putString("user", usuario);
-        args.putString("insc", inscriptos);
+        args.putString("insc", String.valueOf(cantTotal));
         args.putBoolean("bolinsc", inscripto);
+        args.putString("cantF5", F5);
+        args.putString("cantF7", F7);
         pop.setArguments(args);
 
         return pop;
@@ -47,6 +50,8 @@ public class PopUpEvento extends DialogFragment {
         TextView turno = (TextView) view.findViewById(R.id.textView3);
         TextView dia = (TextView) view.findViewById(R.id.textView4);
         TextView ins = (TextView) view.findViewById(R.id.textView5);
+        TextView insF5 = (TextView) view.findViewById(R.id.textView5);
+        TextView insF7 = (TextView) view.findViewById(R.id.textView5);
 
         turno.setText(getArguments().getString("turn"));
         dia.setText(getArguments().getString("di"));

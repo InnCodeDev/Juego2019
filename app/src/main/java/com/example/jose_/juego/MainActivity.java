@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity
         json.execute();
 
     }
+
     public void ejecutar2doJSON(){
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
         JSONEventosUsuario jsonE = new JSONEventosUsuario(this, formateador.format(cal2.getTime()), FB_user, false); //cal.getTime()),"Jose");
@@ -267,95 +268,97 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    //PopUpEvento.newInstance(this, tviewTurno, tviewDia, inscriptos, FB_user, inscripto, turno, cantF5, cantF7);
+    public void ContinuarOnClickEvento (View v, String turno, String dia, Boolean inscripto, int cantF5, int cantF7){
+        popEvento = PopUpEvento.newInstance(this, turno, dia, FB_user, inscripto, turno, cantF5, cantF7);
+        popEvento.show(getFragmentManager(), "Evento"); //turno, dia, "user"); //fm, "fragment_edit_name");
+    }
+
     public void onClickEvento(View v, boolean continuar, ArrayList array) {
         String semana = "";
-        String turno="";
+        String NroTurno="";
         String dia= "";
         String btn="";
+        int resID;
 
-        if(continuar == false){
-            System.out.println("ON CLICK EVENTOOOOOOOOOOOOO   - " + getResources().getResourceEntryName(v.getId()));
-            btn = getResources().getResourceEntryName(v.getId());
+        System.out.println("ON CLICK EVENTOOOOOOOOOOOOO   - " + getResources().getResourceEntryName(v.getId()));
+        btn = getResources().getResourceEntryName(v.getId());
 
-            semana = btn.substring(btn.indexOf("w") + 1, btn.indexOf("w") + 2);
-            turno = btn.substring(btn.length() - 3, btn.length() - 1);
-            dia = btn.substring(btn.length() - 1, btn.length());
+        semana = btn.substring(btn.indexOf("w") + 1, btn.indexOf("w") + 2);
+        NroTurno = btn.substring(btn.length() - 3, btn.length() - 1);
+        dia = btn.substring(btn.length() - 1, btn.length());
 
-            //Toast.makeText(MainActivity.this, "Semana:" + semana + " - dia:" + dia + " - turno:" + Integer.valueOf(turno), Toast.LENGTH_SHORT).show();
-        }else{
-            int resID;
-            String tviewTurno = ""; //textView1010 - 1020 - 1030
-            String tviewDia = ""; //textView1001 - 1006
+        String tviewTurno = ""; //textView1010 - 1020 - 1030
+        String tviewDia = ""; //textView1001 - 1006
 
-            SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
-            Calendar aux = cal;
-            long r;
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar aux = cal;
+        long r;
 
-            Calendar c = Calendar.getInstance();
-            Calendar cc = Calendar.getInstance();
-            cc.set(Calendar.DAY_OF_MONTH, Integer.valueOf(minDay.substring(0, 2)));
-            cc.set(Calendar.MONTH, Integer.valueOf(minDay.substring(3, 5)) - 1);
-            cc.set(Calendar.YEAR, Integer.valueOf(minDay.substring(6, 10)));
-            cc.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) - 1);
-            c.setTimeInMillis(System.currentTimeMillis());
+        Calendar c = Calendar.getInstance();
+        Calendar cc = Calendar.getInstance();
+        cc.set(Calendar.DAY_OF_MONTH, Integer.valueOf(minDay.substring(0, 2)));
+        cc.set(Calendar.MONTH, Integer.valueOf(minDay.substring(3, 5)) - 1);
+        cc.set(Calendar.YEAR, Integer.valueOf(minDay.substring(6, 10)));
+        cc.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) - 1);
+        c.setTimeInMillis(System.currentTimeMillis());
 
-            //Verificar que la fecha y turno que se seleccionó sea futura, no haya pasado
-            //El dia minimo de la semana + los dias desplazados del lunes, tiene que ser mayor a la fecha de hoy
-            if (semana.compareTo("1") == 0 && c.getTime().compareTo(cc.getTime()) > 0) {
-                Toast.makeText(MainActivity.this, "Elija una fecha posterior al dia de hoy!!", Toast.LENGTH_LONG).show();
-            } else {
-                tviewTurno = turno;
-                Calendar aux2 = cal;
-                try {
-                    switch (semana) {
-                        case "1":
-                            aux.setTime((formateador).parse(minDay));
-                            aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) - 1);
-                            tviewDia = formateador.format(aux.getTime());
-                            aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) + 1);
-                            break;
-                        case "2":
-                            aux.setTime((formateador).parse(minDay));
-                            aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 6);
-                            tviewDia = formateador.format(aux.getTime());
-                            aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 6);
-                            break;
-                        case "3":
-                            aux.setTime((formateador).parse(minDay));
-                            aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 13);
-                            tviewDia = formateador.format(aux.getTime());
-                            aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 13);
-                            break;
-                        case "4":
-                            aux.setTime((formateador).parse(minDay));
-                            aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 20);
-                            tviewDia = formateador.format(aux.getTime());
-                            aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 20);
-                            break;
-                        default:
-                            break;
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
+        //Verificar que la fecha y turno que se seleccionó sea futura, no haya pasado
+        //El dia minimo de la semana + los dias desplazados del lunes, tiene que ser mayor a la fecha de hoy
+        if (semana.compareTo("1") == 0 && c.getTime().compareTo(cc.getTime()) > 0) {
+            Toast.makeText(MainActivity.this, "Elija una fecha posterior al dia de hoy!!", Toast.LENGTH_LONG).show();
+        } else {
+            tviewTurno = NroTurno;
+            Calendar aux2 = cal;
+            try {
+                switch (semana) {
+                    case "1":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) - 1);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) + 1);
+                        break;
+                    case "2":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 6);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 6);
+                        break;
+                    case "3":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 13);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 13);
+                        break;
+                    case "4":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 20);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 20);
+                        break;
+                    default:
+                        break;
                 }
-                resID = getResources().getIdentifier(btn, "id", this.getPackageName());
-                TextView tview = findViewById(resID);
-
-                //Si BackgroundColor es Verde; esta inscripto.. si es gris (o no verde) se puede inscribir = falso
-                boolean inscripto = false;
-                System.out.println("COLOOOOR : " + ((ColorDrawable) tview.getBackground()).getColor());
-                if (((ColorDrawable) tview.getBackground()).getColor() == Color.GREEN) {
-                    inscripto = true;
-                }
-                String inscriptos = tview.getText().toString();
-                popEvento = PopUpEvento.newInstance(this, tviewTurno, tviewDia, inscriptos, FB_user, inscripto, turno);
-                popEvento.show(getFragmentManager(), "Evento"); //turno, dia, "user"); //fm, "fragment_edit_name");
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
+            resID = getResources().getIdentifier(btn, "id", this.getPackageName());
+            TextView tview = findViewById(resID);
+            System.out.println("TURNO: " + NroTurno + " -- TViewTurno: "  + tviewTurno + " - TViewDia: " + tviewDia);
+
+            //Si BackgroundColor es Verde; esta inscripto.. si es gris (o no verde) se puede inscribir = falso
+            boolean inscripto = false;
+            System.out.println("COLOOOOR : " + ((ColorDrawable) tview.getBackground()).getColor());
+            if (((ColorDrawable) tview.getBackground()).getColor() == Color.GREEN) {
+                inscripto = true;
+            }
+            String inscriptos = tview.getText().toString();
+
+
+            JSONDetalleEvento jsonD = new JSONDetalleEvento(this, v, tviewDia, tviewTurno, NroTurno,true, FB_user, inscripto);
+            jsonD.execute();
+
         }
-
-
-
-
     }
 
     //Obtiene los turnos y fechas que esta inscripto dicho usuario
