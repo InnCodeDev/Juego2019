@@ -271,19 +271,29 @@ public class MainActivity extends AppCompatActivity
 
     //ContinuarOnClickEvento(this.view, this.Fecha, this.TextoTurno, this.turno, this.fromPopUp, this.inscripto, this.arrayDispo)
     public void ContinuarOnClickEvento (View v, String Fecha, String TextoTurno, String turno, Boolean fromPopUp, Boolean inscripto, ArrayList ar){
-        String cantF5="", cantF7="", cancha="", cant="";
+        int CantF5=0;
+        int CantF7=0;
 
         Iterator I = ar.iterator();
         while (I.hasNext()) {
             String t = (String) I.next(); //5/12  - 7/30
             if (t.substring(0, t.indexOf("/")).compareTo("5") == 0){
-                cantF5 = t.substring(t.indexOf("/")+1, t.length());
+                CantF5 = Integer.valueOf(t.substring(t.indexOf("/")+1, t.length()));
             }else
-                cantF5 = t.substring(t.indexOf("/")+1, t.length());
+                CantF7 = Integer.valueOf(t.substring(t.indexOf("/")+1, t.length()));
         }
-                                        //MainActivity cont, String turno, String dia, String usuario, String Nrotur, boolean inscripto, String F5, String F7) {
-        popEvento = PopUpEvento.newInstance(this, TextoTurno, Fecha, FB_user, turno, inscripto, cantF5, cantF7 );
-        popEvento.show(getFragmentManager(), "Evento"); //turno, dia, "user"); //fm, "fragment_edit_name");
+        System.out.println(ar.size() + "...........CANCHA 5: " + CantF5 + " -- Cancha 7: " + CantF7);
+
+        if (inscripto == true){
+            //MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, String CantF5, String CantF7)
+            PopUpEventoBorrarse popEventoBorrar = PopUpEventoBorrarse.newInstance(this, TextoTurno, Fecha, FB_user, turno, inscripto, CantF5, CantF7 );
+            popEventoBorrar.show(getFragmentManager(), "BORRAR PARTICIPACION!");
+        }else{ //No esta inscripto
+            //MainActivity cont, String turno, String dia, String usuario, String Nrotur, boolean inscripto, String F5, String F7) {
+            popEvento = PopUpEvento.newInstance(this, TextoTurno, Fecha, FB_user, turno, inscripto, CantF5, CantF7 );
+            popEvento.show(getFragmentManager(), "INSCRIPCION A EVENTO!"); //turno, dia, "user"); //fm, "fragment_edit_name");
+        }  //MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, int CantF5, int CantF7)
+
     }
 
     public void onClickEvento(View v) {
@@ -363,17 +373,16 @@ public class MainActivity extends AppCompatActivity
 
             System.out.println("TURNO: " + NroTurno + " -- TViewTurno: "  + tviewTurno + " - TViewDia: " + tviewDia);
 
-            //Si BackgroundColor es Verde; esta inscripto.. si es gris (o no verde) se puede inscribir = falso
             boolean inscripto = false;
+            //Si BackgroundColor es Verde; esta inscripto.. si es gris (o no verde) se puede inscripto = falso
             if (((ColorDrawable) tview.getBackground()).getColor() == Color.GREEN) {
-                inscripto = true;
+                inscripto = true; //Esta Participando
             }
-            //String inscriptos = tview.getText().toString();
 
             //MainActivity disp, View v, String min, String TextoT, String tur, boolean fromPop, boolean inscr)
             JSONDetalleEvento jsonD = new JSONDetalleEvento(this, v, tviewDia, tviewTurno, NroTurno,  true, inscripto);
             jsonD.execute();
-
+            //String inscriptos = tview.getText().toString();
         }
     }
 
@@ -553,8 +562,8 @@ public class MainActivity extends AppCompatActivity
             System.out.println("AAAAAAAAAA... " + t);
             turno = t.substring(0, t.indexOf("*"));
             fecha = t.substring(t.indexOf("*") + 1, t.lastIndexOf("*"));
-            cant = t.substring(t.lastIndexOf("*") + 1, t.indexOf("/"));
-            cancha = t.substring(t.indexOf("/")+1, t.length());
+            cant = t.substring(t.lastIndexOf("*") + 1, t.length()); //t.indexOf("/"));
+         //   cancha = t.substring(t.indexOf("/")+1, t.length());
 
             if (turno.length() == 1) {
                 turn = "0" + turno;
@@ -604,8 +613,8 @@ public class MainActivity extends AppCompatActivity
                 System.out.println("SEMMM_CargarEventos " + sem + " -- " + semana + " -- " + bigDecimal.doubleValue());
 
                 System.out.println("SEMANA: " + da.toLocaleString() + "  - Semana: " + semana + " -- " + cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da) + " -- " + formateador.format(dat2));
-
-                eventosSemana.add(cancha + "#"+ cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da));
+//cancha + "#"+
+                eventosSemana.add(cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da));
                 //5#1*textView1-02/12/04/2019
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -620,8 +629,8 @@ public class MainActivity extends AppCompatActivity
             String txt = (String) I2.next();  //VERSION2:  //5#1*textView1-02/12/04/2019
             System.out.println("TXT : " + txt); //  7*textView1-02/02/11/2018
             //  6*textView2-02/13/11/2018
-            String CantCancha = txt.substring(0, txt.indexOf("#"));
-            String cant1 = txt.substring(txt.indexOf("#")+1, txt.indexOf("*"));
+         //   String CantCancha = txt.substring(0, txt.indexOf("#"));
+            String cant1 = txt.substring(0, txt.indexOf("*"));
             String tur = txt.substring(txt.indexOf("-") + 1, txt.indexOf("/"));
             String semana1 = txt.substring(txt.indexOf("w") + 1, txt.indexOf("w") + 2);
             String fech = txt.substring(txt.indexOf("/") + 1, txt.length()); //Fecha real del evento
@@ -648,7 +657,7 @@ public class MainActivity extends AppCompatActivity
                         System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
                         System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
                         System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
-                        primera.add(CantCancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
+                        primera.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         break;
 
                     case "2":
@@ -662,7 +671,7 @@ public class MainActivity extends AppCompatActivity
                         System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
                         System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
                         System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
-                        segunda.add(CantCancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
+                        segunda.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -7);
                         break;
 
@@ -678,7 +687,7 @@ public class MainActivity extends AppCompatActivity
                         System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
                         System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
                         System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
-                        tercera.add(CantCancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
+                        tercera.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -14);
                         break;
 
@@ -693,7 +702,7 @@ public class MainActivity extends AppCompatActivity
                         System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
                         System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
                         System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
-                        cuarta.add(CantCancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
+                        cuarta.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -21);
                         break;
                     default:
@@ -717,7 +726,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void continuarJSONPopUP(boolean fromPopU) {
+    public void  continuarJSONPopUP(boolean fromPopU) {
         JSONEventos(fromPopU);
         this.ReloadALL(true);
         this.popEvento.dismiss();

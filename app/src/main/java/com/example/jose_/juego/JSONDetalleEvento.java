@@ -30,16 +30,15 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
     Context context;
     String Fecha, turno, TextoTurno, fut5, fut7 = "";
     //        private final Handler handler = new Handler();
-    boolean fromPopUp;
+    boolean fromPopUp, inscripto;
     View view;
-    boolean inscripto;
     String user_FB;
 
     public ArrayList <String> getarrayDispo (){
         return arrayDispo;
     }
                             //this, v, tviewDia, NroTurno, tviewTurno, true, inscripto);
-    public JSONDetalleEvento(MainActivity disp, View v, String min, String TextoT, String tur, boolean fromPop, boolean inscr){//Ademas tiene que recibir el nombre de usuario loggeado
+    public JSONDetalleEvento(MainActivity disp, View v, String min, String TextoT, String tur, boolean fromPop, boolean inscr){
         //User = u;
         context = disp;
         view = v;
@@ -71,7 +70,7 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
         try{
 
             ServerID server = ServerID.getInstance();
-            String urlString = server.DBserver+"cargarDetalleEvento.php?fecha="+Fecha+"&turno="+turno; //Pasar la fecha a partir de cuando filtrar
+            String urlString = server.DBserver+"cargarDetalleEvento.php?fecha="+Fecha+"&turn="+turno; //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
             URL url = new URL(urlString);
@@ -102,7 +101,7 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
             }else
                 System.out.println("HTTPS RESPONSE CODE FALSE - "+responseCode);
         } catch(Exception e){
-            Log.e("log_tag", "JSONCargarEventos - Error converting result - "+e.toString());
+            Log.e("log_tag", "JSONDetalleEventos - Error converting result - "+e.toString());
         }
 
 
@@ -120,7 +119,7 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
                 JSONArray jsonArrayResult = (JSONArray) jsonParser.parse(r);
 
 
-                System.out.println("jSONArrayResult: " + jsonArrayResult.toString());
+                System.out.println("jSONDetalleEventos ArrayResult: " + jsonArrayResult.toString());
 
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);
@@ -130,18 +129,13 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
                     System.out.println("Cancha: " + cancha + " - Cantidad: " + cantidad  );
 
                     s =  cancha + "/" + cantidad; //Formato: 5/10  o 7/2
+                    System.out.println("...JSONDetalleEventos " + s);
                     arrayDispo.add(s);
-                /*    if (cancha.compareTo("5") == 0){
-                        this.fut5 = cantidad;
-                    }else{
-                        this.fut7 = cantidad;
-                    }
-                */
                 }
 
             }
         }catch (Exception e){
-            Log.e("log_tag", "JSONCargarEventos - Error analizando Archivo JSON from PHP- " + e.toString());
+            Log.e("log_tag", "JSONDetalleEventos - Error analizando Archivo JSON from PHP- " + e.toString());
         }
 
         return AsyncTask.Status.FINISHED.toString();

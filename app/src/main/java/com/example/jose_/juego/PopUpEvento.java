@@ -18,19 +18,20 @@ public class PopUpEvento extends DialogFragment {
     public PopUpEvento(){
 
     }//this, TextoTurno, Fecha, FB_user, turno, inscripto, cantF5, cantF7 );
-    public static PopUpEvento newInstance(MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, String CantF5, String CantF7){
+    public static PopUpEvento newInstance(MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, int CantF5, int CantF7){
         PopUpEvento pop = new PopUpEvento();
         c=context;
-        int cantTotal = Integer.valueOf(CantF5) + Integer.valueOf(CantF7);
+        int cantTotal = CantF5 + CantF7;
         Bundle args = new Bundle();
         args.putString("turn", TextoTurno);
         args.putString("Nroturn", NroTurno);
         args.putString("di", Fecha);
         args.putString("user", User);
-        args.putString("insc", String.valueOf(cantTotal));
+        args.putString("insc", String.valueOf(0));
         args.putBoolean("bolinsc", inscripto);
-        args.putString("cantF5", CantF5);
-        args.putString("cantF7", CantF7);
+        args.putString("cantTotal", String.valueOf(cantTotal));
+        args.putString("cantF5", String.valueOf(CantF5));
+        args.putString("cantF7", String.valueOf(CantF7));
         pop.setArguments(args);
 
         return pop;
@@ -58,21 +59,15 @@ public class PopUpEvento extends DialogFragment {
         insF5.setText(getArguments().getString("cantF5"));
         insF7.setText(getArguments().getString("cantF7"));
 
-        getDialog().setTitle("EVENTO");
+        getDialog().setTitle("INSCRIPCION A EVENTO!");
 
         TextView btnTView = (TextView) view.findViewById(R.id.textView6);
-
-        if (getArguments().getBoolean("bolinsc") == true){
-            btnTView.setText("NO JUGAR");
-        }else
-            btnTView.setText("PARTICIPAR !");
-
 
         btnTView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (getArguments().getBoolean("bolinsc") == true){
+              /*  if (getArguments().getBoolean("bolinsc") == true){
                     System.out.println("Se va a dar de bajar?");
                     try {
                         JSONBorrarParticipacion json = new JSONBorrarParticipacion((MainActivity) c,getArguments().getString("turn"), getArguments().getString("user"), getArguments().getString("di"));
@@ -82,14 +77,14 @@ public class PopUpEvento extends DialogFragment {
                     }
                   //  Toast.makeText(MainActivity.this,"Se va a dar de bajar?", Toast.LENGTH_SHORT).show();
                 }else{
-                    System.out.println("A PARTICIPAR !!");
+                */    System.out.println("A PARTICIPAR !!");
                     try {
                         JSONInscripcionEvento json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"));
                         json.execute();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
+                //}
             }
         });
 

@@ -74,7 +74,7 @@ TextView btn, sc;
         }catch(Exception e){
             Log.e("log_tag", "-Error in http connection- "+e.toString());
 
-            txtFinal = "JSONEventosUsuario - Couldnt connect to database - " + e.toString();
+            txtFinal = "JSONMostarUsuarios - Couldnt connect to database - " + e.toString();
         }
 
         //convert response to string
