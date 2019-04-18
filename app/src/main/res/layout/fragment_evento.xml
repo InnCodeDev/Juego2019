@@ -117,7 +117,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
-
         </LinearLayout>
     </LinearLayout>
 
@@ -239,4 +238,3 @@
             tools:text="@tools:sample/full_names"></TextView>
     </LinearLayout>
 
-</LinearLayout>

@@ -112,7 +112,7 @@ public class primera extends android.support.v4.app.Fragment {
             Iterator I = primera.iterator();
             int resID;
             while(I.hasNext()){
-                String txt = (String) I.next(); //2*textView10728
+                String txt = (String) I.next(); //5#2*textView10728
                 if (txt.length()>1){
                     String cant = txt.substring(0,txt.indexOf("*"));
                     System.out.println("STRIIIIIIIIIIIING " + txt + " - " + cant);

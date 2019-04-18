@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,34 +22,41 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * Created by jose_ on 15/9/2018.
  */
-public class JSONCargarEventos extends AsyncTask<String, String, String>{
-        Callback callback;
-        String txtFinal = "";
-        ArrayList<String> arrayDispo = new ArrayList <String> ();
-        ProgressDialog pDialog;
-        Context context;
-        String minFecha = "";
-//        private final Handler handler = new Handler();
-        boolean fromPopUp;
+public class JSONDetalleEvento extends AsyncTask<String, String, String>{
+    Callback callback;
+    String txtFinal = "";
+    ArrayList<String> arrayDispo = new ArrayList <String> ();
+    ProgressDialog pDialog;
+    Context context;
+    String Fecha, turno, fut5, fut7 = "";
+    //        private final Handler handler = new Handler();
+    boolean fromPopUp;
+    View view;
+    boolean inscripto;
+    String user_FB;
 
-        public ArrayList <String> getarrayDispo (){
+    public ArrayList <String> getarrayDispo (){
         return arrayDispo;
     }
 
-        public JSONCargarEventos (MainActivity disp, String min, boolean fromPop){//Ademas tiene que recibir el nombre de usuario loggeado
+    public JSONDetalleEvento(MainActivity disp, View v, String min, String tur, boolean fromPop, String usuario, Boolean inscr){//Ademas tiene que recibir el nombre de usuario loggeado
         //User = u;
-            context = disp;
-            minFecha = min;
-            fromPopUp = fromPop;
-            pDialog = new ProgressDialog(disp);
-            pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
-            pDialog.setMessage("Cargando eventos... \n\nPor favor espere..");
-            pDialog.setCancelable(false);
-            pDialog.setCanceledOnTouchOutside(false);
+        context = disp;
+        view = v;
+        Fecha = min;
+        turno = tur;
+        fromPopUp = fromPop;
+        user_FB = usuario;
+        inscripto = inscr;
+        pDialog = new ProgressDialog(disp);
+        pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
+        pDialog.setMessage("Cargando detalles...");
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
     }
 
-        @Override
-        protected void onPreExecute() {
+    @Override
+    protected void onPreExecute() {
         pDialog.show();
     }
 
@@ -62,7 +70,7 @@ public class JSONCargarEventos extends AsyncTask<String, String, String>{
         try{
 
             ServerID server = ServerID.getInstance();
-            String urlString = server.DBserver+"cargarEventos.php?fecha="+minFecha; //Pasar la fecha a partir de cuando filtrar
+            String urlString = server.DBserver+"cargarDetalleEvento.php?fecha="+Fecha+"&turno="+turno; //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
             URL url = new URL(urlString);
@@ -90,7 +98,7 @@ public class JSONCargarEventos extends AsyncTask<String, String, String>{
                 }
                 isr.close();
                 result = sb.toString();
-             }else
+            }else
                 System.out.println("HTTPS RESPONSE CODE FALSE - "+responseCode);
         } catch(Exception e){
             Log.e("log_tag", "JSONCargarEventos - Error converting result - "+e.toString());
@@ -116,15 +124,19 @@ public class JSONCargarEventos extends AsyncTask<String, String, String>{
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);
                     //String id = (String) b.get("id");
-                    String turno = (String) b.get("turno");
-                    String dia = (String) b.get("fecha");
-                    String cantidad = (String) b.get("Cantidad");
                     String cancha = (String) b.get("cancha");
-                    System.out.println("Turno: " + turno + " - Dia: " + dia + " - Cantidad: " + cantidad + " - Cancha: " + cancha);
+                    String cantidad = (String) b.get("Cantidad");
+                    System.out.println("Cancha: " + cancha + " - Cantidad: " + cantidad  );
 
-                    s =  turno + "*" + dia + "*" + cantidad+ "/"+ cancha; //Formato: 10-2-16/5
-                    arrayDispo.add(s); //Agrega cada combinacion Turno-Dia en el Array
+                    s =  cancha + "/" + cantidad; //Formato: 5/10  o 7/2
+                    arrayDispo.add(s);
+                    if (cancha.compareTo("5") == 0){
+                        this.fut5 = cantidad;
+                    }else{
+                        this.fut7 = cantidad;
+                    }
                 }
+
             }
         }catch (Exception e){
             Log.e("log_tag", "JSONCargarEventos - Error analizando Archivo JSON from PHP- " + e.toString());
@@ -141,8 +153,8 @@ public class JSONCargarEventos extends AsyncTask<String, String, String>{
     protected void onPostExecute(String result) {
         try {
             pDialog.dismiss();
-            this.cancel(true); //finalize();d
-            ((MainActivity) context).continuarJSONCargarEventos(arrayDispo, fromPopUp);
+            this.cancel(true); //(View v, String turno, String dia, Boolean inscripto, int cantF5, int cantF7){
+            ((MainActivity) context).ContinuarOnClickEvento(this.view, this.turno, this.Fecha, this.inscripto, Integer.valueOf(this.fut5), Integer.valueOf(this.fut7));
         } catch (Throwable e) {
             e.printStackTrace();
         }
