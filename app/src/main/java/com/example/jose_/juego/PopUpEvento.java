@@ -17,18 +17,20 @@ public class PopUpEvento extends DialogFragment {
 
     public PopUpEvento(){
 
-    }
-
-    public static PopUpEvento newInstance(MainActivity cont, String turno, String dia, String inscriptos, String usuario, boolean inscripto, String nroturno) {
+    }//this, TextoTurno, Fecha, FB_user, turno, inscripto, cantF5, cantF7 );
+    public static PopUpEvento newInstance(MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, String CantF5, String CantF7){
         PopUpEvento pop = new PopUpEvento();
-        c=cont;
+        c=context;
+        int cantTotal = Integer.valueOf(CantF5) + Integer.valueOf(CantF7);
         Bundle args = new Bundle();
-        args.putString("turn", turno);
-        args.putString("Nroturn", nroturno);
-        args.putString("di", dia);
-        args.putString("user", usuario);
-        args.putString("insc", inscriptos);
+        args.putString("turn", TextoTurno);
+        args.putString("Nroturn", NroTurno);
+        args.putString("di", Fecha);
+        args.putString("user", User);
+        args.putString("insc", String.valueOf(cantTotal));
         args.putBoolean("bolinsc", inscripto);
+        args.putString("cantF5", CantF5);
+        args.putString("cantF7", CantF7);
         pop.setArguments(args);
 
         return pop;
@@ -46,11 +48,15 @@ public class PopUpEvento extends DialogFragment {
 
         TextView turno = (TextView) view.findViewById(R.id.textView3);
         TextView dia = (TextView) view.findViewById(R.id.textView4);
-        TextView ins = (TextView) view.findViewById(R.id.textView5);
+        //TextView ins = (TextView) view.findViewById(R.id.textView5);
+        TextView insF5 = (TextView) view.findViewById(R.id.textView5);
+        TextView insF7 = (TextView) view.findViewById(R.id.textView6);
 
         turno.setText(getArguments().getString("turn"));
         dia.setText(getArguments().getString("di"));
-        ins.setText(getArguments().getString("insc"));
+       // ins.setText(getArguments().getString("insc"));
+        insF5.setText(getArguments().getString("cantF5"));
+        insF7.setText(getArguments().getString("cantF7"));
 
         getDialog().setTitle("EVENTO");
 

@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity
         json.execute();
 
     }
+
     public void ejecutar2doJSON(){
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
         JSONEventosUsuario jsonE = new JSONEventosUsuario(this, formateador.format(cal2.getTime()), FB_user, false); //cal.getTime()),"Jose");
@@ -230,6 +231,7 @@ public class MainActivity extends AppCompatActivity
         System.out.println("...........SALIENDO DE JSONEVENTOS................");
     }
 
+
     public void continuarJSONEmostrarUsuarios(View v, TextView bt, TextView s, ArrayList a){
 
         ArrayList usuarios = a;
@@ -267,95 +269,112 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void onClickEvento(View v, boolean continuar, ArrayList array) {
+    //ContinuarOnClickEvento(this.view, this.Fecha, this.TextoTurno, this.turno, this.fromPopUp, this.inscripto, this.arrayDispo)
+    public void ContinuarOnClickEvento (View v, String Fecha, String TextoTurno, String turno, Boolean fromPopUp, Boolean inscripto, ArrayList ar){
+        String cantF5="", cantF7="", cancha="", cant="";
+
+        Iterator I = ar.iterator();
+        while (I.hasNext()) {
+            String t = (String) I.next(); //5/12  - 7/30
+            if (t.substring(0, t.indexOf("/")).compareTo("5") == 0){
+                cantF5 = t.substring(t.indexOf("/")+1, t.length());
+            }else
+                cantF5 = t.substring(t.indexOf("/")+1, t.length());
+        }
+                                        //MainActivity cont, String turno, String dia, String usuario, String Nrotur, boolean inscripto, String F5, String F7) {
+        popEvento = PopUpEvento.newInstance(this, TextoTurno, Fecha, FB_user, turno, inscripto, cantF5, cantF7 );
+        popEvento.show(getFragmentManager(), "Evento"); //turno, dia, "user"); //fm, "fragment_edit_name");
+    }
+
+    public void onClickEvento(View v) {
         String semana = "";
-        String turno="";
+        String NroTurno="";
         String dia= "";
         String btn="";
+        int resID;
+        String tviewTurno = ""; //textView1010 - 1020 - 1030
+        String tviewDia = ""; //textView1001 al 1006
 
-        if(continuar == false){
-            System.out.println("ON CLICK EVENTOOOOOOOOOOOOO   - " + getResources().getResourceEntryName(v.getId()));
-            btn = getResources().getResourceEntryName(v.getId());
+        System.out.println("ON CLICK EVENTOOOOOOOOOOOOO   - " + getResources().getResourceEntryName(v.getId()));
+        btn = getResources().getResourceEntryName(v.getId()); //textView1073
 
-            semana = btn.substring(btn.indexOf("w") + 1, btn.indexOf("w") + 2);
-            turno = btn.substring(btn.length() - 3, btn.length() - 1);
-            dia = btn.substring(btn.length() - 1, btn.length());
+        semana = btn.substring(btn.indexOf("w") + 1, btn.indexOf("w") + 2);//1
+        NroTurno = btn.substring(btn.length() - 3, btn.length() - 1);//07
+        dia = btn.substring(btn.length() - 1, btn.length());//3
 
-            //Toast.makeText(MainActivity.this, "Semana:" + semana + " - dia:" + dia + " - turno:" + Integer.valueOf(turno), Toast.LENGTH_SHORT).show();
-        }else{
-            int resID;
-            String tviewTurno = ""; //textView1010 - 1020 - 1030
-            String tviewDia = ""; //textView1001 - 1006
 
-            SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
-            Calendar aux = cal;
-            long r;
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar aux = cal;
+        long r;
 
-            Calendar c = Calendar.getInstance();
-            Calendar cc = Calendar.getInstance();
-            cc.set(Calendar.DAY_OF_MONTH, Integer.valueOf(minDay.substring(0, 2)));
-            cc.set(Calendar.MONTH, Integer.valueOf(minDay.substring(3, 5)) - 1);
-            cc.set(Calendar.YEAR, Integer.valueOf(minDay.substring(6, 10)));
-            cc.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) - 1);
-            c.setTimeInMillis(System.currentTimeMillis());
+        Calendar c = Calendar.getInstance();
+        Calendar cc = Calendar.getInstance();
+        cc.set(Calendar.DAY_OF_MONTH, Integer.valueOf(minDay.substring(0, 2)));
+        cc.set(Calendar.MONTH, Integer.valueOf(minDay.substring(3, 5)) - 1);
+        cc.set(Calendar.YEAR, Integer.valueOf(minDay.substring(6, 10)));
+        cc.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) - 1);
+        c.setTimeInMillis(System.currentTimeMillis());
 
-            //Verificar que la fecha y turno que se seleccionó sea futura, no haya pasado
-            //El dia minimo de la semana + los dias desplazados del lunes, tiene que ser mayor a la fecha de hoy
-            if (semana.compareTo("1") == 0 && c.getTime().compareTo(cc.getTime()) > 0) {
-                Toast.makeText(MainActivity.this, "Elija una fecha posterior al dia de hoy!!", Toast.LENGTH_LONG).show();
-            } else {
-                tviewTurno = turno;
-                Calendar aux2 = cal;
-                try {
-                    switch (semana) {
-                        case "1":
-                            aux.setTime((formateador).parse(minDay));
-                            aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) - 1);
-                            tviewDia = formateador.format(aux.getTime());
-                            aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) + 1);
-                            break;
-                        case "2":
-                            aux.setTime((formateador).parse(minDay));
-                            aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 6);
-                            tviewDia = formateador.format(aux.getTime());
-                            aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 6);
-                            break;
-                        case "3":
-                            aux.setTime((formateador).parse(minDay));
-                            aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 13);
-                            tviewDia = formateador.format(aux.getTime());
-                            aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 13);
-                            break;
-                        case "4":
-                            aux.setTime((formateador).parse(minDay));
-                            aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 20);
-                            tviewDia = formateador.format(aux.getTime());
-                            aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 20);
-                            break;
-                        default:
-                            break;
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
+        //Verificar que la fecha y turno que se seleccionó sea futura, no haya pasado
+        //El dia minimo de la semana + los dias desplazados del lunes, tiene que ser mayor a la fecha de hoy
+        if (semana.compareTo("1") == 0 && c.getTime().compareTo(cc.getTime()) > 0) {
+            Toast.makeText(MainActivity.this, "Elija una fecha posterior al dia de hoy!!", Toast.LENGTH_LONG).show();
+        } else {
+            tviewTurno = NroTurno;
+            Calendar aux2 = cal;
+            try {
+                switch (semana) {
+                    case "1":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) - 1);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) + 1);
+                        break;
+                    case "2":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 6);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 6);
+                        break;
+                    case "3":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 13);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 13);
+                        break;
+                    case "4":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 20);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 20);
+                        break;
+                    default:
+                        break;
                 }
-                resID = getResources().getIdentifier(btn, "id", this.getPackageName());
-                TextView tview = findViewById(resID);
-
-                //Si BackgroundColor es Verde; esta inscripto.. si es gris (o no verde) se puede inscribir = falso
-                boolean inscripto = false;
-                System.out.println("COLOOOOR : " + ((ColorDrawable) tview.getBackground()).getColor());
-                if (((ColorDrawable) tview.getBackground()).getColor() == Color.GREEN) {
-                    inscripto = true;
-                }
-                String inscriptos = tview.getText().toString();
-                popEvento = PopUpEvento.newInstance(this, tviewTurno, tviewDia, inscriptos, FB_user, inscripto, turno);
-                popEvento.show(getFragmentManager(), "Evento"); //turno, dia, "user"); //fm, "fragment_edit_name");
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
+
+            resID = getResources().getIdentifier("textView"+semana+NroTurno+"0","id",this.getPackageName());
+            tviewTurno = ((TextView) findViewById(resID)).getText().toString();
+
+            resID = getResources().getIdentifier(btn, "id", this.getPackageName());
+            TextView tview = findViewById(resID);
+
+            System.out.println("TURNO: " + NroTurno + " -- TViewTurno: "  + tviewTurno + " - TViewDia: " + tviewDia);
+
+            //Si BackgroundColor es Verde; esta inscripto.. si es gris (o no verde) se puede inscribir = falso
+            boolean inscripto = false;
+            if (((ColorDrawable) tview.getBackground()).getColor() == Color.GREEN) {
+                inscripto = true;
+            }
+            //String inscriptos = tview.getText().toString();
+
+            //MainActivity disp, View v, String min, String TextoT, String tur, boolean fromPop, boolean inscr)
+            JSONDetalleEvento jsonD = new JSONDetalleEvento(this, v, tviewDia, tviewTurno, NroTurno,  true, inscripto);
+            jsonD.execute();
+
         }
-
-
-
-
     }
 
     //Obtiene los turnos y fechas que esta inscripto dicho usuario
@@ -601,7 +620,7 @@ public class MainActivity extends AppCompatActivity
             String txt = (String) I2.next();  //VERSION2:  //5#1*textView1-02/12/04/2019
             System.out.println("TXT : " + txt); //  7*textView1-02/02/11/2018
             //  6*textView2-02/13/11/2018
-            String cancha = txt.substring(0, txt.indexOf("#"));
+            String CantCancha = txt.substring(0, txt.indexOf("#"));
             String cant1 = txt.substring(txt.indexOf("#")+1, txt.indexOf("*"));
             String tur = txt.substring(txt.indexOf("-") + 1, txt.indexOf("/"));
             String semana1 = txt.substring(txt.indexOf("w") + 1, txt.indexOf("w") + 2);
@@ -629,7 +648,7 @@ public class MainActivity extends AppCompatActivity
                         System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
                         System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
                         System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
-                        primera.add(cancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
+                        primera.add(CantCancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
                         break;
 
                     case "2":
@@ -643,7 +662,7 @@ public class MainActivity extends AppCompatActivity
                         System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
                         System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
                         System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
-                        segunda.add(cancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
+                        segunda.add(CantCancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -7);
                         break;
 
@@ -659,7 +678,7 @@ public class MainActivity extends AppCompatActivity
                         System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
                         System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
                         System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
-                        tercera.add(cancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
+                        tercera.add(CantCancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -14);
                         break;
 
@@ -674,7 +693,7 @@ public class MainActivity extends AppCompatActivity
                         System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
                         System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
                         System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
-                        cuarta.add(cancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
+                        cuarta.add(CantCancha+"#"+cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -21);
                         break;
                     default:

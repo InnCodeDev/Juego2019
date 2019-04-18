@@ -28,22 +28,27 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
     ArrayList<String> arrayDispo = new ArrayList <String> ();
     ProgressDialog pDialog;
     Context context;
-    String Fecha, turno, fut5, fut7 = "";
+    String Fecha, turno, TextoTurno, fut5, fut7 = "";
     //        private final Handler handler = new Handler();
     boolean fromPopUp;
     View view;
+    boolean inscripto;
+    String user_FB;
 
     public ArrayList <String> getarrayDispo (){
         return arrayDispo;
     }
-
-    public JSONDetalleEvento(MainActivity disp, View v, String min, String tur, boolean fromPop){//Ademas tiene que recibir el nombre de usuario loggeado
+                            //this, v, tviewDia, NroTurno, tviewTurno, true, inscripto);
+    public JSONDetalleEvento(MainActivity disp, View v, String min, String TextoT, String tur, boolean fromPop, boolean inscr){//Ademas tiene que recibir el nombre de usuario loggeado
         //User = u;
         context = disp;
         view = v;
         Fecha = min;
+        TextoTurno = TextoT;
         turno = tur;
         fromPopUp = fromPop;
+        //user_FB = usuario;
+        inscripto = inscr;
         pDialog = new ProgressDialog(disp);
         pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
         pDialog.setMessage("Cargando detalles...");
@@ -126,7 +131,14 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
 
                     s =  cancha + "/" + cantidad; //Formato: 5/10  o 7/2
                     arrayDispo.add(s);
+                /*    if (cancha.compareTo("5") == 0){
+                        this.fut5 = cantidad;
+                    }else{
+                        this.fut7 = cantidad;
+                    }
+                */
                 }
+
             }
         }catch (Exception e){
             Log.e("log_tag", "JSONCargarEventos - Error analizando Archivo JSON from PHP- " + e.toString());
@@ -143,8 +155,8 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
     protected void onPostExecute(String result) {
         try {
             pDialog.dismiss();
-            this.cancel(true); //finalize();d
-            ((MainActivity) context).onClickEvento(view, true, arrayDispo);
+            this.cancel(true); //View v, String min, String TextoT, String tur, boolean fromPop, String usuario, boolean inscr)
+            ((MainActivity) context).ContinuarOnClickEvento(this.view, this.Fecha, this.TextoTurno, this.turno, this.fromPopUp, this.inscripto, this.arrayDispo);
         } catch (Throwable e) {
             e.printStackTrace();
         }
