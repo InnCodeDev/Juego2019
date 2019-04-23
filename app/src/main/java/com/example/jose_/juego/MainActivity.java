@@ -40,10 +40,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
-
-import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
-
+import android.R.*;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -236,40 +233,28 @@ public class MainActivity extends AppCompatActivity
 
         ArrayList usuarios = a;
         TextView btn = bt; //getResources().getResourceEntryName( R.id.lbl_participantes);
-        TextView sc = s; //getResources().getResourceEntryName(R.id.sc_participantes);
+        TextView sc = findViewById(R.id.sc_participantes); // id.sc_participantes);
         sc.setMovementMethod(new ScrollingMovementMethod());
-//TextView sc = findViewById(R.id.sc_participantes);
 
         System.out.println("ON CLICK USUARIOSSS " + btn.getText());
+        sc.setHeight(150);
+        btn.setText("Ocultar Participantes\n\n");
 
-        if (btn.getText().toString().compareTo("Ver P<articipantes") == 0){
-           // sc.setHeight(150);
-            btn.setText("Ocultar Participantes\n\n");
+        Iterator I = usuarios.iterator();
+        System.out.println("Cantidad de participantes: " + usuarios.size());
 
-            Iterator I = usuarios.iterator();
-            System.out.println("Cantidad de participantes: " + usuarios.size());
-
-            if (usuarios.size() > 0) {
-                sc.append("PARTICIPANTES: \n");
-                while (I.hasNext()) {
-                    String user = (String) I.next();
-                    System.out.println("USUARIOS: " + user);
-                    sc.append(user + "\n");
-                }
+        if (usuarios.size() > 0) {
+            sc.append("PARTICIPANTES: \n");
+            while (I.hasNext()) {
+                String user = (String) I.next();
+                System.out.println("USUARIOS: " + user);
+                sc.append(user + "\n");
             }
-            sc.setMaxLines(5);
-
-        }else{
-            sc.setText("");
-            //sc.setHeight(1);
-            btn.setText("Ver Participantes");
-
         }
-
+        sc.setMaxLines(5);
 
     }
 
-    //ContinuarOnClickEvento(this.view, this.Fecha, this.TextoTurno, this.turno, this.fromPopUp, this.inscripto, this.arrayDispo)
     public void ContinuarOnClickEvento (View v, String Fecha, String TextoTurno, String turno, Boolean fromPopUp, Boolean inscripto, ArrayList ar){
         int CantF5=0;
         int CantF7=0;

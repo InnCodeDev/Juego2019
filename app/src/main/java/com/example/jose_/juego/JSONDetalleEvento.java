@@ -80,7 +80,6 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
 
         }catch(Exception e){
             Log.e("log_tag", "-Error in http connection- "+e.toString());
-
             txtFinal = "JSONCargarEventos - Couldnt connect to database - " + e.toString();
         }
 
@@ -108,7 +107,7 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
         String s = "";
 
         try {
-            System.out.println("JSONListaCategorias : " + result);
+            System.out.println("JSONListaUsuarios: " + result);
 
             if (result != null){
 

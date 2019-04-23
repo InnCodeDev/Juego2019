@@ -3,6 +3,7 @@ package com.example.jose_.juego;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -140,8 +142,9 @@ TextView btn, sc;
     protected void onPostExecute(String result) {
         try {
             pDialog.dismiss();
+                ((MainActivity) context).continuarJSONEmostrarUsuarios(view, btn, sc, arrayDispo);
             this.cancel(true); //finalize();d
-            ((MainActivity) context).continuarJSONEmostrarUsuarios(view, btn, sc, arrayDispo);
+
         } catch (Throwable e) {
             e.printStackTrace();
         }

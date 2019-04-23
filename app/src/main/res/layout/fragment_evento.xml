@@ -222,21 +222,19 @@
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
 
-        <TextView
-            android:id="@+id/sc_participantes"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_gravity="top"
-            android:layout_marginTop="10dp"
-            android:clickable="false"
-            android:contextClickable="false"
-            android:editable="false"
-            android:isScrollContainer="true"
-            android:maxHeight="10dp"
-            android:maxLines="5"
-            android:minHeight="2dp"
-            android:onClick="none"
-            android:textAlignment="textStart"
-            tools:text="@tools:sample/full_names"></TextView>
+    <TextView
+        android:id="@+id/sc_participantes"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_gravity="top"
+        android:layout_marginTop="10dp"
+        android:clickable="false"
+        android:contextClickable="false"
+        android:editable="false"
+        android:isScrollContainer="true"
+        android:maxHeight="10dp"
+        android:maxLines="5"
+        android:minHeight="2dp"
+        tools:text="@tools:sample/full_names"></TextView>
     </LinearLayout>
 

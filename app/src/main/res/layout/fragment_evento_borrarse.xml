@@ -14,7 +14,7 @@
     android:paddingBottom="20dp">
 
     <TextView
-        android:id="@+id/lbl_titulo"
+        android:id="@+id/lbl_titulo2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -31,14 +31,14 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/lbl_turno"
+            android:id="@+id/lbl_turno2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Turno: "
             android:textStyle="normal|bold" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textView32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text" />
@@ -50,14 +50,14 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/lbl_dia"
+            android:id="@+id/lbl_dia2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dia: "
             android:textStyle="normal|bold" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textView42"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text" />
@@ -71,7 +71,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/lbl_inscriptos"
+            android:id="@+id/lbl_inscriptos2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Inscriptos "
@@ -85,28 +85,29 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/lbl_inscriptosF5"
+                android:id="@+id/lbl_inscriptosF52"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Futbol 5: "
                 android:textStyle="normal|bold" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView52"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:text="New Text"/>
+                android:text="New Text" />
 
             <TextView
-                android:id="@+id/lbl_inscriptosF7"
+                android:id="@+id/lbl_inscriptosF72"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:text="Futbol 7: "
                 android:textStyle="normal|bold"/>
+
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView62"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Text" />
@@ -120,7 +121,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/l_btnesc"
+        android:id="@+id/l_btnesc2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -128,7 +129,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/lbl_txtins"
+            android:id="@+id/lbl_txtins2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -136,13 +137,13 @@
             android:textStyle="normal|bold"/>
 
         <LinearLayout
-            android:id="@+id/lbl_btnins"
+            android:id="@+id/linearL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal">
 
             <TextView
-                android:id="@+id/textView63"
+                android:id="@+id/textView632"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -165,7 +166,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/lbl_participantes"
+            android:id="@+id/lbl_participantes2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -177,13 +178,13 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/divider2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
 
     <TextView
-        android:id="@+id/sc_participantes"
+        android:id="@+id/sc_participantes2"
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:layout_gravity="top"

@@ -40,7 +40,7 @@ public class PopUpEvento extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_evento, container, false);
+        return inflater.inflate(R.layout.fragment_evento, container, true);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class PopUpEvento extends DialogFragment {
 
         TextView turno = (TextView) view.findViewById(R.id.textView3);
         TextView dia = (TextView) view.findViewById(R.id.textView4);
-        //TextView ins = (TextView) view.findViewById(R.id.textView5);
+        TextView sc = (TextView) view.findViewById(R.id.sc_participantes);
         TextView insF5 = (TextView) view.findViewById(R.id.textView5);
         TextView insF7 = (TextView) view.findViewById(R.id.textView6);
 
@@ -88,14 +88,20 @@ public class PopUpEvento extends DialogFragment {
             }
         });
 
+        //Asigna evento Click de VerParticipantes
         final TextView btn = view.findViewById(R.id.lbl_participantes);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("MOSTRAR USUARIOS... !!");
                 try {
-                    JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("turn"), getArguments().getString("di"), (TextView)view.findViewById(R.id.lbl_participantes), btn);
+                    JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc);
                     json.execute();
+
+//                   TextView participantes = (TextView) view.findViewById(R.id.sc_participantes);
+//                    participantes.setText("CATAAALINAA");
+                    System.out.println("CATALINAAA");
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
