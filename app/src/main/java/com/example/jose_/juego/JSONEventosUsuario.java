@@ -106,7 +106,7 @@ public class JSONEventosUsuario extends AsyncTask<String, String, String>
         try {
             System.out.println("JSONListaCategorias : " + result);
 
-            if (result != null){
+            if (result.toString().compareTo("<br />null") != 0){
 
                 JSONParser jsonParser = new JSONParser();
 

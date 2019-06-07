@@ -61,8 +61,8 @@ public class PopUpEvento extends DialogFragment {
 
         getDialog().setTitle("INSCRIPCION A EVENTO!");
 
-        TextView btnTView = (TextView) view.findViewById(R.id.textView6);
-
+        TextView btnTView = (TextView) view.findViewById(R.id.textView61);
+/*
         btnTView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,8 +85,11 @@ public class PopUpEvento extends DialogFragment {
                         e.printStackTrace();
                     }
                 //}
-            }
+/*            }
         });
+*/
+
+        
 
         final TextView btn = view.findViewById(R.id.lbl_participantes);
         btn.setOnClickListener(new View.OnClickListener() {
