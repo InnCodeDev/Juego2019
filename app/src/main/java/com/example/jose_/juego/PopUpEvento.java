@@ -131,10 +131,9 @@ public class PopUpEvento extends DialogFragment {
                 }else{
                     System.out.println("MOSTRAR USUARIOS... !!");
                     try {
+                        btn.setText("Ocultar Participantes");
                         JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_particip);
                         json.execute();
-
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

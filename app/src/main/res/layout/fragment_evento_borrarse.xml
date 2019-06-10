@@ -128,14 +128,6 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/lbl_txtins2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text=""
-            android:textStyle="normal|bold" />
-
         <LinearLayout
             android:id="@+id/linearL"
             android:layout_width="match_parent"
@@ -173,12 +165,6 @@
             android:text="Ver Participantes"
             android:textAlignment="center"
             android:textStyle="normal|bold" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="?android:attr/listDivider" />
 
         <TextView
             android:id="@+id/sc_participantes2"
