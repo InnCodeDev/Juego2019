@@ -22,12 +22,14 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
     String turno;
     String usuario;
     String fecha;
+    int cancha;
 
-    public JSONInscripcionEvento (MainActivity disp, String t, String u, String f){//Ademas tiene que recibir el nombre de usuario loggeado
+    public JSONInscripcionEvento (MainActivity disp, String t, String u, String f, int c){//Ademas tiene que recibir el nombre de usuario loggeado
         context = disp;
         turno = t;
         usuario = u;
         fecha = f;
+        cancha = c;
         pDialog = new ProgressDialog(disp);
         pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
         pDialog.setMessage("Inscribiendote al evento... \n\nAguarde!");
@@ -50,7 +52,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
         try{
 
             ServerID server = ServerID.getInstance();
-            System.out.println("POPUP: Fecha: " + fecha + " -User: " + usuario + " - turno: " + turno);
+            System.out.println("POPUP: Fecha: " + fecha + " -User: " + usuario + " - turno: " + turno + " - cancha: " + cancha);
             String d = fecha.substring(0,fecha.indexOf("/"));
             String m = fecha.substring(fecha.indexOf("/")+1, fecha.lastIndexOf("/"));
             String a = fecha.substring(fecha.lastIndexOf("/")+1, fecha.length());
@@ -59,7 +61,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
             String fech = a+"/"+m+"/"+d;
 
             System.out.println("FECHA PHP: " + fech);
-            String urlString = server.DBserver+"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno;
+            String urlString = server.DBserver+"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha;
             //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 

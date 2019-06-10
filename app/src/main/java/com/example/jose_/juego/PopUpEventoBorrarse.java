@@ -18,6 +18,8 @@ import java.util.Iterator;
 public class PopUpEventoBorrarse extends DialogFragment {
     static String user = "";
     static Context c;
+    TextView sc_participantes2;
+    TextView btn;
 
     public PopUpEventoBorrarse(){
 
@@ -54,11 +56,16 @@ public class PopUpEventoBorrarse extends DialogFragment {
         TextView dia = (TextView) view.findViewById(R.id.textView42);
         TextView insF5 = (TextView) view.findViewById(R.id.textView52);
         TextView insF7 = (TextView) view.findViewById(R.id.textView62);
+        this.sc_participantes2 = (TextView) view.findViewById(R.id.sc_participantes2);
+        btn = view.findViewById(R.id.lbl_participantes2);
 
         turno.setText(getArguments().getString("turn"));
         dia.setText(getArguments().getString("di"));
         insF5.setText(getArguments().getString("cantF5"));
         insF7.setText(getArguments().getString("cantF7"));
+
+        TextView titulo = view.findViewById(R.id.lbl_titulo2);
+        titulo.setText("Borrar Participacion");
 
         getDialog().setTitle("BORRAR PARTICIPACION");
 
@@ -78,17 +85,22 @@ public class PopUpEventoBorrarse extends DialogFragment {
         });
 
         //Asigna evento Click de VerParticipantes
-        final TextView btn = view.findViewById(R.id.lbl_participantes2);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("MOSTRAR USUARIOS... !!");
-                try {
-                    JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, (TextView)view.findViewById(R.id.sc_participantes));
-                    json.execute();
+                System.out.println("----------" + btn.getText().toString());
+                if (btn.getText().toString().compareTo("Ocultar Participantes") == 0){
+                    btn.setText("Ver Participantes");
+                    sc_participantes2.setText("");
+                }else{
+                    System.out.println("MOSTRAR USUARIOS... !!");
+                    try {
+                        JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_participantes2);
+                        json.execute();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

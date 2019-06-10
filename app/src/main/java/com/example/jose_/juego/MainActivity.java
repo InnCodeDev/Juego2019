@@ -232,54 +232,32 @@ public class MainActivity extends AppCompatActivity
     public void continuarJSONEmostrarUsuarios(View v, TextView bt, TextView s, ArrayList a){
 
         ArrayList usuarios = a;
-        TextView btn = bt; //getResources().getResourceEntryName( R.id.lbl_participantes);
-        TextView sc = findViewById(R.id.sc_participantes); // id.sc_participantes);
-        sc.setMovementMethod(new ScrollingMovementMethod());
+        TextView sc;
+        String btn = getResources().getResourceEntryName(bt.getId());
+        String lbl_sc = getResources().getResourceEntryName(s.getId());
 
-        System.out.println("ON CLICK USUARIOSSS " + btn.getText());
-        sc.setHeight(150);
-        btn.setText("Ocultar Participantes\n\n");
+        System.out.println("ON CLICK USUARIOSSS " + btn + " -- " + lbl_sc );
+
+        s.setMovementMethod(new ScrollingMovementMethod());
+
+        s.setHeight(150);
+        bt.setText("Ocultar Participantes\n\n");
 
         Iterator I = usuarios.iterator();
         System.out.println("Cantidad de participantes: " + usuarios.size());
 
         if (usuarios.size() > 0) {
-            sc.append("PARTICIPANTES: \n");
+            s.append("PARTICIPANTES: \n");
             while (I.hasNext()) {
                 String user = (String) I.next();
                 System.out.println("USUARIOS: " + user);
-                sc.append(user + "\n");
+                s.append(user + "\n");
             }
         }
-        sc.setMaxLines(5);
+        s.setMaxLines(5);
 
     }
 
-    public void ContinuarOnClickEvento (View v, String Fecha, String TextoTurno, String turno, Boolean fromPopUp, Boolean inscripto, ArrayList ar){
-        int CantF5=0;
-        int CantF7=0;
-
-        Iterator I = ar.iterator();
-        while (I.hasNext()) {
-            String t = (String) I.next(); //5/12  - 7/30
-            if (t.substring(0, t.indexOf("/")).compareTo("5") == 0){
-                CantF5 = Integer.valueOf(t.substring(t.indexOf("/")+1, t.length()));
-            }else
-                CantF7 = Integer.valueOf(t.substring(t.indexOf("/")+1, t.length()));
-        }
-        System.out.println(ar.size() + "...........CANCHA 5: " + CantF5 + " -- Cancha 7: " + CantF7);
-
-        if (inscripto == true){
-            //MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, String CantF5, String CantF7)
-            PopUpEventoBorrarse popEventoBorrar = PopUpEventoBorrarse.newInstance(this, TextoTurno, Fecha, FB_user, turno, inscripto, CantF5, CantF7 );
-            popEventoBorrar.show(getFragmentManager(), "BORRAR PARTICIPACION!");
-        }else{ //No esta inscripto
-            //MainActivity cont, String turno, String dia, String usuario, String Nrotur, boolean inscripto, String F5, String F7) {
-            popEvento = PopUpEvento.newInstance(this, TextoTurno, Fecha, FB_user, turno, inscripto, CantF5, CantF7 );
-            popEvento.show(getFragmentManager(), "INSCRIPCION A EVENTO!"); //turno, dia, "user"); //fm, "fragment_edit_name");
-        }  //MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, int CantF5, int CantF7)
-
-    }
 
     public void onClickEvento(View v) {
         String semana = "";
@@ -369,6 +347,32 @@ public class MainActivity extends AppCompatActivity
             jsonD.execute();
             //String inscriptos = tview.getText().toString();
         }
+    }
+
+    public void ContinuarOnClickEvento (View v, String Fecha, String TextoTurno, String turno, Boolean fromPopUp, Boolean inscripto, ArrayList ar){
+        int CantF5=0;
+        int CantF7=0;
+
+        Iterator I = ar.iterator();
+        while (I.hasNext()) {
+            String t = (String) I.next(); //5/12  - 7/30
+            if (t.substring(0, t.indexOf("/")).compareTo("5") == 0){
+                CantF5 = Integer.valueOf(t.substring(t.indexOf("/")+1, t.length()));
+            }else
+                CantF7 = Integer.valueOf(t.substring(t.indexOf("/")+1, t.length()));
+        }
+        System.out.println(ar.size() + "...........CANCHA 5: " + CantF5 + " -- Cancha 7: " + CantF7);
+
+        if (inscripto == true){
+            //MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, String CantF5, String CantF7)
+            PopUpEventoBorrarse popEventoBorrar = PopUpEventoBorrarse.newInstance(this, TextoTurno, Fecha, FB_user, turno, inscripto, CantF5, CantF7 );
+            popEventoBorrar.show(getFragmentManager(), "BORRAR PARTICIPACION!");
+        }else{ //No esta inscripto
+            //MainActivity cont, String turno, String dia, String usuario, String Nrotur, boolean inscripto, String F5, String F7) {
+            popEvento = PopUpEvento.newInstance(this, TextoTurno, Fecha, FB_user, turno, inscripto, CantF5, CantF7 );
+            popEvento.show(getFragmentManager(), "INSCRIPCION A EVENTO!"); //turno, dia, "user"); //fm, "fragment_edit_name");
+        }  //MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, int CantF5, int CantF7)
+
     }
 
     //Obtiene los turnos y fechas que esta inscripto dicho usuario
@@ -714,7 +718,7 @@ public class MainActivity extends AppCompatActivity
     public void  continuarJSONPopUP(boolean fromPopU) {
         JSONEventos(fromPopU);
         this.ReloadALL(true);
-        this.popEvento.dismiss();
+//        this.popEvento.dismiss();
     }
 
     public void getDiaSemana() {
