@@ -349,7 +349,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void ContinuarOnClickEvento (View v, String Fecha, String TextoTurno, String turno, Boolean fromPopUp, Boolean inscripto, ArrayList ar){
+    public void ContinuarOnClickEvento (View v, String Fecha, String TextoTurno, String Nroturno,  Boolean fromPopUp, Boolean inscripto, ArrayList ar){
         int CantF5=0;
         int CantF7=0;
 
@@ -365,11 +365,11 @@ public class MainActivity extends AppCompatActivity
 
         if (inscripto == true){
             //MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, String CantF5, String CantF7)
-            PopUpEventoBorrarse popEventoBorrar = PopUpEventoBorrarse.newInstance(this, TextoTurno, Fecha, FB_user, turno, inscripto, CantF5, CantF7 );
+            PopUpEventoBorrarse popEventoBorrar = PopUpEventoBorrarse.newInstance(this, TextoTurno, Fecha, FB_user, Nroturno, inscripto, CantF5, CantF7 );
             popEventoBorrar.show(getFragmentManager(), "BORRAR PARTICIPACION!");
         }else{ //No esta inscripto
             //MainActivity cont, String turno, String dia, String usuario, String Nrotur, boolean inscripto, String F5, String F7) {
-            popEvento = PopUpEvento.newInstance(this, TextoTurno, Fecha, FB_user, turno, inscripto, CantF5, CantF7 );
+            popEvento = PopUpEvento.newInstance(this, TextoTurno, Fecha, FB_user, Nroturno, inscripto, CantF5, CantF7 );
             popEvento.show(getFragmentManager(), "INSCRIPCION A EVENTO!"); //turno, dia, "user"); //fm, "fragment_edit_name");
         }  //MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, int CantF5, int CantF7)
 

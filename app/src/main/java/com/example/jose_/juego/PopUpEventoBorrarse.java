@@ -76,8 +76,9 @@ public class PopUpEventoBorrarse extends DialogFragment {
             public void onClick(View view) {
                 System.out.println("Se va a dar de bajar?");
                 try {
-                    JSONBorrarParticipacion json = new JSONBorrarParticipacion((MainActivity) c,getArguments().getString("turn"), getArguments().getString("user"), getArguments().getString("di"));
+                    JSONBorrarParticipacion json = new JSONBorrarParticipacion((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"));
                     json.execute();
+                    PopUpEventoBorrarse.this.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -97,7 +98,6 @@ public class PopUpEventoBorrarse extends DialogFragment {
                     try {
                         JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_participantes2);
                         json.execute();
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
