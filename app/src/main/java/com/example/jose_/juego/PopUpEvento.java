@@ -14,6 +14,8 @@ import android.widget.TextView;
 public class PopUpEvento extends DialogFragment {
     static String user = "";
     static Context c;
+    TextView sc_particip;
+    TextView btn;
 
     public PopUpEvento(){
 
@@ -40,7 +42,7 @@ public class PopUpEvento extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_evento, container, false);
+        return inflater.inflate(R.layout.fragment_evento, container, true);
     }
 
     @Override
@@ -49,9 +51,11 @@ public class PopUpEvento extends DialogFragment {
 
         TextView turno = (TextView) view.findViewById(R.id.textView3);
         TextView dia = (TextView) view.findViewById(R.id.textView4);
-        //TextView ins = (TextView) view.findViewById(R.id.textView5);
+        final TextView sc = (TextView) view.findViewById(R.id.sc_particip);
         TextView insF5 = (TextView) view.findViewById(R.id.textView5);
         TextView insF7 = (TextView) view.findViewById(R.id.textView6);
+        sc_particip = (TextView) view.findViewById(R.id.sc_particip);
+        btn = view.findViewById(R.id.lbl_participantes);
 
         turno.setText(getArguments().getString("turn"));
         dia.setText(getArguments().getString("di"));
@@ -61,46 +65,78 @@ public class PopUpEvento extends DialogFragment {
 
         getDialog().setTitle("INSCRIPCION A EVENTO!");
 
-        TextView btnTView = (TextView) view.findViewById(R.id.textView61);
-/*
-        btnTView.setOnClickListener(new View.OnClickListener() {
+        //Boton cancha 5
+        TextView btnTView5 = (TextView) view.findViewById(R.id.textView61);
+        btnTView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-              /*  if (getArguments().getBoolean("bolinsc") == true){
-                    System.out.println("Se va a dar de bajar?");
-                    try {
-                        JSONBorrarParticipacion json = new JSONBorrarParticipacion((MainActivity) c,getArguments().getString("turn"), getArguments().getString("user"), getArguments().getString("di"));
-                        json.execute();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                  //  Toast.makeText(MainActivity.this,"Se va a dar de bajar?", Toast.LENGTH_SHORT).show();
-                }else{
-                */    System.out.println("A PARTICIPAR !!");
-                    try {
-                        JSONInscripcionEvento json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"));
-                        json.execute();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                //}
-/*            }
+                System.out.println("A PARTICIPAR en Cancha 5!!");
+                try {
+                    JSONInscripcionEvento json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 5);
+                    json.execute();
+                    PopUpEvento.this.dismiss();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         });
-*/
+        //Boton cancha 7
+        TextView btnTView7 = (TextView) view.findViewById(R.id.textView62);
+        btnTView7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("A PARTICIPAR en Cancha 7!!");
+                try {
+                    JSONInscripcionEvento json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 7);
+                    json.execute();
+                    PopUpEvento.this.dismiss();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        
-
-        final TextView btn = view.findViewById(R.id.lbl_participantes);
+        //Boton INDISTINTO
+        TextView btnTViewIndist = (TextView) view.findViewById(R.id.textView63);
+        btnTViewIndist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView btnC5 = (TextView) view.findViewById(R.id.textView5);
+                TextView btnC7 = (TextView) view.findViewById(R.id.textView6);
+                int c5 = Integer.valueOf(getArguments().getString("cantF5")); //Integer.valueOf(btnC5.getText().toString());
+                int c7 = Integer.valueOf(getArguments().getString("cantF7")); // Integer.valueOf(btnC7.getText().toString());
+                int cancha = 5; //por defecto en caso que sean igual cantidad
+                if (c5 <= c7){
+                    cancha = 7;
+                }
+                System.out.println("A PARTICIPAR en cancha " + cancha + " !! " );
+                try {
+                    JSONInscripcionEvento json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), cancha);
+                    json.execute();
+                    PopUpEvento.this.dismiss();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            }
+        });
+        //Asigna evento Click de VerParticipantes
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("MOSTRAR USUARIOS... !!");
-                try {
-                    JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("turn"), getArguments().getString("di"), (TextView)view.findViewById(R.id.lbl_participantes), btn);
-                    json.execute();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (btn.getText().toString().compareTo("Ocultar Participantes") == 0){
+                    btn.setText("Ver Participantes");
+                    sc_particip.setText("");
+                }else{
+                    System.out.println("MOSTRAR USUARIOS... !!");
+                    try {
+                        btn.setText("Ocultar Participantes");
+                        JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_particip);
+                        json.execute();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

@@ -3,10 +3,14 @@ package com.example.jose_.juego;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by jose_ on 27/8/2018.
@@ -14,6 +18,8 @@ import android.widget.TextView;
 public class PopUpEventoBorrarse extends DialogFragment {
     static String user = "";
     static Context c;
+    TextView sc_participantes2;
+    TextView btn;
 
     public PopUpEventoBorrarse(){
 
@@ -46,48 +52,62 @@ public class PopUpEventoBorrarse extends DialogFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView turno = (TextView) view.findViewById(R.id.textView3);
-        TextView dia = (TextView) view.findViewById(R.id.textView4);
-        TextView insF5 = (TextView) view.findViewById(R.id.textView5);
-        TextView insF7 = (TextView) view.findViewById(R.id.textView6);
+        TextView turno = (TextView) view.findViewById(R.id.textView32);
+        TextView dia = (TextView) view.findViewById(R.id.textView42);
+        TextView insF5 = (TextView) view.findViewById(R.id.textView52);
+        TextView insF7 = (TextView) view.findViewById(R.id.textView62);
+        this.sc_participantes2 = (TextView) view.findViewById(R.id.sc_participantes2);
+        btn = view.findViewById(R.id.lbl_participantes2);
 
         turno.setText(getArguments().getString("turn"));
         dia.setText(getArguments().getString("di"));
         insF5.setText(getArguments().getString("cantF5"));
         insF7.setText(getArguments().getString("cantF7"));
 
+        TextView titulo = view.findViewById(R.id.lbl_titulo2);
+        titulo.setText("Borrar Participacion");
+
         getDialog().setTitle("BORRAR PARTICIPACION");
 
-        TextView btnTView = (TextView) view.findViewById(R.id.textView63);
+        TextView btnTView = (TextView) view.findViewById(R.id.textView632);
 
         btnTView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("Se va a dar de bajar?");
                 try {
-                    JSONBorrarParticipacion json = new JSONBorrarParticipacion((MainActivity) c,getArguments().getString("turn"), getArguments().getString("user"), getArguments().getString("di"));
+                    JSONBorrarParticipacion json = new JSONBorrarParticipacion((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"));
                     json.execute();
+                    PopUpEventoBorrarse.this.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
-     /*   final TextView btn = view.findViewById(R.id.lbl_participantes);
+        //Asigna evento Click de VerParticipantes
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("MOSTRAR USUARIOS... !!");
-                try {
-                    JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("turn"), getArguments().getString("di"), (TextView)view.findViewById(R.id.lbl_participantes), btn);
-                    json.execute();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                System.out.println("----------" + btn.getText().toString());
+                if (btn.getText().toString().compareTo("Ocultar Participantes") == 0){
+                    btn.setText("Ver Participantes");
+                    sc_participantes2.setText("");
+                }else{
+                    System.out.println("MOSTRAR USUARIOS... !!");
+                    try {
+                        btn.setText("Ocultar Participantes");
+                        JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_participantes2);
+                        json.execute();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
-        */
+
     }
+
 
 
 

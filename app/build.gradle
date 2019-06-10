@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion '28.0.3'//'28.0.2'
     defaultConfig {
         applicationId "com.example.jose_.juego"
         minSdkVersion 27
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName "2.0"
     }
     buildTypes {
         release {

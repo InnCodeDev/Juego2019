@@ -1,7 +1,7 @@
 <!-- fragment_evento.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
+    android:id="@+id/linearLayout1"
     style="@style/Animation.AppCompat.Dialog"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
@@ -197,37 +197,34 @@
         </LinearLayout>
     </LinearLayout>
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:gravity="top|center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lbl_participantes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:gravity="top|center_horizontal"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/lbl_participantes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:onClick="onClickUsuarios"
-                android:text="Ver Participantes"
-                android:textAlignment="center"
-                android:textStyle="normal|bold" />
-
-        </LinearLayout>
+            android:text="Ver Participantes"
+            android:textAlignment="center"
+            android:textStyle="normal|bold" />
 
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:background="?android:attr/listDivider" />
 
         <TextView
-            android:id="@+id/sc_participantes"
+            android:id="@+id/sc_particip"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="match_parent"
             android:layout_gravity="top"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:clickable="false"
             android:contextClickable="false"
             android:editable="false"
@@ -235,8 +232,10 @@
             android:maxHeight="10dp"
             android:maxLines="5"
             android:minHeight="2dp"
-            android:onClick="none"
-            android:textAlignment="textStart"
-            tools:text="@tools:sample/full_names"></TextView>
+            tools:text="@tools:sample/full_names">
+        </TextView>
+
     </LinearLayout>
+
+</LinearLayout>
 
