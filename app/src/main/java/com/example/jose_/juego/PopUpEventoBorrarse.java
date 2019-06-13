@@ -90,7 +90,7 @@ public class PopUpEventoBorrarse extends DialogFragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (viendoPart = false){
+                if (viendoPart == false){
                     System.out.println("Mostrando USUARIOS... !!");
                     try {
                         btn.setText("Ocultar Participantes");
@@ -104,9 +104,10 @@ public class PopUpEventoBorrarse extends DialogFragment {
                     System.out.println("Ocultando USUARIOS... !!");
                     try {
                         btn.setText("Ver Participantes");
+                        sc_participantes2.setText("");
                         viendoPart = false;
-                        JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_participantes2);
-                        json.execute();
+                       // JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_participantes2);
+                      //  json.execute();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

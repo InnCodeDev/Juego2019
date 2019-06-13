@@ -126,12 +126,12 @@ public class PopUpEvento extends DialogFragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (viendoPart = false){
+                if (viendoPart == false){
                     System.out.println("Mostrando USUARIOS... !!");
                     try {
                         btn.setText("Ocultar Participantes");
                         viendoPart = true;
-                        JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_participantes2);
+                        JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_particip);
                         json.execute();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -141,8 +141,9 @@ public class PopUpEvento extends DialogFragment {
                     try {
                         btn.setText("Ver Participantes");
                         viendoPart = false;
-                        JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_participantes2);
-                        json.execute();
+                        sc_particip.setText("");
+                        //JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_particip);
+                       // json.execute();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
