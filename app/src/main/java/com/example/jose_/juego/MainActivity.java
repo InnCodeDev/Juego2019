@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity
         s.setMovementMethod(new ScrollingMovementMethod());
 
         s.setHeight(150);
-        bt.setText("Ocultar Participantes\n\n");
+        //bt.setText("Ocultar Participantes\n");
 
         Iterator I = usuarios.iterator();
         System.out.println("Cantidad de participantes: " + usuarios.size());

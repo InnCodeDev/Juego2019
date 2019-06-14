@@ -106,6 +106,9 @@ public class PopUpEventoBorrarse extends DialogFragment {
                         btn.setText("Ver Participantes");
                         sc_participantes2.setText("");
                         viendoPart = false;
+                        sc_participantes2.setSystemUiVisibility(0);
+                        sc_participantes2.setText("");
+                        sc_participantes2.setHeight(0);
                        // JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_participantes2);
                       //  json.execute();
                     } catch (Exception e) {

@@ -3,9 +3,11 @@ package com.example.jose_.juego;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 /**
@@ -131,6 +133,8 @@ public class PopUpEvento extends DialogFragment {
                     try {
                         btn.setText("Ocultar Participantes");
                         viendoPart = true;
+                        sc_particip.setSystemUiVisibility(100);
+
                         JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_particip);
                         json.execute();
                     } catch (Exception e) {
@@ -141,7 +145,9 @@ public class PopUpEvento extends DialogFragment {
                     try {
                         btn.setText("Ver Participantes");
                         viendoPart = false;
+                        sc_particip.setSystemUiVisibility(0);
                         sc_particip.setText("");
+                        sc_particip.setHeight(0);
                         //JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_particip);
                        // json.execute();
                     } catch (Exception e) {

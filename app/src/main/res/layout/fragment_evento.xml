@@ -4,15 +4,14 @@
     android:id="@+id/linearLayout1"
     style="@style/Animation.AppCompat.Dialog"
     android:layout_width="fill_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:baselineAligned="false"
     android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical"
     android:paddingLeft="40dp"
-    android:paddingTop="40dp"
-    android:paddingRight="40dp"
-    android:paddingBottom="20dp">
+    android:paddingTop="10dp"
+    android:paddingRight="40dp">
 
     <TextView
         android:id="@+id/lbl_titulo"
@@ -68,8 +67,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/lbl_inscriptos"
@@ -82,8 +81,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/lbl_inscriptosF5"
@@ -96,28 +95,29 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:text="New Text" />
 
             <TextView
                 android:id="@+id/lbl_inscriptosF7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:text="Futbol 7: "
-                android:textStyle="normal|bold"
-                android:layout_marginLeft="20dp"/>
+                android:textStyle="normal|bold" />
+
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Text" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-        </LinearLayout>
+            android:orientation="horizontal"></LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -125,10 +125,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
         android:background="@drawable/border"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="5dip" >
+        android:padding="5dip"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/lbl_txtins"
@@ -198,31 +199,29 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linear_particip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_gravity="top"
+        android:layout_marginTop="8dp"
         android:gravity="top|center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="0dp">
 
         <TextView
             android:id="@+id/lbl_participantes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:layout_gravity="top"
             android:text="Ver Participantes"
             android:textAlignment="center"
             android:textStyle="normal|bold" />
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="?android:attr/listDivider" />
-
         <TextView
             android:id="@+id/sc_particip"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:layout_marginTop="5dp"
             android:clickable="false"
@@ -232,8 +231,7 @@
             android:maxHeight="10dp"
             android:maxLines="5"
             android:minHeight="2dp"
-            tools:text="@tools:sample/full_names">
-        </TextView>
+            tools:text="@tools:sample/full_names"></TextView>
 
     </LinearLayout>
 
