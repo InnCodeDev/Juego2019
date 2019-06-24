@@ -29,7 +29,7 @@ public class primera extends android.support.v4.app.Fragment {
     String minDay;
     String maxDay;
 
-    ArrayList primera, primeraM = new ArrayList();
+    ArrayList primera, primeraM, primeraZ = new ArrayList();
     boolean creado=false;
     Bundle bundle;
 
@@ -56,6 +56,7 @@ public class primera extends android.support.v4.app.Fragment {
             System.out.println("BUNDLE 1 NO ES NULL..........." );
             primera = bundle.getStringArrayList("a");
             primeraM = bundle.getStringArrayList("b");
+            primeraZ = bundle.getStringArrayList("c");
         }
         System.out.println("CREOOOOOOOOO VISTA 1 -- " ); //+ primera.size() + " -- " + primeraM.size());
         v = inflater.inflate(R.layout.fragment_primera, container, false);
@@ -66,12 +67,14 @@ public class primera extends android.support.v4.app.Fragment {
         LimpiarTodo();
         getEventosSemana();
         getEventosUsuario();
+        getEventosNULL();
     }
 
-    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b){
+    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b, ArrayList c){
         bundle = bu;
         primera = a;
         primeraM = b;
+        primeraZ = c;
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
@@ -103,6 +106,29 @@ public class primera extends android.support.v4.app.Fragment {
             case 7: //Sabado
                 cal2.add(Calendar.DAY_OF_WEEK,-5);
                 break;
+        }
+    }
+    public void getEventosNULL(){  //(cant1 + "*" + "textView" + semana1 + tur + r);
+        if (primeraZ != null && primeraZ.size()>0){
+            System.out.println("PRIMERAZ !! ... tiene " + primeraZ.size());
+            Iterator I = primeraZ.iterator();
+            int resID;
+            while(I.hasNext()){
+                String txt = (String) I.next(); //5#2*textView10728
+                if (txt.length()>1){
+                    String cant = txt.substring(0,txt.indexOf("*"));
+                    //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
+                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    System.out.println("PRI1: " + txt + " -- " + txF);
+
+                    resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
+                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    ta.setBackgroundColor(Color.LTGRAY);
+                    ta.setText("");
+                }
+            }
+        }else{
+            System.out.println("......primera es NULL o IGUAL A CERO...");
         }
     }
 

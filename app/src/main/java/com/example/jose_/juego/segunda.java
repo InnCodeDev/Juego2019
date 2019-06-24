@@ -26,7 +26,7 @@ public class segunda extends android.support.v4.app.Fragment {
     boolean creado = false;
     String minDay;
     String maxDay;
-    ArrayList segunda, segundaM = new ArrayList();
+    ArrayList segunda, segundaM, segundaZ= new ArrayList();
     Bundle bundle;
 
     public segunda () {
@@ -52,6 +52,7 @@ public class segunda extends android.support.v4.app.Fragment {
             System.out.println("BUNDLE 2 NO ES NULL..........." );
             segunda = bundle.getStringArrayList("a");
             segundaM = bundle.getStringArrayList("b");
+            segundaZ = bundle.getStringArrayList("c");
         }
         System.out.println("CREOOOOOOOOO VISTA 2 -- " );
         View v = inflater.inflate(R.layout.fragment_segunda, container, false);
@@ -62,12 +63,14 @@ public class segunda extends android.support.v4.app.Fragment {
         LimpiarTodo();
         getEventosSemana();
         getEventosUsuario();
+        getEventosNULL();
     }
 
-    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b){
+    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b, ArrayList c){
         bundle = bu;
         segunda = a;
         segundaM = b;
+        segundaZ = c;
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
@@ -98,6 +101,30 @@ public class segunda extends android.support.v4.app.Fragment {
             case 7: //Sabado
                 cal3.add(Calendar.DAY_OF_WEEK,-5);
                 break;
+        }
+    }
+
+    public void getEventosNULL(){  //(cant1 + "*" + "textView" + semana1 + tur + r);
+        if (segundaZ != null && segundaZ.size()>0){
+            System.out.println("SegundaZ !! ... tiene " + segundaZ.size());
+            Iterator I = segundaZ.iterator();
+            int resID;
+            while(I.hasNext()){
+                String txt = (String) I.next(); //5#2*textView10728
+                if (txt.length()>1){
+                    String cant = txt.substring(0,txt.indexOf("*"));
+                    //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
+                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    System.out.println("PRI1: " + txt + " -- " + txF);
+
+                    resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
+                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    ta.setBackgroundColor(Color.LTGRAY);
+                    ta.setText("");
+                }
+            }
+        }else{
+            System.out.println("......segundaZ es NULL o IGUAL A CERO...");
         }
     }
 
