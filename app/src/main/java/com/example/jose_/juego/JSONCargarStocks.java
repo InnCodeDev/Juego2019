@@ -62,7 +62,9 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
         try{
 
             ServerID server = ServerID.getInstance();
-            String urlString = server.DBserver+"cargarStock.php?fecha="+minFecha; //Pasar la fecha a partir de cuando filtrar
+
+            String parametros = "fecha="+minFecha;
+            String urlString = server.DBserver+"cargarStock.php?"+parametros; //+java.net.URLEncoder.encode(parametros); //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
             URL url = new URL(urlString);

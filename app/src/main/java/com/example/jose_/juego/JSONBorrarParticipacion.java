@@ -59,7 +59,9 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
             String fech = a+"/"+m+"/"+d;
 
             System.out.println("FECHA PHP: " + fech);
-            String urlString = server.DBserver+"borrarParticipacion.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno;
+
+            String parametros = "fecha="+ fech+"&user="+usuario+"&turno=" + turno;
+            String urlString = server.DBserver+"borrarParticipacion.php?"+java.net.URLEncoder.encode(parametros, "UTF-8");
             //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 

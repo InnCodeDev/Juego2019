@@ -65,6 +65,7 @@ TextView btn, sc;
         int responseCode=0;
         try{
             ServerID server = ServerID.getInstance();
+
             String urlString = server.DBserver+"mostrarUsuarios.php?fecha="+dia+"&turno="+turno; //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
@@ -105,7 +106,7 @@ TextView btn, sc;
         try {
             System.out.println("JSONListaUsuarios : " + result);
 
-            if (result != null){
+            if (result.compareTo("<br />null") != 0) { //== null){
 
                 JSONParser jsonParser = new JSONParser();
 

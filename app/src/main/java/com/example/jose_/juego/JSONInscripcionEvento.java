@@ -62,7 +62,9 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
             String fech = a+"/"+m+"/"+d;
 
             System.out.println("FECHA PHP: " + fech);
-            String urlString = server.DBserver+"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha;
+
+            String parametros = "fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha;
+            String urlString = server.DBserver+"inscripcionEvento.php?"+parametros; // +java.net.URLEncoder.encode(parametros, "UTF-8");
             //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
