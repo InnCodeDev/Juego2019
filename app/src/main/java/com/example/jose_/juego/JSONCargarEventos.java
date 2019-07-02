@@ -102,7 +102,7 @@ public class JSONCargarEventos extends AsyncTask<String, String, String>{
         try {
             System.out.println("JSONListaCategorias : " + result);
 
-            if (result.toString().compareTo("<br />null") != 0){
+            if (result.compareTo("") != 0){
 
                 JSONParser jsonParser = new JSONParser();
 

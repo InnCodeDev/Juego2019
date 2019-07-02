@@ -14,6 +14,7 @@
 
     SHA-1
     69:BF:BE:80:38:C1:AF:A2:C8:94:5E:9E:4D:32:1D:1D:F3:FC:5A:F9
+    96:AF:EC:41:69:D4:DA:85:3A:45:DE:B4:4B:26:EA:90:2F:55:D7:FF  //Ultimo Agregado A FireBase
 
     ID CLIENTE GOOGLE
      978743906549-od0a4npfhpokhqdlu808grkske4979ep.apps.googleusercontent.com
@@ -30,15 +31,13 @@
 
         <activity
             android:name=".LoginActivity"
-            android:label="LoginActivity" />
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".Disponibilidad"
-            android:label="disponibilidad" />
-<!--
-                <meta-data
-                    android:name="com.google.android.version" />
-                    android:value="978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com" />
--->
+            android:label="@string/title_activity_login" />
+
+
+
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_login"
@@ -48,7 +47,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
-
+<!--    <meta-data
+            android:name="com.google.android.version" />
+            android:value="978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com" />
+-->
 </manifest>

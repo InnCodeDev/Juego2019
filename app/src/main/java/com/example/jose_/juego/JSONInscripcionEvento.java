@@ -23,6 +23,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
     String usuario;
     String fecha;
     int cancha;
+    String resultado;
 
     public JSONInscripcionEvento (MainActivity disp, String t, String u, String f, int c){//Ademas tiene que recibir el nombre de usuario loggeado
         context = disp;
@@ -98,6 +99,9 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
 
 
         String s = "";
+
+        resultado = result.toString();
+        System.out.println("JSONInscripcionEvento : " + result);
 /*
         try {
             System.out.println("JSONListaCategorias : " + result);
@@ -141,7 +145,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
         try {
             pDialog.dismiss();
             this.cancel(true); //finalize();d
-            ((MainActivity) context).continuarJSONPopUP(false);
+            ((MainActivity) context).continuarJSONPopUP(false, resultado);
         } catch (Throwable e) {
             e.printStackTrace();
         }

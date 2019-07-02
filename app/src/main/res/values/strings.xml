@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Juego</string>
+    <string name="app_name">El Circulo - Futbol</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -27,7 +27,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">El Circulo Futbol</string>
 
     <string name = "server_client_id"> 978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com </string>
 </resources>

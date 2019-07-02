@@ -20,6 +20,7 @@ public class PopUpEventoBorrarse extends DialogFragment {
     static Context c;
     TextView sc_participantes2;
     TextView btn;
+    boolean viendoPart = false;
 
     public PopUpEventoBorrarse(){
 
@@ -56,8 +57,6 @@ public class PopUpEventoBorrarse extends DialogFragment {
         TextView dia = (TextView) view.findViewById(R.id.textView42);
         TextView insF5 = (TextView) view.findViewById(R.id.textView52);
         TextView insF7 = (TextView) view.findViewById(R.id.textView62);
-        this.sc_participantes2 = (TextView) view.findViewById(R.id.sc_participantes2);
-        btn = view.findViewById(R.id.lbl_participantes2);
 
         turno.setText(getArguments().getString("turn"));
         dia.setText(getArguments().getString("di"));
@@ -86,12 +85,42 @@ public class PopUpEventoBorrarse extends DialogFragment {
         });
 
         //Asigna evento Click de VerParticipantes
+        sc_participantes2 = (TextView) view.findViewById(R.id.sc_participantes2);
+        btn = (TextView) view.findViewById(R.id.lbl_participantes2);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (viendoPart == false){
+                    System.out.println("Mostrando USUARIOS... !!");
+                    try {
+                        btn.setText("Ocultar Participantes");
+                        viendoPart = true;
+                        JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_participantes2);
+                        json.execute();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    System.out.println("Ocultando USUARIOS... !!");
+                    try {
+                        btn.setText("Ver Participantes");
+                        sc_participantes2.setText("");
+                        viendoPart = false;
+                        sc_participantes2.setSystemUiVisibility(0);
+                        sc_participantes2.setText("");
+                        sc_participantes2.setHeight(0);
+                       // JSONmostrarUsuarios json = new JSONmostrarUsuarios(view,(MainActivity) c, getArguments().getString("Nroturn"), getArguments().getString("di"), btn, sc_participantes2);
+                      //  json.execute();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+/*
                 System.out.println("----------" + btn.getText().toString());
+                System.out.println("----> " + btn.getText().toString());
                 if (btn.getText().toString().compareTo("Ocultar Participantes") == 0){
-                    btn.setText("Ver Participantes");
+                   // btn.setText("Ver Participantes");
                     sc_participantes2.setText("");
                 }else{
                     System.out.println("MOSTRAR USUARIOS... !!");
@@ -103,7 +132,7 @@ public class PopUpEventoBorrarse extends DialogFragment {
                         e.printStackTrace();
                     }
                 }
-            }
+*/            }
         });
 
     }

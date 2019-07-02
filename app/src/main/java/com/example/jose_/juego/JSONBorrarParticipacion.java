@@ -138,7 +138,7 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         try {
             pDialog.dismiss();
-            ((MainActivity) context).continuarJSONPopUP(true);
+            ((MainActivity) context).continuarJSONPopUP(true, "");
             this.cancel(true); //finalize();d
         } catch (Throwable e) {
             e.printStackTrace();

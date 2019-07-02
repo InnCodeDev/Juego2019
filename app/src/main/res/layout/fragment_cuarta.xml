@@ -2330,6 +2330,75 @@
                 />
             </TableRow>
         </TableRow>
+        <TableRow
+            android:id="@+id/tableRow15"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="3dp"
+            android:scrollbars="horizontal|vertical"
+            android:showDividers="beginning"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/linearlayout5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView015"
+                    android:layout_width="23dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:width="50dp"
+                    android:background="@android:color/holo_green_light" />
+
+                <TextView
+                    android:id="@+id/textView025"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:text="Participando" />
+
+                <TextView
+                    android:id="@+id/textView035"
+                    android:layout_width="23dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/textView045"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:text="No Disponible" />
+
+                <TextView
+                    android:id="@+id/textView055"
+                    android:layout_width="23dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:width="50dp"
+                    android:background="@drawable/border" />
+
+                <TextView
+                    android:id="@+id/textView065"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:text="Disponible" />
+            </LinearLayout>
+        </TableRow>
 
     </LinearLayout>
 </FrameLayout>
