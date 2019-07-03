@@ -23,6 +23,8 @@
     978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com
     -->
     <application
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
