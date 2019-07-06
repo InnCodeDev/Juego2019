@@ -70,7 +70,9 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
         try{
 
             ServerID server = ServerID.getInstance();
-            String urlString = server.DBserver+"cargarDetalleEvento.php?fecha="+Fecha+"&turn="+turno; //Pasar la fecha a partir de cuando filtrar
+
+            String parametros = "fecha="+Fecha+"&turn="+turno;
+            String urlString = server.DBserver+"cargarDetalleEvento.php?"+parametros; // + java.net.URLEncoder.encode(parametros, "UTF-8"); //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
             URL url = new URL(urlString);
@@ -109,7 +111,7 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
         try {
             System.out.println("JSONListaUsuarios: " + result);
 
-            if (result.compareTo("<br />null") != 0) { //!= null){
+            if (result.compareTo("null") != 0) { //!= null){
 
                 JSONParser jsonParser = new JSONParser();
 

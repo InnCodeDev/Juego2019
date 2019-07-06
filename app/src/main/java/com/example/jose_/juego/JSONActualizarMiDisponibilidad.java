@@ -51,7 +51,10 @@ public class JSONActualizarMiDisponibilidad extends AsyncTask<String, String, St
         try{
 
             ServerID server = ServerID.getInstance();
-            String urlString = server.DBserver+"actualizarMiDisponibilidad.php?user=Jose&disponibilidad="+dispo;
+
+            String parametros = "user=Jose&disponibilidad="+dispo;
+
+            String urlString = server.DBserver+"actualizarMiDisponibilidad.php?"+java.net.URLEncoder.encode(parametros, "UTF-8");
 /*
                 URLConnection httpclient = null;
                 URL url = new URL("2");

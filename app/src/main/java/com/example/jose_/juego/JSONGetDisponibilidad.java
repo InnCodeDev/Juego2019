@@ -60,7 +60,9 @@ public class JSONGetDisponibilidad extends AsyncTask<String, String, String> {
             try{
 
                 ServerID server = ServerID.getInstance();
-                String urlString = server.DBserver+"getDisponibilidad.php?user=Jose";
+
+                String parametros = "user=Jose";
+                String urlString = server.DBserver+"getDisponibilidad.php?" +java.net.URLEncoder.encode(parametros, "UTF-8");
 /*
                 URLConnection httpclient = null;
                 URL url = new URL("2");

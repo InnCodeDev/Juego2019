@@ -62,7 +62,10 @@ public class JSONCargarEventos extends AsyncTask<String, String, String>{
         try{
 
             ServerID server = ServerID.getInstance();
-            String urlString = server.DBserver+"cargarEventos.php?fecha="+minFecha; //Pasar la fecha a partir de cuando filtrar
+
+            String parametros ="fecha="+minFecha;
+
+            String urlString = server.DBserver+"cargarEventos.php?"+parametros; //java.net.URLEncoder.encode(parametros); //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
             URL url = new URL(urlString);

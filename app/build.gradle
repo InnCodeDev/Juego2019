@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 27
     buildToolsVersion '28.0.3'//'28.0.2'
     defaultConfig {
         applicationId "com.example.jose_.juego"
-        minSdkVersion 27
+        minSdkVersion 23
         targetSdkVersion 27
         versionCode 1
         versionName "2.0"
@@ -20,6 +20,9 @@ android {
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
+    }
+    dexOptions {
+        javaMaxHeapSize "4G"
     }
 }
 
