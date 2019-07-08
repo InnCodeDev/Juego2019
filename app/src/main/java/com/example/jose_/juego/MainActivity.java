@@ -151,6 +151,10 @@ public class MainActivity extends AppCompatActivity
                     .bitmapTransform(new CircleTransform(this))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(t_img);
+
+            JSONRegistrarUsuario jsonUsuario = new JSONRegistrarUsuario (this, FB_user, FB_mail);
+            jsonUsuario.execute();
+
         } else {
             mAuth.signOut();
         }
