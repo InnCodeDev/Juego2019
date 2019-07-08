@@ -23,6 +23,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="#CCCCCC"
+            android:baselineAligned="false"
             android:orientation="vertical"
             android:scrollbars="horizontal|vertical"
             android:showDividers="middle">
@@ -38,8 +39,7 @@
                     android:id="@+id/textView4200"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="17dp"
+                    android:layout_marginRight="12dp"
                     android:width="50dp"
                     android:text="Turnos" />
             </TableRow>
@@ -53,9 +53,9 @@
                     android:id="@+id/textView4210"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:width="30dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="5dp"
+                    android:width="40dp"
                     android:text="Lun." />
             </TableRow>
 
@@ -146,18 +146,19 @@
 
             <TableRow
                 android:id="@+id/tableRow020"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="fill_parent"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="30dp"
                 android:gravity="top">
 
                 <TextView
                     android:id="@+id/textView40200"
-                    android:layout_width="wrap_content"
+                    android:layout_width="24dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
                     android:width="50dp"
+                    android:paddingLeft="20dp"
                     android:text="" />
             </TableRow>
 
@@ -170,12 +171,12 @@
                     android:id="@+id/textView4001"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
-                    android:width="30dp"
-                    android:text="1" />
+                    android:width="40dp"
+                    android:text="1"
+                    android:textAlignment="center" />
             </TableRow>
 
             <TableRow
@@ -187,9 +188,9 @@
                     android:id="@+id/textView4002"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_horizontal"
                     android:width="30dp"
                     android:text="2"
                     android:textAlignment="center" />
@@ -204,12 +205,12 @@
                     android:id="@+id/textView4003"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
                     android:width="30dp"
-                    android:text="3" />
+                    android:text="3"
+                    android:textAlignment="center" />
             </TableRow>
 
             <TableRow
@@ -221,12 +222,12 @@
                     android:id="@+id/textView4004"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
                     android:width="30dp"
-                    android:text="4" />
+                    android:text="4"
+                    android:textAlignment="center" />
             </TableRow>
 
             <TableRow
@@ -238,12 +239,12 @@
                     android:id="@+id/textView4005"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
                     android:width="30dp"
-                    android:text="5" />
+                    android:text="5"
+                    android:textAlignment="center" />
             </TableRow>
 
             <TableRow
@@ -255,8 +256,8 @@
                     android:id="@+id/textView4006"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
                     android:width="30dp"
                     android:text="6"
                     android:textAlignment="center" />
@@ -298,7 +299,7 @@
                     android:id="@+id/textView4010"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="08:00 - 09:00" />
@@ -468,7 +469,7 @@
                     android:id="@+id/textView4020"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="09:00 - 10:00" />
@@ -639,7 +640,7 @@
                     android:id="@+id/textView4030"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="10:00 - 11:00" />
@@ -810,7 +811,7 @@
                     android:id="@+id/textView4040"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="11:00 - 12:00" />
@@ -982,7 +983,7 @@
                     android:id="@+id/textView4050"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="12:00 - 13:00" />
@@ -1153,7 +1154,7 @@
                     android:id="@+id/textView4060"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="13:00 - 14:00" />
@@ -1327,7 +1328,7 @@
                     android:id="@+id/textView4070"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="14:00 - 15:00" />
@@ -1501,7 +1502,7 @@
                     android:id="@+id/textView4080"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="15:00 - 16:00" />
@@ -1674,7 +1675,7 @@
                     android:id="@+id/textView4090"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="16:00 - 17:00" />
@@ -1847,7 +1848,7 @@
                     android:id="@+id/textView4100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="17:00 - 18:00" />
@@ -2020,7 +2021,7 @@
                     android:id="@+id/textView4110"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="18:00 - 19:00" />
@@ -2194,7 +2195,7 @@
                     android:id="@+id/textView4120"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="19:00 - 20:00" />

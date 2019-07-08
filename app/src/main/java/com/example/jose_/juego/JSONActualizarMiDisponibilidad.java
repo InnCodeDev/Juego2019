@@ -2,6 +2,7 @@ package com.example.jose_.juego;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -65,7 +66,7 @@ public class JSONActualizarMiDisponibilidad extends AsyncTask<String, String, St
 //                postDataParams.put("name", "abc");
 //                postDataParams.put("email", "abc@gmail.com");
 
-            URL url = new URL(urlString);
+            URL url = new URL(Uri.encode(urlString));
             conn = (HttpURLConnection) url.openConnection();
             responseCode = conn.getResponseCode();
             isr = conn.getInputStream();

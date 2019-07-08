@@ -23,6 +23,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="#CCCCCC"
+            android:baselineAligned="false"
             android:orientation="vertical"
             android:scrollbars="horizontal|vertical"
             android:showDividers="middle">
@@ -35,11 +36,11 @@
                 android:gravity="top">
 
                 <TextView
-                    android:id="@+id/textView3200"
+                    android:id="@+id/textView1200"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="17dp"
+
+                    android:layout_marginRight="12dp"
                     android:width="50dp"
                     android:text="Turnos" />
             </TableRow>
@@ -53,8 +54,8 @@
                     android:id="@+id/textView3210"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="5dp"
                     android:width="30dp"
                     android:text="Lun." />
             </TableRow>
@@ -146,18 +147,19 @@
 
             <TableRow
                 android:id="@+id/tableRow020"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="fill_parent"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="30dp"
                 android:gravity="top">
 
                 <TextView
-                    android:id="@+id/textView30200"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView10200"
+                    android:layout_width="24dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
                     android:width="50dp"
+                    android:paddingLeft="20dp"
                     android:text="" />
             </TableRow>
 
@@ -170,12 +172,12 @@
                     android:id="@+id/textView3001"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
                     android:width="30dp"
-                    android:text="1" />
+                    android:text="1"
+                    android:textAlignment="center" />
             </TableRow>
 
             <TableRow
@@ -187,9 +189,9 @@
                     android:id="@+id/textView3002"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_horizontal"
                     android:width="30dp"
                     android:text="2"
                     android:textAlignment="center" />
@@ -204,12 +206,12 @@
                     android:id="@+id/textView3003"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
                     android:width="30dp"
-                    android:text="3" />
+                    android:text="3"
+                    android:textAlignment="center" />
             </TableRow>
 
             <TableRow
@@ -221,12 +223,12 @@
                     android:id="@+id/textView3004"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
                     android:width="30dp"
-                    android:text="4" />
+                    android:text="4"
+                    android:textAlignment="center" />
             </TableRow>
 
             <TableRow
@@ -238,12 +240,12 @@
                     android:id="@+id/textView3005"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
                     android:width="30dp"
-                    android:text="5" />
+                    android:text="5"
+                    android:textAlignment="center" />
             </TableRow>
 
             <TableRow
@@ -255,8 +257,8 @@
                     android:id="@+id/textView3006"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
                     android:width="30dp"
                     android:text="6"
                     android:textAlignment="center" />
@@ -297,7 +299,7 @@
                     android:id="@+id/textView3010"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="08:00 - 09:00" />
@@ -467,7 +469,7 @@
                     android:id="@+id/textView3020"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="09:00 - 10:00" />
@@ -638,7 +640,7 @@
                     android:id="@+id/textView3030"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="10:00 - 11:00" />
@@ -809,7 +811,7 @@
                     android:id="@+id/textView3040"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="11:00 - 12:00" />
@@ -981,7 +983,7 @@
                     android:id="@+id/textView3050"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="12:00 - 13:00" />
@@ -1152,7 +1154,7 @@
                     android:id="@+id/textView3060"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="13:00 - 14:00" />
@@ -1326,7 +1328,7 @@
                     android:id="@+id/textView3070"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="14:00 - 15:00" />
@@ -1500,7 +1502,7 @@
                     android:id="@+id/textView3080"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="15:00 - 16:00" />
@@ -1673,7 +1675,7 @@
                     android:id="@+id/textView3090"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="16:00 - 17:00" />
@@ -1846,7 +1848,7 @@
                     android:id="@+id/textView3100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="17:00 - 18:00" />
@@ -2019,7 +2021,7 @@
                     android:id="@+id/textView3110"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="18:00 - 19:00" />
@@ -2193,7 +2195,7 @@
                     android:id="@+id/textView3120"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="3dp"
                     android:width="50dp"
                     android:text="19:00 - 20:00" />

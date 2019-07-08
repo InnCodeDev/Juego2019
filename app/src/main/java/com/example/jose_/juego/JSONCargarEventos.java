@@ -68,7 +68,9 @@ public class JSONCargarEventos extends AsyncTask<String, String, String>{
             String urlString = server.DBserver+"cargarEventos.php?"+parametros; //java.net.URLEncoder.encode(parametros); //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
+            urlString.replace(" ", "%20");
             URL url = new URL(urlString);
+
             conn = (HttpURLConnection) url.openConnection();
             responseCode = conn.getResponseCode();
             isr = conn.getInputStream();
@@ -105,7 +107,7 @@ public class JSONCargarEventos extends AsyncTask<String, String, String>{
         try {
             System.out.println("JSONListaCategorias : " + result);
 
-            if (result.compareTo("<br />null") != 0){
+            if (result.compareTo("null") != 0){
 
                 JSONParser jsonParser = new JSONParser();
 

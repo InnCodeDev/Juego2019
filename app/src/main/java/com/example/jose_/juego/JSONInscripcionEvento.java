@@ -2,6 +2,7 @@ package com.example.jose_.juego;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -64,11 +66,13 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
             System.out.println("FECHA PHP: " + fech);
 
             String parametros = "fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha;
-            String urlString = server.DBserver+"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha;; // +java.net.URLEncoder.encode(parametros, "UTF-8");
+            String urlString = server.DBserver+"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha; // +java.net.URLEncoder.encode(parametros, "UTF-8");
             //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
+            urlString.replace(" ", "%20");
             URL url = new URL(urlString);
+
             conn = (HttpURLConnection) url.openConnection();
             responseCode = conn.getResponseCode();
             isr = conn.getInputStream();

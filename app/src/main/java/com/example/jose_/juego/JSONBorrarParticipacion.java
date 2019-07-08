@@ -2,6 +2,7 @@ package com.example.jose_.juego;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -61,11 +62,13 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
             System.out.println("FECHA PHP: " + fech);
 
             String parametros = "fecha="+ fech+"&user="+usuario+"&turno=" + turno;
-            String urlString = server.DBserver+"borrarParticipacion.php?"+java.net.URLEncoder.encode(parametros, "UTF-8");
+            String urlString = server.DBserver+"borrarParticipacion.php?"+parametros;
             //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
+            urlString.replace(" ", "%20");
             URL url = new URL(urlString);
+
             conn = (HttpURLConnection) url.openConnection();
             responseCode = conn.getResponseCode();
             isr = conn.getInputStream();
