@@ -1,5 +1,6 @@
 package com.example.jose_.juego;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,11 +13,17 @@ import java.util.Iterator;
 public class Disponibilidad extends AppCompatActivity {
     ArrayList array = null;
     String disp="";
+    String FB_user="";
+    String FB_mail="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disponibilidad);
+
+        Intent a = getIntent();
+        FB_user = a.getExtras().getString("user");
+        FB_mail = a.getExtras().getString("mail");
 
         Button button = (Button) findViewById(R.id.button1);
         button.setOnClickListener(new View.OnClickListener() {
@@ -31,7 +38,7 @@ public class Disponibilidad extends AppCompatActivity {
     public void getDisponibilidad (){
         try {
 
-            JSONGetDisponibilidad json = new JSONGetDisponibilidad(this);
+            JSONGetDisponibilidad json = new JSONGetDisponibilidad(this, this.FB_user, this.FB_mail);
             json.execute();
 
         } catch (Exception e) {
@@ -75,7 +82,7 @@ public class Disponibilidad extends AppCompatActivity {
         //llamar a JSONActualizarMiDisponibilidad y pasar String disp
         try {
 
-            JSONActualizarMiDisponibilidad json = new JSONActualizarMiDisponibilidad(this, disp);
+            JSONActualizarMiDisponibilidad json = new JSONActualizarMiDisponibilidad(this, disp, FB_user, FB_mail);
             json.execute();
 
         } catch (Exception e) {

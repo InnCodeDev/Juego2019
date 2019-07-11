@@ -29,6 +29,8 @@ public class JSONGetDisponibilidad extends AsyncTask<String, String, String> {
         ArrayList<String> arrayDispo = new ArrayList <String> ();
         ProgressDialog pDialog;
         Context context;
+        String FB_user="";
+        String FB_mail="";
 
 //        private final Handler handler = new Handler();
 
@@ -36,9 +38,12 @@ public class JSONGetDisponibilidad extends AsyncTask<String, String, String> {
             return arrayDispo;
         }
 
-        public JSONGetDisponibilidad (Disponibilidad disp){//Ademas tiene que recibir el nombre de usuario loggeado
+        public JSONGetDisponibilidad (Disponibilidad disp, String user, String mail){//Ademas tiene que recibir el nombre de usuario loggeado
             //User = u;
             context = disp;
+            FB_user=user;
+            FB_mail=mail;
+
             pDialog = new ProgressDialog(disp);
             pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
             pDialog.setMessage("Cargando su disponibilidad. \nPor favor espere..");
@@ -58,23 +63,15 @@ public class JSONGetDisponibilidad extends AsyncTask<String, String, String> {
             HttpURLConnection conn=null;
             int responseCode=0;
 
-            try{
+            try {
 
                 ServerID server = ServerID.getInstance();
 
-                String parametros = "user=Jose";
-                String urlString = server.DBserver+"getDisponibilidad.php?" +java.net.URLEncoder.encode(parametros, "UTF-8");
-/*
-                URLConnection httpclient = null;
-                URL url = new URL("2");
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("POST") ;
-*/
-//                JSONObject postDataParams = new JSONObject();
-//                postDataParams.put("name", "abc");
-//                postDataParams.put("email", "abc@gmail.com");
+                String urlString = server.DBserver+"getDisponibilidad.php?user="+FB_user;
 
-                URL url = new URL(Uri.encode(urlString));
+                urlString.replace(" ", "%20");
+                URL url = new URL(urlString);
+
                 conn = (HttpURLConnection) url.openConnection();
                 responseCode = conn.getResponseCode();
                 isr = conn.getInputStream();
