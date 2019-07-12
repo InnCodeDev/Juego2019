@@ -83,7 +83,6 @@ public class JSONGetDisponibilidad extends AsyncTask<String, String, String> {
             }
 
             //convert response to string
-
             try{
                 if (responseCode == HttpsURLConnection.HTTP_OK) {
 
@@ -97,24 +96,14 @@ public class JSONGetDisponibilidad extends AsyncTask<String, String, String> {
                     }
                     isr.close();
                     result = sb.toString();
-
-/*
-                    HttpPost httppost = new HttpPost(url); //YOUR PHP SCRIPT ADDRESS
-                    HttpResponse response = httpclient.execute(httppost);
-                    HttpEntity entity = response.getEntity();
-                    isr = entity.getContent();
-*/                }else
+               }else
                     System.out.println("HTTPS RESPONSE CODE FALSE - "+responseCode);
             } catch(Exception e){
                 Log.e("log_tag", "JSONGetDisponibilidad - Error converting result - "+e.toString());
             }
 
-
             String s = "";
-
             try {
-            //    System.out.println("JSONGetDisponibilidad -  : " + result);
-
                 if (result != null){
 
                     JSONParser jsonParser = new JSONParser();

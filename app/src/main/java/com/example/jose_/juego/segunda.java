@@ -189,6 +189,7 @@ public class segunda extends android.support.v4.app.Fragment {
                 }else{
                     S = String.valueOf(i);
                 }
+
                 int resID = getResources().getIdentifier("textView2"+S+j, "id", getActivity().getPackageName());
                 TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
                 ta.setText("-");

@@ -2729,7 +2729,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2161"
+                    android:id="@+id/textView2151"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -2753,7 +2753,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2162"
+                    android:id="@+id/textView2152"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -2777,7 +2777,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2163"
+                    android:id="@+id/textView2153"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -2801,7 +2801,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2164"
+                    android:id="@+id/textView2154"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -2825,7 +2825,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2165"
+                    android:id="@+id/textView2155"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -2849,7 +2849,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2166"
+                    android:id="@+id/textView2156"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -2886,7 +2886,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2170"
+                    android:id="@+id/textView2160"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -2902,7 +2902,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2171"
+                    android:id="@+id/textView2161"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -2926,7 +2926,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2172"
+                    android:id="@+id/textView2162"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -2950,7 +2950,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2173"
+                    android:id="@+id/textView2163"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -2974,7 +2974,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2174"
+                    android:id="@+id/textView2164"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -2998,7 +2998,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2175"
+                    android:id="@+id/textView2165"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -3022,7 +3022,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2176"
+                    android:id="@+id/textView2166"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
