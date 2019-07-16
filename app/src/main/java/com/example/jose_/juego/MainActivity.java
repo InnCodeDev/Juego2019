@@ -1001,6 +1001,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.MiDisponibilidad) {
             Intent nvo = new Intent(this, Disponibilidad.class);
+            nvo.putExtra("user", FB_user);
+            nvo.putExtra("mail", FB_mail);
             this.startActivity(nvo);
             // Handle the camera action
         } else if (id == R.id.info) {

@@ -21,14 +21,19 @@ public class JSONActualizarMiDisponibilidad extends AsyncTask<String, String, St
     ProgressDialog pDialog;
     Context context;
     String dispo="";
+    String FB_user="";
+    String FB_mail="";
 
     public ArrayList <String> getarrayDispo (){
         return arrayDispo;
     }
 
-    public JSONActualizarMiDisponibilidad (Disponibilidad disp, String dis){//Ademas tiene que recibir el nombre de usuario loggeado
+    public JSONActualizarMiDisponibilidad (Disponibilidad disp, String dis, String user, String mail){//Ademas tiene que recibir el nombre de usuario loggeado
         //User = u;
         dispo=dis;
+        FB_user=user;
+        FB_mail=mail;
+
         context = disp;
         pDialog = new ProgressDialog(disp);
         pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
@@ -55,18 +60,12 @@ public class JSONActualizarMiDisponibilidad extends AsyncTask<String, String, St
 
             String parametros = "user=Jose&disponibilidad="+dispo;
 
-            String urlString = server.DBserver+"actualizarMiDisponibilidad.php?"+java.net.URLEncoder.encode(parametros, "UTF-8");
-/*
-                URLConnection httpclient = null;
-                URL url = new URL("2");
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("POST") ;
-*/
-//                JSONObject postDataParams = new JSONObject();
-//                postDataParams.put("name", "abc");
-//                postDataParams.put("email", "abc@gmail.com");
+            String urlString = server.DBserver+"actualizarMiDisponibilidad.php?user="+FB_user+"&disponibilidad="+dispo;
 
-            URL url = new URL(Uri.encode(urlString));
+
+            urlString.replace(" ", "%20");
+            URL url = new URL(urlString);
+
             conn = (HttpURLConnection) url.openConnection();
             responseCode = conn.getResponseCode();
             isr = conn.getInputStream();

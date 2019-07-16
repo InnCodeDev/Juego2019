@@ -182,13 +182,14 @@ public class segunda extends android.support.v4.app.Fragment {
 
     public void LimpiarTodo (){
         String S="";
-        for (int i=1;i<13; i++){
+        for (int i=1;i<17; i++){
             for (int j=1;j<7;j++){
                 if (i<10){
                     S = "0"+String.valueOf(i);
                 }else{
                     S = String.valueOf(i);
                 }
+
                 int resID = getResources().getIdentifier("textView2"+S+j, "id", getActivity().getPackageName());
                 TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
                 ta.setText("-");
