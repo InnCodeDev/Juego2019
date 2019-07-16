@@ -104,7 +104,7 @@ public class JSONGetDisponibilidad extends AsyncTask<String, String, String> {
 
             String s = "";
             try {
-                if (result != null){
+                if (result.compareTo("null") != 0){
 
                     JSONParser jsonParser = new JSONParser();
 

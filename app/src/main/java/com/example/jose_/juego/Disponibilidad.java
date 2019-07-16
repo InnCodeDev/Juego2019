@@ -67,7 +67,7 @@ public class Disponibilidad extends AppCompatActivity {
     public void ActualizarMiDisponibilidad(){
 
         CheckBox ck;
-        for(int i=1; i<13; i++){ //turno
+        for(int i=1; i<17; i++){ //turno
             for(int j=1; j<7; j++){ //dia
                 int resID = getResources().getIdentifier("checkBox"+i+""+j, "id", this.getPackageName());
                 ck = (CheckBox) findViewById(resID);
