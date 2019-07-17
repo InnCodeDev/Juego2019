@@ -53,7 +53,7 @@ public class primera extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         bundle = this.getArguments();
         if (bundle != null) {
-            System.out.println("BUNDLE 1 NO ES NULL..........." );
+     //       System.out.println("BUNDLE 1 NO ES NULL..........." );
             primera = bundle.getStringArrayList("a");
             primeraM = bundle.getStringArrayList("b");
             primeraZ = bundle.getStringArrayList("c");
@@ -119,7 +119,7 @@ public class primera extends android.support.v4.app.Fragment {
                     String cant = txt.substring(0,txt.indexOf("*"));
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
                     String txF = txt.substring(txt.indexOf("*")+1, txt.length());
-                    System.out.println("PRI1: " + txt + " -- " + txF);
+                  //  System.out.println("PRI1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
@@ -141,10 +141,10 @@ public class primera extends android.support.v4.app.Fragment {
                 String txt = (String) I.next(); //5#2*textView10728
                 if (txt.length()>1){
                     String cant = txt.substring(0,txt.indexOf("*"));
-                    System.out.println("STRIIIIIIIIIIIING " + txt + " - " + cant);
+                  //  System.out.println("STRIIIIIIIIIIIING " + txt + " - " + cant);
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
                     String txF = txt.substring(txt.indexOf("*")+1, txt.length());
-                    System.out.println("PRI1: " + txt + " -- " + txF);
+                //    System.out.println("PRI1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
@@ -171,7 +171,7 @@ public class primera extends android.support.v4.app.Fragment {
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
                     // ta.setText(cant);
-                    System.out.println("PrimeraM: " + txt + " -- " + txF );
+                //    System.out.println("PrimeraM: " + txt + " -- " + txF );
                     ta.setBackgroundColor(Color.GREEN);
                 }
             }

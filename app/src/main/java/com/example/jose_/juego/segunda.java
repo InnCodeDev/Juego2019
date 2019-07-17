@@ -115,7 +115,7 @@ public class segunda extends android.support.v4.app.Fragment {
                     String cant = txt.substring(0,txt.indexOf("*"));
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
                     String txF = txt.substring(txt.indexOf("*")+1, txt.length());
-                    System.out.println("PRI1: " + txt + " -- " + txF);
+                  //  System.out.println("PRI1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
@@ -139,7 +139,7 @@ public class segunda extends android.support.v4.app.Fragment {
                     String cant = txt.substring(0,txt.indexOf("*"));
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
                     String txF = txt.substring(txt.indexOf("*")+1, txt.length());
-                    System.out.println("SEG1: " + txt + " -- " + txF);
+                  //  System.out.println("SEG1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
@@ -169,9 +169,9 @@ public class segunda extends android.support.v4.app.Fragment {
                     TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
 
 //                     ta.setText(cant);
-                    System.out.println("segundaM: " + txt + " -- " + txF );
+                 //   System.out.println("segundaM: " + txt + " -- " + txF );
                     // ta.setText(cant);
-                    System.out.println("SegundaM: " + txt + " -- " + txF );
+                 //   System.out.println("SegundaM: " + txt + " -- " + txF );
                     ta.setBackgroundColor(Color.GREEN);
                 }
             }
