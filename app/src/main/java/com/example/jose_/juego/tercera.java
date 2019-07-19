@@ -26,7 +26,7 @@ public class tercera extends android.support.v4.app.Fragment {
     boolean creado = false;
     String minDay;
     String maxDay;
-    ArrayList tercera, terceraM, terceraZ = new ArrayList();
+    ArrayList tercera, terceraM, terceraZ, terceraX = new ArrayList();
     Bundle bundle;
 
     public tercera () {
@@ -57,16 +57,18 @@ public class tercera extends android.support.v4.app.Fragment {
             tercera = bundle.getStringArrayList("a");
             terceraM = bundle.getStringArrayList("b");
             terceraZ = bundle.getStringArrayList("c");
+            terceraX = bundle.getStringArrayList("d");
         }
         View v = inflater.inflate(R.layout.fragment_tercera, container, false);
         return v;
     }
 
-    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b, ArrayList c){
+    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b, ArrayList c, ArrayList d){
         bundle = bu;
         tercera = a;
         terceraM = b;
         terceraZ = c;
+        terceraX = d;
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
@@ -120,6 +122,30 @@ public class tercera extends android.support.v4.app.Fragment {
             }
         }else{
             System.out.println("......tercera es NULL o IGUAL A CERO...");
+        }
+    }
+
+    public void getEventosFULL(){  //(cant1 + "*" + "textView" + semana1 + tur + r);
+        if (terceraX != null && terceraX.size()>0){
+            System.out.println("TERCERAXXX !! ... tiene " + terceraX.size());
+            Iterator I = terceraX.iterator();
+            int resID;
+            while(I.hasNext()){
+                String txt = (String) I.next(); //5#2*textView10728
+                if (txt.length()>1){
+                    String cant = txt.substring(0,txt.indexOf("*"));
+                    //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
+                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    //  System.out.println("PRI1: " + txt + " -- " + txF);
+
+                    resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
+                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    ta.setBackgroundColor(Color.BLUE);
+                    ta.setText("");
+                }
+            }
+        }else{
+            System.out.println("......primeraX es NULL o IGUAL A CERO...");
         }
     }
 
@@ -193,6 +219,7 @@ public class tercera extends android.support.v4.app.Fragment {
         getEventosSemana();
         getEventosUsuario();
         getEventosNULL();
+        getEventosFULL();
     }
 
     public void onViewCreated (View view, Bundle savedInstanceState) {

@@ -21,7 +21,7 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * Created by jose_ on 15/9/2018.
  */
-public class JSONCargarStocks extends AsyncTask<String, String, String>{
+public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
         Callback callback;
         String txtFinal = "";
         ArrayList<String> arrayDispo = new ArrayList <String> ();
@@ -35,7 +35,7 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
         return arrayDispo;
     }
 
-        public JSONCargarStocks(MainActivity disp, String min, boolean fromPop){//Ademas tiene que recibir el nombre de usuario loggeado
+        public JSONCargarFullStocks(MainActivity disp, String min, boolean fromPop){//Ademas tiene que recibir el nombre de usuario loggeado
         //User = u;
             context = disp;
             minFecha = min;
@@ -63,8 +63,14 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
 
             ServerID server = ServerID.getInstance();
 
-            String parametros = "fecha="+minFecha;
-            String urlString = server.DBserver+"cargarStock.php?"+parametros; //+java.net.URLEncoder.encode(parametros); //Pasar la fecha a partir de cuando filtrar
+            String d = minFecha.substring(0,minFecha.indexOf("/"));
+            String m = minFecha.substring(minFecha.indexOf("/")+1, minFecha.lastIndexOf("/"));
+            String a = minFecha.substring(minFecha.lastIndexOf("/")+1, minFecha.length());
+            if (d.length()==1)
+                d = "0"+d;
+            String fech = a+"-"+m+"-"+d;
+
+            String urlString = server.DBserver+"cargarFullStock.php?fecha=" + fech; //+java.net.URLEncoder.encode(parametros); //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
             URL url = new URL(urlString);
@@ -102,7 +108,7 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
         String s = "";
 
         try {
-            System.out.println("JSONListaCategorias : " + result);
+            System.out.println("JSONFullStock : " + result);
 
             if (result.compareTo("") != 0){ //.toString().compareTo() != 0
 
@@ -113,7 +119,7 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
                 JSONArray jsonArrayResult = (JSONArray) jsonParser.parse(r);
 
 
-          //      System.out.println("jSONArrayResult: " + jsonArrayResult.toString());
+                System.out.println("jSONArrayResult JSONFullStock: " + jsonArrayResult.toString());
 
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);
@@ -122,7 +128,7 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
                     String turno = (String) b.get("turno");
                     String cantidad = (String) b.get("cantidad");
                   //  String cancha = (String) b.get("cancha");
-                   // System.out.println("Dia: " + dia + " - Turno: " + turno + " - Cantidad: " + cantidad); // + " - Cancha: " + cancha);
+                    System.out.println("Dia: " + dia + " - Turno: " + turno + " - Cantidad: " + cantidad); // + " - Cancha: " + cancha);
 
                     //Agrega solo los dias/turnos que no tienen disponibilidad
                     if (Integer.valueOf(cantidad) == 0){
@@ -133,7 +139,7 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
                 }
             }
         }catch (Exception e){
-            Log.e("log_tag", "JSONCargarEventos - Error analizando Archivo JSON from PHP- " + e.toString());
+            Log.e("log_tag", "JSONFullStock - Error analizando Archivo JSON from PHP- " + e.toString());
         }
 
         return Status.FINISHED.toString();
@@ -148,7 +154,7 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
         try {
             pDialog.dismiss();
             this.cancel(true); //finalize();d
-            ((MainActivity) context).continuarJSONCargarStock(arrayDispo, fromPopUp);
+            ((MainActivity) context).continuarJSONCargarFullStock(arrayDispo, fromPopUp);
         } catch (Throwable e) {
             e.printStackTrace();
         }

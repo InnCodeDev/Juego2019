@@ -26,7 +26,7 @@ public class cuarta extends android.support.v4.app.Fragment {
     boolean creado = false;
     String minDay;
     String maxDay;
-    ArrayList cuarta, cuartaM, cuartaZ = new ArrayList();
+    ArrayList cuarta, cuartaM, cuartaZ, cuartaX = new ArrayList();
     Bundle bundle;
 
     public cuarta () {
@@ -53,6 +53,7 @@ public class cuarta extends android.support.v4.app.Fragment {
             cuarta = bundle.getStringArrayList("a");
             cuartaM = bundle.getStringArrayList("b");
             cuartaZ = bundle.getStringArrayList("c");
+            cuartaX = bundle.getStringArrayList("d");
         }
         View v = inflater.inflate(R.layout.fragment_cuarta, container, false);
         return v;
@@ -63,18 +64,22 @@ public class cuarta extends android.support.v4.app.Fragment {
         getEventosSemana(); //this.getView());
         getEventosUsuario(); //this.getView());
         getEventosNULL();
+        getEventosFULL();
     }
-    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b, ArrayList c){
+
+    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b, ArrayList c, ArrayList d){
         bundle = bu;
         cuarta = a;
         cuartaM = b;
-        cuartaZ = b;
+        cuartaZ = c;
+        cuartaX = d;
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
 
         Refresh();
     }
+
     public void getDiaSemana(){
         switch (cal5.get(Calendar.DAY_OF_WEEK)){
             case 1: //Domingo
@@ -98,6 +103,29 @@ public class cuarta extends android.support.v4.app.Fragment {
             case 7: //Sabado
                 cal5.add(Calendar.DAY_OF_WEEK,-5);
                 break;
+        }
+    }
+    public void getEventosFULL(){  //(cant1 + "*" + "textView" + semana1 + tur + r);
+        if (cuartaX != null && cuartaX.size()>0){
+            System.out.println("CUARTAXXX !! ... tiene " + cuartaX.size());
+            Iterator I = cuartaX.iterator();
+            int resID;
+            while(I.hasNext()){
+                String txt = (String) I.next(); //5#2*textView10728
+                if (txt.length()>1){
+                    String cant = txt.substring(0,txt.indexOf("*"));
+                    //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
+                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    //  System.out.println("PRI1: " + txt + " -- " + txF);
+
+                    resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
+                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    ta.setBackgroundColor(Color.BLUE);
+                    ta.setText("");
+                }
+            }
+        }else{
+            System.out.println("......primeraX es NULL o IGUAL A CERO...");
         }
     }
 

@@ -26,7 +26,7 @@ public class segunda extends android.support.v4.app.Fragment {
     boolean creado = false;
     String minDay;
     String maxDay;
-    ArrayList segunda, segundaM, segundaZ= new ArrayList();
+    ArrayList segunda, segundaM, segundaZ, segundaX= new ArrayList();
     Bundle bundle;
 
     public segunda () {
@@ -53,6 +53,7 @@ public class segunda extends android.support.v4.app.Fragment {
             segunda = bundle.getStringArrayList("a");
             segundaM = bundle.getStringArrayList("b");
             segundaZ = bundle.getStringArrayList("c");
+            segundaX = bundle.getStringArrayList("d");
         }
         System.out.println("CREOOOOOOOOO VISTA 2 -- " );
         View v = inflater.inflate(R.layout.fragment_segunda, container, false);
@@ -64,13 +65,15 @@ public class segunda extends android.support.v4.app.Fragment {
         getEventosSemana();
         getEventosUsuario();
         getEventosNULL();
+        getEventosFULL();
     }
 
-    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b, ArrayList c){
+    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b, ArrayList c, ArrayList d){
         bundle = bu;
         segunda = a;
         segundaM = b;
         segundaZ = c;
+        segundaX = d;
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
@@ -101,6 +104,30 @@ public class segunda extends android.support.v4.app.Fragment {
             case 7: //Sabado
                 cal3.add(Calendar.DAY_OF_WEEK,-5);
                 break;
+        }
+    }
+
+    public void getEventosFULL(){  //(cant1 + "*" + "textView" + semana1 + tur + r);
+        if (segundaX != null && segundaX.size()>0){
+            System.out.println("SEGUNDAXXX !! ... tiene " + segundaX.size());
+            Iterator I = segundaX.iterator();
+            int resID;
+            while(I.hasNext()){
+                String txt = (String) I.next(); //5#2*textView10728
+                if (txt.length()>1){
+                    String cant = txt.substring(0,txt.indexOf("*"));
+                    //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
+                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    //  System.out.println("PRI1: " + txt + " -- " + txF);
+
+                    resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
+                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    ta.setBackgroundColor(Color.BLUE);
+                    ta.setText("");
+                }
+            }
+        }else{
+            System.out.println("......primeraX es NULL o IGUAL A CERO...");
         }
     }
 
