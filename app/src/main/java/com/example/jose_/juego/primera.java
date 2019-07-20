@@ -29,7 +29,7 @@ public class primera extends android.support.v4.app.Fragment {
     String minDay;
     String maxDay;
 
-    ArrayList primera, primeraM, primeraZ = new ArrayList();
+    ArrayList primera, primeraM, primeraZ, primeraX = new ArrayList();
     boolean creado=false;
     Bundle bundle;
 
@@ -53,10 +53,11 @@ public class primera extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         bundle = this.getArguments();
         if (bundle != null) {
-            System.out.println("BUNDLE 1 NO ES NULL..........." );
+     //       System.out.println("BUNDLE 1 NO ES NULL..........." );
             primera = bundle.getStringArrayList("a");
             primeraM = bundle.getStringArrayList("b");
             primeraZ = bundle.getStringArrayList("c");
+            primeraX = bundle.getStringArrayList("d");
         }
         System.out.println("CREOOOOOOOOO VISTA 1 -- " ); //+ primera.size() + " -- " + primeraM.size());
         v = inflater.inflate(R.layout.fragment_primera, container, false);
@@ -68,13 +69,15 @@ public class primera extends android.support.v4.app.Fragment {
         getEventosSemana();
         getEventosUsuario();
         getEventosNULL();
+        getEventosFULL();
     }
 
-    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b, ArrayList c){
+    public void RELOADFRAGMENT (Bundle bu, ArrayList a, ArrayList b, ArrayList c, ArrayList d){
         bundle = bu;
         primera = a;
         primeraM = b;
         primeraZ = c;
+        primeraX = d;
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
@@ -119,7 +122,7 @@ public class primera extends android.support.v4.app.Fragment {
                     String cant = txt.substring(0,txt.indexOf("*"));
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
                     String txF = txt.substring(txt.indexOf("*")+1, txt.length());
-                    System.out.println("PRI1: " + txt + " -- " + txF);
+                    //  System.out.println("PRI1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
@@ -129,6 +132,29 @@ public class primera extends android.support.v4.app.Fragment {
             }
         }else{
             System.out.println("......primera es NULL o IGUAL A CERO...");
+        }
+    }
+    public void getEventosFULL(){  //(cant1 + "*" + "textView" + semana1 + tur + r);
+        if (primeraX != null && primeraX.size()>0){
+            System.out.println("PRIMERAXXX !! ... tiene " + primeraX.size());
+            Iterator I = primeraX.iterator();
+            int resID;
+            while(I.hasNext()){
+                String txt = (String) I.next(); //5#2*textView10728
+                if (txt.length()>1){
+                    String cant = txt.substring(0,txt.indexOf("*"));
+                    //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
+                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    //  System.out.println("PRI1: " + txt + " -- " + txF);
+
+                    resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
+                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    ta.setBackgroundColor(Color.BLUE);
+                    ta.setText("");
+                }
+            }
+        }else{
+            System.out.println("......primeraX es NULL o IGUAL A CERO...");
         }
     }
 
@@ -141,10 +167,10 @@ public class primera extends android.support.v4.app.Fragment {
                 String txt = (String) I.next(); //5#2*textView10728
                 if (txt.length()>1){
                     String cant = txt.substring(0,txt.indexOf("*"));
-                    System.out.println("STRIIIIIIIIIIIING " + txt + " - " + cant);
+                  //  System.out.println("STRIIIIIIIIIIIING " + txt + " - " + cant);
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
                     String txF = txt.substring(txt.indexOf("*")+1, txt.length());
-                    System.out.println("PRI1: " + txt + " -- " + txF);
+                //    System.out.println("PRI1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
@@ -171,7 +197,7 @@ public class primera extends android.support.v4.app.Fragment {
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
                     // ta.setText(cant);
-                    System.out.println("PrimeraM: " + txt + " -- " + txF );
+                //    System.out.println("PrimeraM: " + txt + " -- " + txF );
                     ta.setBackgroundColor(Color.GREEN);
                 }
             }
