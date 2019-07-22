@@ -122,7 +122,6 @@ public class cuarta extends android.support.v4.app.Fragment {
                     TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
                     //ta.setBackgroundColor(Color.rgb(255,68,68) );
                     ta.setTextColor(Color.RED);
-                    ta.setText("");
                 }
             }
         }else{
