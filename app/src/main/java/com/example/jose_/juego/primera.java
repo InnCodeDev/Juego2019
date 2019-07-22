@@ -149,8 +149,9 @@ public class primera extends android.support.v4.app.Fragment {
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
                     TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
-                    ta.setBackgroundColor(Color.BLUE);
-                    ta.setText("");
+                    //ta.setBackgroundColor(Color.rgb(255,68,68) );
+                   // ta.setTextColor(Color.rgb(255,68,68)); //Color.RED);
+                    ta.setTextColor(Color.RED);
                 }
             }
         }else{

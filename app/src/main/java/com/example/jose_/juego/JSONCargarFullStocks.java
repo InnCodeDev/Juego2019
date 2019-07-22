@@ -93,7 +93,7 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
                 StringBuilder sb = new StringBuilder("");
                 String line = "";
                 while ((line = reader.readLine()) != null) {
-                    System.out.println("TOSTRING: " + reader.readLine());
+                    System.out.println("TOSTRING FULLSTOCK: " + reader.readLine());
                     sb.append(line);
                 }
                 isr.close();
@@ -131,11 +131,8 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
                     System.out.println("Dia: " + dia + " - Turno: " + turno + " - Cantidad: " + cantidad); // + " - Cancha: " + cancha);
 
                     //Agrega solo los dias/turnos que no tienen disponibilidad
-                    if (Integer.valueOf(cantidad) == 0){
                         s =  dia + "*" + turno + "*" + cantidad; //+ "/"+ cancha; //Formato: 10-2-16/5
                         arrayDispo.add(s); //Agrega cada combinacion Turno-Dia en el Array
-                    }
-
                 }
             }
         }catch (Exception e){

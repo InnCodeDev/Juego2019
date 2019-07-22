@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 JSONEventos(false);
-
                 Snackbar.make(view, "Actualizando grillas.. aguarde! ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -104,7 +103,6 @@ public class MainActivity extends AppCompatActivity
         // final
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
 
         cal = Calendar.getInstance();
         getDiaSemana();
@@ -128,11 +126,9 @@ public class MainActivity extends AppCompatActivity
         jsonCargar.execute();
 
 
-        JSONCargarFullStocks jFULL = new JSONCargarFullStocks(this, minDay, false);
-        jFULL.execute();
+
 
         ejecutar1erJSON();
-
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -165,6 +161,10 @@ public class MainActivity extends AppCompatActivity
             mAuth.signOut();
         }
     }
+    public void cargarFullStock(){
+        JSONCargarFullStocks jFULL = new JSONCargarFullStocks(this, minDay, false);
+        jFULL.execute();
+    }
 
     public void ejecutar1erJSON(){
         bundleP = new Bundle();
@@ -180,33 +180,32 @@ public class MainActivity extends AppCompatActivity
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
         JSONEventosUsuario jsonE = new JSONEventosUsuario(this, formateador.format(cal2.getTime()), FB_user, false); //cal.getTime()),"Jose");
         jsonE.execute();
+        ReloadALL(false);
     }
 
     public void ReloadALL(Boolean fromPopUP){
-        if (fromPopUP){
-            //Determina cual es el fragment activo y recargar ese
-            //Recargar ese y los del costado
-            System.out.println("ITEMMMMMMMMMMMMMMMMMMMMMMMM: " + mViewPager.getCurrentItem());
-            switch (mViewPager.getCurrentItem()) {
-                case 0:
-                    pri.RELOADFRAGMENT(bundleP, primera, primeraM, primeraZ, primeraX);
-                    seg.RELOADFRAGMENT(bundleS, segunda, segundaM, segundaZ, segundaX);
-                    break;
-                case 1:
-                    pri.RELOADFRAGMENT(bundleP, primera, primeraM, primeraZ, primeraX);
-                    seg.RELOADFRAGMENT(bundleS, segunda, segundaM, segundaZ, segundaX);
-                    ter.RELOADFRAGMENT(bundleT, tercera, terceraM, terceraZ, terceraX);
-                    break;
-                case 2:
-                    seg.RELOADFRAGMENT(bundleS, segunda, segundaM, segundaZ, segundaX);
-                    ter.RELOADFRAGMENT(bundleT, tercera, terceraM, terceraZ, terceraX);
-                    cuar.RELOADFRAGMENT(bundleC, cuarta, cuartaM, cuartaZ, cuartaX);
-                    break;
-                case 3:
-                    ter.RELOADFRAGMENT(bundleT, tercera, terceraM, terceraZ, terceraX);
-                    cuar.RELOADFRAGMENT(bundleC, cuarta, cuartaM, cuartaZ, cuartaX);
-                    break;
-            }
+        //Determina cual es el fragment activo y recargar ese
+        //Recargar ese y los del costado
+        System.out.println("ITEMMMMMMMMMMMMMMMMMMMMMMMM: " + mViewPager.getCurrentItem());
+        switch (mViewPager.getCurrentItem()) {
+            case 0:
+                pri.RELOADFRAGMENT(bundleP, primera, primeraM, primeraZ, primeraX);
+                seg.RELOADFRAGMENT(bundleS, segunda, segundaM, segundaZ, segundaX);
+                break;
+            case 1:
+                pri.RELOADFRAGMENT(bundleP, primera, primeraM, primeraZ, primeraX);
+                seg.RELOADFRAGMENT(bundleS, segunda, segundaM, segundaZ, segundaX);
+                ter.RELOADFRAGMENT(bundleT, tercera, terceraM, terceraZ, terceraX);
+                break;
+            case 2:
+                seg.RELOADFRAGMENT(bundleS, segunda, segundaM, segundaZ, segundaX);
+                ter.RELOADFRAGMENT(bundleT, tercera, terceraM, terceraZ, terceraX);
+                cuar.RELOADFRAGMENT(bundleC, cuarta, cuartaM, cuartaZ, cuartaX);
+                break;
+            case 3:
+                ter.RELOADFRAGMENT(bundleT, tercera, terceraM, terceraZ, terceraX);
+                cuar.RELOADFRAGMENT(bundleC, cuarta, cuartaM, cuartaZ, cuartaX);
+                break;
         }
     }
 
@@ -453,11 +452,6 @@ public class MainActivity extends AppCompatActivity
             try {
                 Date dat2 = formatoDelTexto.parse(minDay);
 
-         /*       dat2.setDate(Integer.valueOf(formatoDelTexto.format(minDay).substring(0,formatoDelTexto.format(minDay).indexOf("/"))));
-                da.setMonth(Integer.valueOf(formatoDelTexto.format(minDay).substring(formatoDelTexto.format(minDay).indexOf("/")+1,formatoDelTexto.format(minDay).lastIndexOf("/"))) - 1);
-                da.setYear(Integer.valueOf(formatoDelTexto.format(minDay).substring(formatoDelTexto.format(minDay).lastIndexOf("/")+1, formatoDelTexto.format(minDay).length())) - 1900);
-       */         //formateador.parse(minDay);
-
                 //Fecha del evento - Fecha Menor dia de la primer semana
                 sem = (da.getTime() - dat2.getTime()) / (1000 * 60 * 60 * 24); //Diferencia de dias entre ambas fechas
                 float div = (float)sem/6;
@@ -585,7 +579,7 @@ public class MainActivity extends AppCompatActivity
         }
         System.out.println("ARRAYS FULLSTOCK: " + primeraX.size() + " - " + segundaX.size() + " - " + terceraX.size() + " - " + cuartaX.size());
 
-        //ejecutar2doJSON();
+        ejecutar2doJSON();
 
     }
 
@@ -769,8 +763,8 @@ public class MainActivity extends AppCompatActivity
         }
         System.out.println("ARRAYS: " + primeraZ.size() + " - " + segundaZ.size() + " - " + terceraZ.size() + " - " + cuartaZ.size());
 
-        ejecutar2doJSON();
-
+        cargarFullStock();
+        //ejecutar2doJSON();
     }
 
     public void continuarJSONEventosUsuario(ArrayList a, boolean fromPopUp) {
@@ -1119,6 +1113,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case "NOK1":
                 Toast.makeText(this.getApplicationContext(),"Error al inscribirse. No hay cupo disponible.",Toast.LENGTH_LONG).show();
+                cargarFullStock();
                 break;
             case "NOK2":
                 Toast.makeText(this.getApplicationContext(),"Error al inscribirse. Turno NO Disponible.",Toast.LENGTH_LONG).show();

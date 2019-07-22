@@ -3098,7 +3098,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
                     android:width="50dp"
-                    android:background="@drawable/border" />
+                    android:background="@android:color/holo_red_light" />
 
                 <TextView
                     android:id="@+id/textView065"
