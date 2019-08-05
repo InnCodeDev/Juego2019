@@ -145,13 +145,13 @@ public class tercera extends android.support.v4.app.Fragment {
                 }
             }
         }else{
-            System.out.println("......primeraX es NULL o IGUAL A CERO...");
+            System.out.println("......terceraX es NULL o IGUAL A CERO...");
         }
     }
 
     public void getEventosNULL(){  //(cant1 + "*" + "textView" + semana1 + tur + r);
         if (terceraZ != null && terceraZ.size()>0){
-            System.out.println("SegundaZ !! ... tiene " + terceraZ.size());
+            System.out.println("terceraZ !! ... tiene " + terceraZ.size());
             Iterator I = terceraZ.iterator();
             int resID;
             while(I.hasNext()){
@@ -168,7 +168,7 @@ public class tercera extends android.support.v4.app.Fragment {
                 }
             }
         }else{
-            System.out.println("......segundaZ es NULL o IGUAL A CERO...");
+            System.out.println("......terceraZ es NULL o IGUAL A CERO...");
         }
     }
 

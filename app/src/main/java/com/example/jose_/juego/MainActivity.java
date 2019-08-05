@@ -439,7 +439,7 @@ public class MainActivity extends AppCompatActivity
                 dia = "0" + dia;
             int mes = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 1, fecha.indexOf("-") + 3));
             int ano = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 4, fecha.length()));
-            //System.out.println("------ " + t + " --- " + dia + " /-/ " + mes + " /-/ " + ano);  //t = 12*15-11-2018*9
+            System.out.println("------ " + t + " --- " + dia + " /-/ " + mes + " /-/ " + ano);  //t = 12*15-11-2018*9
 
             SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
             da.setDate(Integer.valueOf(dia));
@@ -463,7 +463,7 @@ public class MainActivity extends AppCompatActivity
                     if (bigDecimal.doubleValue() <= 2) {
                         semana = 2;
                     } else {
-                        if (bigDecimal.doubleValue() <= 3.2) {
+                        if (bigDecimal.doubleValue() < 3.5) {
                             semana = 3;
                         } else {
                             semana = 4;
@@ -644,7 +644,7 @@ public class MainActivity extends AppCompatActivity
                     if (bigDecimal.doubleValue() <= 2) {
                         semana = 2;
                     } else {
-                        if (bigDecimal.doubleValue() <= 3) {
+                        if (bigDecimal.doubleValue() <= 3.3) {
                             semana = 3;
                         } else {
                             semana = 4;
