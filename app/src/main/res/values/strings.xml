@@ -29,5 +29,5 @@
     </string>
     <string name="title_activity_login">El Circulo Futbol</string>
 
-    <string name = "server_client_id"> 978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com </string>
+    <string name="server_client_id"> 978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com </string>
 </resources>

@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         // Set up the ViewPager with the sections adapter.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter); //adapter); //mSectionsPagerAdapter);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) { //adapter.getCount(); i++) {
             mViewPager.getChildAt(i + 1);
         }
@@ -1191,10 +1191,18 @@ public class MainActivity extends AppCompatActivity
             nvo.putExtra("mail", FB_mail);
             this.startActivity(nvo);
             // Handle the camera action
-        } else if (id == R.id.info) {
+        } else if (id == R.id.inicio) {
 
-        } else if (id == R.id.nav_slideshow) {
-
+        } else if (id == R.id.dondestamos) {
+        /*    mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+            mViewPager = findViewById(R.id.container);
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+            for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) { //adapter.getCount(); i++) {
+                mViewPager.getChildAt(i + 1);
+            }
+            */
+            UbicacionFragment uf = new UbicacionFragment();
+            mViewPager.addView(uf.getView());
         } else if (id == R.id.cerrar_sesion) {
             FirebaseAuth.getInstance().signOut();
 
