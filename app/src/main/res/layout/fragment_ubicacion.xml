@@ -27,7 +27,7 @@
             android:layout_height="142dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:src="@mipmap/ubicacion1"/>
+            android:src="@mipmap/logo"/>
 
         <TextView
             android:layout_width="match_parent"

@@ -29,16 +29,15 @@
 -->
 
     <LinearLayout
-        android:id="@+id/linearlayout"
+        android:id="@+id/linear"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
 
-        android:layout_marginTop="8dp"
         android:gravity="top"
         android:measureWithLargestChild="true"
         android:orientation="vertical"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteY="8dp">
 
         <TableRow
             android:id="@+id/tableRow1"
@@ -48,7 +47,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView100"
+                android:id="@+id/Titulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -68,7 +67,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/Subtitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sumate a jugar el dia y turno que puedas.." />
@@ -77,20 +76,12 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:isScrollContainer="true"
             android:paddingBottom="5dp"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
+            android:scrollbarAlwaysDrawHorizontalTrack="true" >
         </android.support.v4.view.ViewPager>
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:height="20dp"
-            android:text="Sumate a jugar el dia y turno que puedas.." />
+        <!-- app:layout_behavior="@string/appbar_scrolling_view_behavior"  -->
 
     </LinearLayout>
 

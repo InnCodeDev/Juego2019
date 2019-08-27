@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -66,43 +67,13 @@ public class MainActivity extends AppCompatActivity
     segunda seg;
     tercera ter;
     cuarta cuar;
+    UbicacionFragment ubicFrag;
     SectionsPagerAdapter mSectionsPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        // Set up the ViewPager with the sections adapter.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mViewPager = findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) { //adapter.getCount(); i++) {
-            mViewPager.getChildAt(i + 1);
-        }
-
-        //Aca estaba codigo de Floating Button
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                JSONEventos(false);
-                Snackbar.make(view, "Actualizando grillas.. aguarde! ", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        // final
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         cal = Calendar.getInstance();
         getDiaSemana();
@@ -120,16 +91,37 @@ public class MainActivity extends AppCompatActivity
         seg = new segunda();
         ter = new tercera();
         cuar = new cuarta();
+        ubicFrag = new UbicacionFragment();
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        //Aca estaba codigo de Floating Button
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JSONEventos(false);
+                Snackbar.make(view, "Actualizando grillas.. aguarde! ", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         //Busca los turnos que no tienen disponibilidad
         JSONCargarStocks jsonCargar = new JSONCargarStocks(this,minDay, false);
         jsonCargar.execute();
 
 
-
-
         ejecutar1erJSON();
-
 
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
@@ -160,7 +152,42 @@ public class MainActivity extends AppCompatActivity
         } else {
             mAuth.signOut();
         }
+
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = findViewById(R.id.container);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+                mViewPager.getChildAt(i + 1);
+        }
+
     }
+
+    @Override
+    public void onBackPressed() {
+      /*  DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+    */
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.ContainerGral);
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+            findViewById(R.id.Titulo).setVisibility(View.VISIBLE);
+            findViewById(R.id.Subtitulo).setVisibility(View.VISIBLE);
+            if (fragment != null) {
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.remove(fragment).commit();
+
+            } else {
+                super.onBackPressed();
+            }
+    //    }
+    }
+
+
+
     public void cargarFullStock(){
         JSONCargarFullStocks jFULL = new JSONCargarFullStocks(this, minDay, false);
         jFULL.execute();
@@ -180,7 +207,7 @@ public class MainActivity extends AppCompatActivity
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
         JSONEventosUsuario jsonE = new JSONEventosUsuario(this, formateador.format(cal2.getTime()), FB_user, false); //cal.getTime()),"Jose");
         jsonE.execute();
-        ReloadALL(false);
+      //  ReloadALL(false);
     }
 
     public void ReloadALL(Boolean fromPopUP){
@@ -206,10 +233,13 @@ public class MainActivity extends AppCompatActivity
                 ter.RELOADFRAGMENT(bundleT, tercera, terceraM, terceraZ, terceraX);
                 cuar.RELOADFRAGMENT(bundleC, cuarta, cuartaM, cuartaZ, cuartaX);
                 break;
+            case 4:
+                mViewPager.setAlpha(0f);
+                break;
         }
     }
 
-    public void  JSONEventos(Boolean fromPopUP) {
+    public void JSONEventos(Boolean fromPopUP) {
         ejecutar1erJSON();
     }
 
@@ -254,7 +284,6 @@ public class MainActivity extends AppCompatActivity
      //  System.out.println("...........SALIENDO DE JSONEVENTOS................");
     }
 
-
     public void continuarJSONEmostrarUsuarios(View v, TextView bt, TextView s, ArrayList a){
 
         ArrayList usuarios = a;
@@ -283,7 +312,6 @@ public class MainActivity extends AppCompatActivity
         s.setMaxLines(5);
 
     }
-
 
     public void onClickEvento(View v) {
         String semana = "";
@@ -1150,16 +1178,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -1179,7 +1197,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-   // @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -1192,17 +1209,26 @@ public class MainActivity extends AppCompatActivity
             this.startActivity(nvo);
             // Handle the camera action
         } else if (id == R.id.inicio) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.hide(ubicFrag);
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+            //ft.replace(R.id.container, pri).commit();
+            ft.show(pri).commit();
+            findViewById(R.id.Titulo).setVisibility(View.VISIBLE);
+            findViewById(R.id.Subtitulo).setVisibility(View.VISIBLE);
 
         } else if (id == R.id.dondestamos) {
-        /*    mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-            mViewPager = findViewById(R.id.container);
-            mViewPager.setAdapter(mSectionsPagerAdapter);
-            for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) { //adapter.getCount(); i++) {
-                mViewPager.getChildAt(i + 1);
-            }
-            */
-            UbicacionFragment uf = new UbicacionFragment();
-            mViewPager.addView(uf.getView());
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(R.id.ContainerGral, ubicFrag).commit();
+
+
+            mViewPager.setAdapter(null);
+
+            findViewById(R.id.Titulo).setVisibility(View.INVISIBLE);
+            findViewById(R.id.Subtitulo).setVisibility(View.INVISIBLE);
+
+            System.out.println("FRAGMENT DONDEESTAMOS: " + mViewPager.getCurrentItem());
+
         } else if (id == R.id.cerrar_sesion) {
             FirebaseAuth.getInstance().signOut();
 
@@ -1226,32 +1252,56 @@ public class MainActivity extends AppCompatActivity
      * A {@link //SectionsPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    //public class ViewPagerAdapter extends FragmentPagerAdapter { //PagerAdapter {
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+            //FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
         }
 
         @Override
         public Fragment getItem(int position) {
+            Fragment fragment = null;
+      /*      FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+     //       ft.replace(R.id.container, pri);
+            ft.add(R.id.container, seg);
+            ft.add(R.id.container, ter);
+            ft.add(R.id.container, cuar);
+            ft.commit();
+       */
             switch (position) {
-                case 0:
-                    return pri;
-                case 1:
-                    return seg;
-                case 2:
-                    return ter;
-                case 3:
-                    return cuar;
-                default:
-                    return null;
+                case 0: fragment = pri; break;
+                case 1: fragment = seg; break;
+                case 2: fragment = ter; break;
+                case 3: fragment = cuar; break;
+                case 4: fragment = ubicFrag; break;
+                //default: fragment = pri; break;
+                /*
+                case 0: ft.show(pri); break;
+                case 1: ft.show(seg); break;
+                case 2: ft.show(ter); break;
+                case 3: ft.show(cuar); break;
+                */
             }
+
+
+          //  ft.add(R.id.FragConteiner, seg, "frag2");
+            // ft.add(R.id.FragConteiner, ter, "frag3");
+            // ft.add(R.id.FragConteiner, cuar, "frag4");
+
+          //  ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+           // ft.show(pri);
+          //  ft.commit();
+
+
+            return fragment;
         }
 
         @Override
         public int getCount() {
-            return 4;
+            return 5;
         }
 
         @Override
@@ -1271,4 +1321,5 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
 }

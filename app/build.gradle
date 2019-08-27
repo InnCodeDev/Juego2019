@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '28.0.3'//'28.0.2'
+    //'28.0.2'
     defaultConfig {
         applicationId "com.example.jose_.juego"
         minSdkVersion 23
@@ -15,8 +15,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    productFlavors {
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
