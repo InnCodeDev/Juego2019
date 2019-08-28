@@ -219,6 +219,7 @@ public class segunda extends android.support.v4.app.Fragment {
 
                 int resID = getResources().getIdentifier("textView2"+S+j, "id", getActivity().getPackageName());
                 TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
+                System.out.println("Text 2: " + "textView2"+S+j);
                 ta.setText("-");
                 ta.setBackgroundColor(Color.TRANSPARENT);
             }
