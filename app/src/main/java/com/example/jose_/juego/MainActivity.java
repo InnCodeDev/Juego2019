@@ -1190,10 +1190,10 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+/*        if (id == R.id.action_settings) {
             return true;
         }
-
+*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -1210,7 +1210,9 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.inicio) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.hide(ubicFrag);
+            //ft.hide(ubicFrag);
+            ft.remove(ubicFrag);
+
             mViewPager.setAdapter(mSectionsPagerAdapter);
             //ft.replace(R.id.container, pri).commit();
             ft.show(pri).commit();
@@ -1219,8 +1221,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.dondestamos) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.ContainerGral, ubicFrag).commit();
 
+            if (!ubicFrag.isAdded())
+                ft.add(R.id.ContainerGral, ubicFrag).commit();
 
             mViewPager.setAdapter(null);
 
@@ -1235,7 +1238,8 @@ public class MainActivity extends AppCompatActivity
             Intent nvo = new Intent(this, LoginActivity.class);
             this.startActivity(nvo);
 
-        } else if (id == R.id.nav_share) {
+      //  } else if (id == R.id.nav_share) {
+            //ESTE MENU ESTA OCULTO EN EL xml
 
         } else if (id == R.id.nav_send) {
 

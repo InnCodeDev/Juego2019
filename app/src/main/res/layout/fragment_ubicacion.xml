@@ -27,14 +27,17 @@
             android:layout_height="142dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:src="@mipmap/logo"/>
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@mipmap/mapa"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="Av. Gauss 4900 - Villa Belgrano (7,81 km) Ciudad de Córdoba" />
+            android:textAlignment="center"
+            android:text="Av. Gauss 4900 - Villa Belgrano                                                                               - Ciudad de Córdoba -" />
 
     </LinearLayout>
 
