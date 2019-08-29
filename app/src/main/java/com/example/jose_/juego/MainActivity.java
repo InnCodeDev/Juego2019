@@ -160,13 +160,9 @@ public class MainActivity extends AppCompatActivity
 
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        for (int i = 0; i < mSectionsPagerAdapter.getCount()-1; i++) {
-            if (i < 4)
+        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
                 mViewPager.getChildAt(i + 1);
         }
-
-
-
 
     }
 
@@ -176,14 +172,18 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
     */
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
-        if (fragment != null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.remove(fragment).commit();
-        } else {
-            super.onBackPressed();
-        }
-        //    }
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.ContainerGral);
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+            findViewById(R.id.Titulo).setVisibility(View.VISIBLE);
+            findViewById(R.id.Subtitulo).setVisibility(View.VISIBLE);
+            if (fragment != null) {
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.remove(fragment).commit();
+
+            } else {
+                super.onBackPressed();
+            }
+    //    }
     }
 
 
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
         JSONEventosUsuario jsonE = new JSONEventosUsuario(this, formateador.format(cal2.getTime()), FB_user, false); //cal.getTime()),"Jose");
         jsonE.execute();
-        //  ReloadALL(false);
+      //  ReloadALL(false);
     }
 
     public void ReloadALL(Boolean fromPopUP){
@@ -277,11 +277,11 @@ public class MainActivity extends AppCompatActivity
         ter.setArguments(bundleT);
         cuar.setArguments(bundleC);
 
-        //  pri.actualizarBundle(bundleP, primera, primeraM);
-        //  seg.actualizarBundle(bundleS, segunda, segundaM);
+      //  pri.actualizarBundle(bundleP, primera, primeraM);
+      //  seg.actualizarBundle(bundleS, segunda, segundaM);
         this.ReloadALL(true);
 
-        //  System.out.println("...........SALIENDO DE JSONEVENTOS................");
+     //  System.out.println("...........SALIENDO DE JSONEVENTOS................");
     }
 
     public void continuarJSONEmostrarUsuarios(View v, TextView bt, TextView s, ArrayList a){
@@ -347,68 +347,68 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        tviewTurno = NroTurno;
-        Calendar aux2 = cal;
-        try {
-            switch (semana) {
-                case "1":
-                    aux.setTime((formateador).parse(minDay));
-                    aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) - 1);
-                    tviewDia = formateador.format(aux.getTime());
-                    aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) + 1);
-                    break;
-                case "2":
-                    aux.setTime((formateador).parse(minDay));
-                    aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 6);
-                    tviewDia = formateador.format(aux.getTime());
-                    aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 6);
-                    break;
-                case "3":
-                    aux.setTime((formateador).parse(minDay));
-                    aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 13);
-                    tviewDia = formateador.format(aux.getTime());
-                    aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 13);
-                    break;
-                case "4":
-                    aux.setTime((formateador).parse(minDay));
-                    aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 20);
-                    tviewDia = formateador.format(aux.getTime());
-                    aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 20);
-                    break;
-                default:
-                    break;
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        resID = getResources().getIdentifier("textView"+semana+NroTurno+"0","id",this.getPackageName());
-        tviewTurno = ((TextView) findViewById(resID)).getText().toString();
-
-        resID = getResources().getIdentifier(btn, "id", this.getPackageName());
-        TextView tview = findViewById(resID);
-
-        if (((ColorDrawable) tview.getBackground()).getColor() == Color.LTGRAY) {
-            Toast.makeText(this, "Turno no disponible", Toast.LENGTH_SHORT).show();
-        }else {
-            if (semana.compareTo("1") == 0 && c.getTime().compareTo(cc.getTime()) > 0) {
-                Toast.makeText(MainActivity.this, "Elija una fecha posterior al dia de hoy!!", Toast.LENGTH_LONG).show();
-            } else {
-                System.out.println("TURNO: " + NroTurno + " -- TViewTurno: "  + tviewTurno + " - TViewDia: " + tviewDia);
-
-                boolean inscripto = false;
-                //Si BackgroundColor es Verde; esta inscripto.. si es gris (o no verde) se puede inscripto = falso
-                if (((ColorDrawable) tview.getBackground()).getColor() == Color.GREEN) {
-                    inscripto = true; //Esta Participando
+            tviewTurno = NroTurno;
+            Calendar aux2 = cal;
+            try {
+                switch (semana) {
+                    case "1":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) - 1);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) + 1);
+                        break;
+                    case "2":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 6);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 6);
+                        break;
+                    case "3":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 13);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 13);
+                        break;
+                    case "4":
+                        aux.setTime((formateador).parse(minDay));
+                        aux.add(Calendar.DAY_OF_MONTH, Integer.valueOf(dia) + 20);
+                        tviewDia = formateador.format(aux.getTime());
+                        aux.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(dia) - 20);
+                        break;
+                    default:
+                        break;
                 }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-                //MainActivity disp, View v, String min, String TextoT, String tur, boolean fromPop, boolean inscr)
-                JSONDetalleEvento jsonD = new JSONDetalleEvento(this, v, tviewDia, tviewTurno, NroTurno,  true, inscripto);
-                jsonD.execute();
-                //String inscriptos = tview.getText().toString();
+            resID = getResources().getIdentifier("textView"+semana+NroTurno+"0","id",this.getPackageName());
+            tviewTurno = ((TextView) findViewById(resID)).getText().toString();
+
+            resID = getResources().getIdentifier(btn, "id", this.getPackageName());
+            TextView tview = findViewById(resID);
+
+            if (((ColorDrawable) tview.getBackground()).getColor() == Color.LTGRAY) {
+                Toast.makeText(this, "Turno no disponible", Toast.LENGTH_SHORT).show();
+            }else {
+                if (semana.compareTo("1") == 0 && c.getTime().compareTo(cc.getTime()) > 0) {
+                    Toast.makeText(MainActivity.this, "Elija una fecha posterior al dia de hoy!!", Toast.LENGTH_LONG).show();
+                } else {
+                    System.out.println("TURNO: " + NroTurno + " -- TViewTurno: "  + tviewTurno + " - TViewDia: " + tviewDia);
+
+                    boolean inscripto = false;
+                    //Si BackgroundColor es Verde; esta inscripto.. si es gris (o no verde) se puede inscripto = falso
+                    if (((ColorDrawable) tview.getBackground()).getColor() == Color.GREEN) {
+                        inscripto = true; //Esta Participando
+                    }
+
+                    //MainActivity disp, View v, String min, String TextoT, String tur, boolean fromPop, boolean inscr)
+                    JSONDetalleEvento jsonD = new JSONDetalleEvento(this, v, tviewDia, tviewTurno, NroTurno,  true, inscripto);
+                    jsonD.execute();
+                    //String inscriptos = tview.getText().toString();
+                }
             }
         }
-    }
 
     public void ContinuarOnClickEvento (View v, String Fecha, String TextoTurno, String Nroturno,  Boolean fromPopUp, Boolean inscripto, ArrayList ar){
         int CantF5=0;
@@ -498,9 +498,9 @@ public class MainActivity extends AppCompatActivity
                         }
                     }
                 }
-                //         System.out.println("SEMMM_CargarEventos " + sem + " -- " + semana + " -- " + bigDecimal.doubleValue());
+       //         System.out.println("SEMMM_CargarEventos " + sem + " -- " + semana + " -- " + bigDecimal.doubleValue());
 
-                //        System.out.println("SEMANA: " + da.toLocaleString() + "  - Semana: " + semana + " -- " + cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da) + " -- " + formateador.format(dat2));
+        //        System.out.println("SEMANA: " + da.toLocaleString() + "  - Semana: " + semana + " -- " + cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da) + " -- " + formateador.format(dat2));
 //cancha + "#"+
                 eventosSemana.add(cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da));
                 //5#1*textView1-02/12/04/2019
@@ -628,7 +628,7 @@ public class MainActivity extends AppCompatActivity
         int semana = 0;
         while (I.hasNext()) {               //dia + "*" + turno + "*" + cantidad
             String t = (String) I.next();   //24-06-2019*6*0
-            //   System.out.println("JJJJJJJJ... " + t);
+         //   System.out.println("JJJJJJJJ... " + t);
             fecha = t.substring(0, t.indexOf("*"));
             turno = t.substring(t.indexOf("*") + 1, t.lastIndexOf("*"));
             cant = t.substring(t.lastIndexOf("*") + 1, t.length()); //t.indexOf("/"));
@@ -719,58 +719,58 @@ public class MainActivity extends AppCompatActivity
 
                 switch (semana1) {
                     case "1":
-                        //       System.out.println("FECH 1: " + fech);
-                        //       System.out.println("MINIMO DIA 1: " + formateador.format(cal2.getTime()));
+                 //       System.out.println("FECH 1: " + fech);
+                 //       System.out.println("MINIMO DIA 1: " + formateador.format(cal2.getTime()));
                         date2 = formateador.parse(minDay);
                         r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
-                        // System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
-                        // System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
-                        //       System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
+                       // System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
+                       // System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
+                 //       System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
                         primeraZ.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         break;
 
                     case "2":
-                        //      System.out.println("FECH 2: " + fech);
+                  //      System.out.println("FECH 2: " + fech);
                         cal2.add(Calendar.DAY_OF_MONTH, 7);
                         System.out.println("MINIMO DIA 2: " + formateador.format(cal2.getTime()));
                         date2 = formateador.parse(formateador.format(cal2.getTime()));
 
                         r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
 
-                        // System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
-                        // System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
-                        //    System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
+                       // System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
+                       // System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
+                    //    System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
                         segundaZ.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -7);
                         break;
 
                     case "3":
-                        //        System.out.println("FECH 3: " + fech);
+                //        System.out.println("FECH 3: " + fech);
 
                         cal2.add(Calendar.DAY_OF_MONTH, 14);
-                        //       System.out.println("MINIMO DIA 3: " + formateador.format(cal2.getTime()));
+                 //       System.out.println("MINIMO DIA 3: " + formateador.format(cal2.getTime()));
                         date2 = formateador.parse(formateador.format(cal2.getTime()));
 
                         r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
 
-                        // System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
-                        //  System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
-                        //       System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
+                       // System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
+                      //  System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
+                 //       System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
                         terceraZ.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -14);
                         break;
 
                     case "4":
-                        //     System.out.println("FECH 4: " + fech);
+                   //     System.out.println("FECH 4: " + fech);
                         cal2.add(Calendar.DAY_OF_MONTH, 21);
-                        //      System.out.println("MINIMO DIA 4: " + formateador.format(cal2.getTime()));
+                  //      System.out.println("MINIMO DIA 4: " + formateador.format(cal2.getTime()));
                         date2 = formateador.parse(formateador.format(cal2.getTime()));
 
                         r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
 
-                        //  System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
-                        //  System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
-                        //      System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
+                      //  System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
+                      //  System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
+                  //      System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
                         cuartaZ.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -21);
                         break;
@@ -812,7 +812,7 @@ public class MainActivity extends AppCompatActivity
             Iterator I = arrayEvento.iterator();
             while (I.hasNext()) {
                 String t = (String) I.next();  //7*28-09-2018 turno*fecha
-                //              System.out.println("BBBBBBBBB: " + t); //2*02-11-2018*7
+  //              System.out.println("BBBBBBBBB: " + t); //2*02-11-2018*7
                 String turno = t.substring(0, t.indexOf("*"));
                 fecha = t.substring(t.indexOf("*") + 1, t.length());
 //            int cant = Integer.valueOf(t.substring(t.lastIndexOf("*")+1),t.length());
@@ -857,7 +857,7 @@ public class MainActivity extends AppCompatActivity
                             }
                         }
                     }
-                    //               System.out.println("SEMMM_CargarEventosUSUARIO " + sem + " -- " + semana + " -- " + bigDecimal.doubleValue());
+     //               System.out.println("SEMMM_CargarEventosUSUARIO " + sem + " -- " + semana + " -- " + bigDecimal.doubleValue());
 
                     //       System.out.println("SEM: " + semana);
                     //       System.out.println("LAAAA textView" + semana + "-" + turn + "/" + formateador.format(da));
@@ -894,7 +894,7 @@ public class MainActivity extends AppCompatActivity
                             date2 = formateador.parse(formateador.format(cal2.getTime()));
 
                             r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
-                            //                   System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
+        //                   System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
                             primeraM.add("textView" + semana1 + tur + r);
                             cal2.add(Calendar.DAY_OF_MONTH, 0);
                             break;
@@ -905,7 +905,7 @@ public class MainActivity extends AppCompatActivity
                             date2 = formateador.parse(formateador.format(cal2.getTime()));
 
                             r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
-                            //                   System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
+         //                   System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
                             segundaM.add("textView" + semana1 + tur + r);
                             cal2.add(Calendar.DAY_OF_MONTH, -7);
                             break;
@@ -916,7 +916,7 @@ public class MainActivity extends AppCompatActivity
                             date2 = formateador.parse(formateador.format(cal2.getTime()));
 
                             r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
-                            //                  System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
+          //                  System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
                             terceraM.add("textView" + semana1 + tur + r);
                             cal2.add(Calendar.DAY_OF_MONTH, -14);
                             break;
@@ -927,7 +927,7 @@ public class MainActivity extends AppCompatActivity
                             date2 = formateador.parse(formateador.format(cal2.getTime()));
 
                             r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
-                            //                   System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
+         //                   System.out.println("eventosUsuario: " + date1.toLocaleString() + " - " + "textView" + semana1 + tur + r);
                             cuartaM.add("textView" + semana1 + tur + r);
                             cal2.add(Calendar.DAY_OF_MONTH, -21);
                             break;
@@ -971,7 +971,7 @@ public class MainActivity extends AppCompatActivity
             turno = t.substring(0, t.indexOf("*"));
             fecha = t.substring(t.indexOf("*") + 1, t.lastIndexOf("*"));
             cant = t.substring(t.lastIndexOf("*") + 1, t.length()); //t.indexOf("/"));
-            //   cancha = t.substring(t.indexOf("/")+1, t.length());
+         //   cancha = t.substring(t.indexOf("/")+1, t.length());
 
             if (turno.length() == 1) {
                 turn = "0" + turno;
@@ -1018,9 +1018,9 @@ public class MainActivity extends AppCompatActivity
                         }
                     }
                 }
-                //          System.out.println("SEMMM_CargarEventos " + sem + " -- " + semana + " -- " + bigDecimal.doubleValue());
+      //          System.out.println("SEMMM_CargarEventos " + sem + " -- " + semana + " -- " + bigDecimal.doubleValue());
 
-                //          System.out.println("SEMANA: " + da.toLocaleString() + "  - Semana: " + semana + " -- " + cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da) + " -- " + formateador.format(dat2));
+      //          System.out.println("SEMANA: " + da.toLocaleString() + "  - Semana: " + semana + " -- " + cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da) + " -- " + formateador.format(dat2));
 //cancha + "#"+
                 eventosSemana.add(cant + "*" + "textView" + semana + "-" + turn + "/" + formateador.format(da));
                 //5#1*textView1-02/12/04/2019
@@ -1037,7 +1037,7 @@ public class MainActivity extends AppCompatActivity
             String txt = (String) I2.next();  //VERSION2:  //5#1*textView1-02/12/04/2019
             System.out.println("TXT : " + txt); //  7*textView1-02/02/11/2018
             //  6*textView2-02/13/11/2018
-            //   String CantCancha = txt.substring(0, txt.indexOf("#"));
+         //   String CantCancha = txt.substring(0, txt.indexOf("#"));
             String cant1 = txt.substring(0, txt.indexOf("*"));
             String tur = txt.substring(txt.indexOf("-") + 1, txt.indexOf("/"));
             String semana1 = txt.substring(txt.indexOf("w") + 1, txt.indexOf("w") + 2);
@@ -1059,26 +1059,26 @@ public class MainActivity extends AppCompatActivity
                 switch (semana1) {
                     case "1":
                         System.out.println("FECH 1: " + fech);
-                        //               System.out.println("MINIMO DIA 1: " + formateador.format(cal2.getTime()));
+         //               System.out.println("MINIMO DIA 1: " + formateador.format(cal2.getTime()));
                         date2 = formateador.parse(minDay);
                         r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
-                        //              System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
-                        //              System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
-                        //              System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
+          //              System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
+          //              System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
+          //              System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
                         primera.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         break;
 
                     case "2":
                         System.out.println("FECH 2: " + fech);
                         cal2.add(Calendar.DAY_OF_MONTH, 7);
-                        //              System.out.println("MINIMO DIA 2: " + formateador.format(cal2.getTime()));
+          //              System.out.println("MINIMO DIA 2: " + formateador.format(cal2.getTime()));
                         date2 = formateador.parse(formateador.format(cal2.getTime()));
 
                         r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
 
-                        //             System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
-                        //             System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
-                        //             System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
+           //             System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
+           //             System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
+           //             System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
                         segunda.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -7);
                         break;
@@ -1087,14 +1087,14 @@ public class MainActivity extends AppCompatActivity
                         System.out.println("FECH 3: " + fech);
 
                         cal2.add(Calendar.DAY_OF_MONTH, 14);
-                        //             System.out.println("MINIMO DIA 3: " + formateador.format(cal2.getTime()));
+           //             System.out.println("MINIMO DIA 3: " + formateador.format(cal2.getTime()));
                         date2 = formateador.parse(formateador.format(cal2.getTime()));
 
                         r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
 
-                        //            System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
-                        //             System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
-                        //             System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
+           //            System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
+           //             System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
+           //             System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
                         tercera.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -14);
                         break;
@@ -1102,14 +1102,14 @@ public class MainActivity extends AppCompatActivity
                     case "4":
                         System.out.println("FECH 4: " + fech);
                         cal2.add(Calendar.DAY_OF_MONTH, 21);
-                        //             System.out.println("MINIMO DIA 4: " + formateador.format(cal2.getTime()));
+           //             System.out.println("MINIMO DIA 4: " + formateador.format(cal2.getTime()));
                         date2 = formateador.parse(formateador.format(cal2.getTime()));
 
                         r = ((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)) + 1;
 
-                        //             System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
-                        //             System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
-                        //              System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
+           //             System.out.println("date 1 : " + date1.getTime() + " - " + date1.toLocaleString() + " -- " + fech);
+           //             System.out.println("date 2 : " + date2.getTime() + " - " + date2.toLocaleString() + " --- " + minDay);
+          //              System.out.println("VALOR R: " + cant1 + "*" + "textView" + semana1 + tur + r);
                         cuarta.add(cant1 + "*" + "textView" + semana1 + tur + r);
                         cal2.add(Calendar.DAY_OF_MONTH, -21);
                         break;
@@ -1190,14 +1190,13 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+/*        if (id == R.id.action_settings) {
             return true;
         }
-
+*/
         return super.onOptionsItemSelected(item);
     }
 
-    // @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -1211,14 +1210,26 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.inicio) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.hide(ubicFrag);
+            //ft.hide(ubicFrag);
+            ft.remove(ubicFrag);
 
+            mViewPager.setAdapter(mSectionsPagerAdapter);
             //ft.replace(R.id.container, pri).commit();
             ft.show(pri).commit();
+            findViewById(R.id.Titulo).setVisibility(View.VISIBLE);
+            findViewById(R.id.Subtitulo).setVisibility(View.VISIBLE);
 
         } else if (id == R.id.dondestamos) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.container, ubicFrag).commit();
+
+            if (!ubicFrag.isAdded())
+                ft.add(R.id.ContainerGral, ubicFrag).commit();
+
+            mViewPager.setAdapter(null);
+
+            findViewById(R.id.Titulo).setVisibility(View.INVISIBLE);
+            findViewById(R.id.Subtitulo).setVisibility(View.INVISIBLE);
+
             System.out.println("FRAGMENT DONDEESTAMOS: " + mViewPager.getCurrentItem());
 
         } else if (id == R.id.cerrar_sesion) {
@@ -1227,7 +1238,8 @@ public class MainActivity extends AppCompatActivity
             Intent nvo = new Intent(this, LoginActivity.class);
             this.startActivity(nvo);
 
-        } else if (id == R.id.nav_share) {
+      //  } else if (id == R.id.nav_share) {
+            //ESTE MENU ESTA OCULTO EN EL xml
 
         } else if (id == R.id.nav_send) {
 
@@ -1279,13 +1291,13 @@ public class MainActivity extends AppCompatActivity
             }
 
 
-            //  ft.add(R.id.FragConteiner, seg, "frag2");
+          //  ft.add(R.id.FragConteiner, seg, "frag2");
             // ft.add(R.id.FragConteiner, ter, "frag3");
             // ft.add(R.id.FragConteiner, cuar, "frag4");
 
-            //  ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            // ft.show(pri);
-            //  ft.commit();
+          //  ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+           // ft.show(pri);
+          //  ft.commit();
 
 
             return fragment;

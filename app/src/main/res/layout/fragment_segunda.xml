@@ -2540,7 +2540,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textView2150"
+                    android:id="@+id/textView2140"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"

@@ -111,6 +111,7 @@ public class primera extends android.support.v4.app.Fragment {
                 break;
         }
     }
+
     public void getEventosNULL(){  //(cant1 + "*" + "textView" + semana1 + tur + r);
         if (primeraZ != null && primeraZ.size()>0){
             System.out.println("PRIMERAZ !! ... tiene " + primeraZ.size());
@@ -134,6 +135,7 @@ public class primera extends android.support.v4.app.Fragment {
             System.out.println("......primera es NULL o IGUAL A CERO...");
         }
     }
+
     public void getEventosFULL(){  //(cant1 + "*" + "textView" + semana1 + tur + r);
         if (primeraX != null && primeraX.size()>0){
             System.out.println("PRIMERAXXX !! ... tiene " + primeraX.size());

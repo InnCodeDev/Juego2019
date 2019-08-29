@@ -22,11 +22,11 @@
 
     <item android:title="Comunicate">
         <menu>
-            <item
+        <!--         <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Compartir" />
-            <item
+        -->    <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Enviar Mensaje" />
