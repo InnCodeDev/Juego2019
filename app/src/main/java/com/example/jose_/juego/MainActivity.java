@@ -1242,6 +1242,9 @@ public class MainActivity extends AppCompatActivity
             //ESTE MENU ESTA OCULTO EN EL xml
 
         } else if (id == R.id.nav_send) {
+            PopUpMail popMail =  PopUpMail.newInstance(this, FB_user, FB_mail);
+            popMail.show(getFragmentManager(), "Contactenos");
+
 
         }
 

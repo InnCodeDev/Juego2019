@@ -1,0 +1,128 @@
+<!-- fragment_evento.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout1"
+    style="@style/Animation.AppCompat.Dialog"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:baselineAligned="false"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="40dp"
+    android:paddingTop="10dp"
+    android:paddingRight="40dp">
+
+    <TextView
+        android:id="@+id/lbl_titulo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:autoText="false"
+        android:padding="5dp"
+        android:text="CONTACTENOS"
+        android:textAlignment="center"
+        android:textStyle="normal|bold" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lbl_turno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="De:"
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lbl_dia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Para: "
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/l_btnesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="5dip"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/lbl_txtins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Mensaje"
+            android:textAlignment="viewStart"
+            android:textStyle="normal|bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:isScrollContainer="true"
+                android:keepScreenOn="true"
+                android:singleLine="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lbl_btnins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/textView63"
+                android:layout_width="73dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="#a1a0a0"
+                android:gravity="top|center_horizontal"
+                android:singleLine="true"
+                android:text="Enviar!"
+                android:textColor="#fefefe" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+
