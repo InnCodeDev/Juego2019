@@ -60,8 +60,8 @@ public class PopUpMail extends DialogFragment {
             @Override
             public void onClick(View view) {
                 try {
-            //        JSONPopUpMail jsonMial = new JSONPopUpMail((MainActivity) c,getArguments().getString("user"), getArguments().getString("userMail"), txtMsj.toString());
-            //        jsonMial.execute();
+                    JSONPopUpMail jsonMial = new JSONPopUpMail((MainActivity) c,getArguments().getString("user"), getArguments().getString("userMail"), txtMsj.toString());
+                    jsonMial.execute();
                     PopUpMail.this.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
