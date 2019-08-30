@@ -35,7 +35,7 @@ public class PopUpMail extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_Mail, container, true);
+        return inflater.inflate(R.layout.fragment_mail, container, true);
     }
 
     @Override
@@ -60,8 +60,8 @@ public class PopUpMail extends DialogFragment {
             @Override
             public void onClick(View view) {
                 try {
-                    JSONPopUpMail jsonMial = new JSONPopUpMail((MainActivity) c,getArguments().getString("user"), getArguments().getString("userMail"), txtMsj.toString());
-                    jsonMial.execute();
+            //        JSONPopUpMail jsonMial = new JSONPopUpMail((MainActivity) c,getArguments().getString("user"), getArguments().getString("userMail"), txtMsj.toString());
+            //        jsonMial.execute();
                     PopUpMail.this.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();

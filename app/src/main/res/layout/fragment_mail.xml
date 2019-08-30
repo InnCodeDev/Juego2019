@@ -11,14 +11,14 @@
     android:orientation="vertical"
     android:paddingLeft="40dp"
     android:paddingTop="10dp"
-    android:paddingRight="40dp">
+    android:paddingRight="40dp"
+    android:paddingBottom="15dp">
 
     <TextView
         android:id="@+id/lbl_titulo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:autoText="false"
         android:padding="5dp"
         android:text="CONTACTENOS"
         android:textAlignment="center"
@@ -80,7 +80,6 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="Mensaje"
-            android:textAlignment="viewStart"
             android:textStyle="normal|bold" />
 
         <LinearLayout
