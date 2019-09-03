@@ -1283,7 +1283,7 @@ public class MainActivity extends AppCompatActivity
                 case 1: fragment = seg; break;
                 case 2: fragment = ter; break;
                 case 3: fragment = cuar; break;
-                case 4: fragment = ubicFrag; break;
+              //  case 4: fragment = ubicFrag; break;
                 //default: fragment = pri; break;
                 /*
                 case 0: ft.show(pri); break;
@@ -1308,7 +1308,7 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public int getCount() {
-            return 5;
+            return 4;
         }
 
         @Override

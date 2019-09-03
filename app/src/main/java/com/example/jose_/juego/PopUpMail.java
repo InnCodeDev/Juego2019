@@ -50,17 +50,14 @@ public class PopUpMail extends DialogFragment {
 
         user.setText(getArguments().getString("user") + " - " + getArguments().getString("userMail") );
         para.setText("Admin - Circulo Futbol");
-       // ins.setText(getArguments().getString("insc"));
 
         getDialog().setTitle("INSCRIPCION A EVENTO!");
 
-        //Boton INDISTINTO
-        TextView btnTViewIndist = (TextView) view.findViewById(R.id.textView63);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    JSONPopUpMail jsonMial = new JSONPopUpMail((MainActivity) c,getArguments().getString("user"), getArguments().getString("userMail"), txtMsj.toString());
+                    JSONPopUpMail jsonMial = new JSONPopUpMail((MainActivity) c,getArguments().getString("user"), getArguments().getString("userMail"), txtMsj.getText().toString());
                     jsonMial.execute();
                     PopUpMail.this.dismiss();
                 } catch (Exception e) {

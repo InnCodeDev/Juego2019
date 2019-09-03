@@ -11,6 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.ads.mediation.AbstractAdViewAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +37,8 @@ public class primera extends android.support.v4.app.Fragment {
     boolean creado=false;
     Bundle bundle;
 
+    AdView mAdView;
+
     public primera () {
         cal2 = Calendar.getInstance();
         getDiaSemana();
@@ -47,6 +53,7 @@ public class primera extends android.support.v4.app.Fragment {
         System.out.println("1--- MINIMA FECHA: " + minDay + " ---- " + "MAX FECHA: " +  maxDay );
         cal2.add(Calendar.DAY_OF_WEEK,-5);
         bundle = new Bundle();
+
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +68,11 @@ public class primera extends android.support.v4.app.Fragment {
         }
         System.out.println("CREOOOOOOOOO VISTA 1 -- " ); //+ primera.size() + " -- " + primeraM.size());
         v = inflater.inflate(R.layout.fragment_primera, container, false);
+
+        mAdView = v.findViewById(R.id.adView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         return v;
     }
 

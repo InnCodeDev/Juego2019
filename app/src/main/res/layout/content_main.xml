@@ -79,8 +79,7 @@
             android:layout_height="match_parent"
             android:isScrollContainer="true"
             android:paddingBottom="5dp"
-            android:scrollbarAlwaysDrawHorizontalTrack="true" >
-        </android.support.v4.view.ViewPager>
+            android:scrollbarAlwaysDrawHorizontalTrack="true"></android.support.v4.view.ViewPager>
         <!-- app:layout_behavior="@string/appbar_scrolling_view_behavior"  -->
 
     </LinearLayout>

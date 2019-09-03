@@ -39,8 +39,6 @@
             android:name=".Disponibilidad"
             android:label="@string/title_activity_login" />
 
-
-
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_login"
@@ -50,6 +48,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5210550399898768~4967964499"/>
+
     </application>
 <!--    <meta-data
             android:name="com.google.android.version" />

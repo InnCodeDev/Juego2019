@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,6 +31,8 @@ public class segunda extends android.support.v4.app.Fragment {
     String maxDay;
     ArrayList segunda, segundaM, segundaZ, segundaX= new ArrayList();
     Bundle bundle;
+
+    AdView mAdView;
 
     public segunda () {
         cal3 = Calendar.getInstance();
@@ -57,6 +62,12 @@ public class segunda extends android.support.v4.app.Fragment {
         }
         System.out.println("CREOOOOOOOOO VISTA 2 -- " );
         View v = inflater.inflate(R.layout.fragment_segunda, container, false);
+
+
+        mAdView = v.findViewById(R.id.adView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         return v;
     }
 

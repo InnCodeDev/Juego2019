@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,6 +31,7 @@ public class tercera extends android.support.v4.app.Fragment {
     String maxDay;
     ArrayList tercera, terceraM, terceraZ, terceraX = new ArrayList();
     Bundle bundle;
+    AdView mAdView;
 
     public tercera () {
         cal4 = Calendar.getInstance();
@@ -60,6 +64,11 @@ public class tercera extends android.support.v4.app.Fragment {
             terceraX = bundle.getStringArrayList("d");
         }
         View v = inflater.inflate(R.layout.fragment_tercera, container, false);
+
+        mAdView = v.findViewById(R.id.adView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         return v;
     }
 

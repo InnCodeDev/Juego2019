@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,6 +31,8 @@ public class cuarta extends android.support.v4.app.Fragment {
     String maxDay;
     ArrayList cuarta, cuartaM, cuartaZ, cuartaX = new ArrayList();
     Bundle bundle;
+
+    AdView mAdView;
 
     public cuarta () {
         cal5 = Calendar.getInstance();
@@ -56,6 +61,11 @@ public class cuarta extends android.support.v4.app.Fragment {
             cuartaX = bundle.getStringArrayList("d");
         }
         View v = inflater.inflate(R.layout.fragment_cuarta, container, false);
+
+        mAdView = v.findViewById(R.id.adView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         return v;
     }
 

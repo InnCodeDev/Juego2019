@@ -1,8 +1,8 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/Framelayout"
     tools:context="com.example.jose_.juego.primera">
 
@@ -270,7 +270,7 @@
             <LinearLayout
                 android:id="@+id/linearlayout"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:baselineAligned="true"
                 android:gravity="top|fill_vertical"
@@ -3113,6 +3113,19 @@
 
                     </LinearLayout>
                 </TableRow>
+
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/adView2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/banner_ad_unit_id">
+                </com.google.android.gms.ads.AdView>
             </LinearLayout>
 
 

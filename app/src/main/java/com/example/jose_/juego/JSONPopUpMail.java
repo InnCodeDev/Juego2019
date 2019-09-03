@@ -54,7 +54,7 @@ public class JSONPopUpMail extends AsyncTask<String, String, String>  {
 
             String urlString = server.DBserver+"PopUpMail.php?user="+ usuario+"&userMail="+userMail+"&msjTxt=" + txtMsj;
 
-            urlString.replace(" ", "%20");
+            urlString.replace(" ",      "%20");
             URL url = new URL(urlString);
 
             conn = (HttpURLConnection) url.openConnection();
