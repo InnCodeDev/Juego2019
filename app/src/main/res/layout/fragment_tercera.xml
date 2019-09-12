@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-
         android:baselineAligned="true"
         android:gravity="center_vertical|fill_vertical"
         android:measureWithLargestChild="true"
@@ -276,7 +275,6 @@
         android:layout_marginBottom="0dp"
         android:baselineAligned="true"
         android:gravity="top|fill_vertical"
-        android:measureWithLargestChild="true"
         android:orientation="vertical"
         android:scrollbars="vertical">
         <!-- 08.00 a 09.00 -->
@@ -3116,7 +3114,8 @@
             android:layout_marginRight="5dp"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            ads:adSize="BANNER"
+            android:layout_marginBottom="10dp"
+            ads:adSize="SMART_BANNER"
             ads:adUnitId="@string/banner_ad_unit_id">
         </com.google.android.gms.ads.AdView>
 

@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -72,7 +73,7 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
             ServerID server = ServerID.getInstance();
 
             String parametros = "fecha="+Fecha+"&turn="+turno;
-            String urlString = server.DBserver+"cargarDetalleEvento.php?"+parametros; // + java.net.URLEncoder.encode(parametros, "UTF-8"); //Pasar la fecha a partir de cuando filtrar
+            String urlString = ServerID.DBserver +"cargarDetalleEvento.php?"+parametros; // + java.net.URLEncoder.encode(parametros, "UTF-8"); //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
             URL url = new URL(urlString);
@@ -89,9 +90,9 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
         try{
             if (responseCode == HttpsURLConnection.HTTP_OK) {
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(isr,"UTF-8"),8);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(isr, StandardCharsets.UTF_8),8);
                 //BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder sb = new StringBuilder("");
+                StringBuilder sb = new StringBuilder();
                 String line = "";
                 while ((line = reader.readLine()) != null) {
                     System.out.println("TOSTRING: " + reader.readLine());
@@ -144,7 +145,7 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
     }
 
     public  interface Callback {
-        public void onComplete(String myData);
+        void onComplete(String myData);
     }
     @Override
     protected void onPostExecute(String result) {

@@ -1,10 +1,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/Framelayout"
-    tools:context="com.example.jose_.juego.primera">
+    tools:context="com.example.jose_.juego.primera"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/Framelayout">
 
 
     <LinearLayout
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
-        android:gravity="bottom|center_horizontal"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
 
@@ -265,20 +265,18 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/linearlayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
-                android:baselineAligned="true"
                 android:gravity="top|fill_vertical"
-                android:measureWithLargestChild="true"
                 android:orientation="vertical"
                 android:scrollbars="vertical">
 
-                <!-- 08.00 a 09.00 -->
+          <!-- 08.00 a 09.00 -->
                 <TableRow
                     android:id="@+id/tableRow3"
                     android:layout_width="fill_parent"
@@ -3117,13 +3115,13 @@
                 <com.google.android.gms.ads.AdView
                     android:id="@+id/adView2"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_height="52dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
-                    ads:adSize="BANNER"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+                    ads:adSize="SMART_BANNER"
                     ads:adUnitId="@string/banner_ad_unit_id">
                 </com.google.android.gms.ads.AdView>
             </LinearLayout>

@@ -53,10 +53,10 @@ public class PopUpEventoBorrarse extends DialogFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView turno = (TextView) view.findViewById(R.id.textView32);
-        TextView dia = (TextView) view.findViewById(R.id.textView42);
-        TextView insF5 = (TextView) view.findViewById(R.id.textView52);
-        TextView insF7 = (TextView) view.findViewById(R.id.textView62);
+        TextView turno = view.findViewById(R.id.textView32);
+        TextView dia = view.findViewById(R.id.textView42);
+        TextView insF5 = view.findViewById(R.id.textView52);
+        TextView insF7 = view.findViewById(R.id.textView62);
 
         turno.setText(getArguments().getString("turn"));
         dia.setText(getArguments().getString("di"));
@@ -68,7 +68,7 @@ public class PopUpEventoBorrarse extends DialogFragment {
 
         getDialog().setTitle("BORRAR PARTICIPACION");
 
-        TextView btnTView = (TextView) view.findViewById(R.id.textView632);
+        TextView btnTView = view.findViewById(R.id.textView632);
 
         btnTView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,8 +85,8 @@ public class PopUpEventoBorrarse extends DialogFragment {
         });
 
         //Asigna evento Click de VerParticipantes
-        sc_participantes2 = (TextView) view.findViewById(R.id.sc_participantes2);
-        btn = (TextView) view.findViewById(R.id.lbl_participantes2);
+        sc_participantes2 = view.findViewById(R.id.sc_participantes2);
+        btn = view.findViewById(R.id.lbl_participantes2);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -32,6 +32,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
@@ -49,13 +53,18 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5210550399898768~4967964499"/>
+
 
     </application>
-<!--    <meta-data
+<!--    "com.google.android.gms.ads.APPLICATION_ID"
+"
+        <meta-data
             android:name="com.google.android.version" />
             android:value="978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com" />
+
+
+
+            Nueva: APP ID   ca-app-pub-5210550399898768~1294067508
+                    BANNER: ca-app-pub-5210550399898768/9008712474
 -->
 </manifest>

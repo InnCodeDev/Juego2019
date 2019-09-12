@@ -1,28 +1,23 @@
 package com.example.jose_.juego;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.ads.mediation.AbstractAdViewAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
-
-//import android.support.v4.app.Fragment;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,6 +63,7 @@ public class primera extends android.support.v4.app.Fragment {
         }
         System.out.println("CREOOOOOOOOO VISTA 1 -- " ); //+ primera.size() + " -- " + primeraM.size());
         v = inflater.inflate(R.layout.fragment_primera, container, false);
+
 
         mAdView = v.findViewById(R.id.adView2);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -134,11 +130,11 @@ public class primera extends android.support.v4.app.Fragment {
                 if (txt.length()>1){
                     String cant = txt.substring(0,txt.indexOf("*"));
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
-                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    String txF = txt.substring(txt.indexOf("*")+1);
                     //  System.out.println("PRI1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
-                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    TextView ta = this.getActivity().findViewById(resID); // getView().findViewById(resID);
                     ta.setBackgroundColor(Color.LTGRAY);
                     ta.setText("");
                 }
@@ -158,11 +154,11 @@ public class primera extends android.support.v4.app.Fragment {
                 if (txt.length()>1){
                     String cant = txt.substring(0,txt.indexOf("*"));
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
-                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    String txF = txt.substring(txt.indexOf("*")+1);
                     //  System.out.println("PRI1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
-                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    TextView ta = this.getActivity().findViewById(resID); // getView().findViewById(resID);
                     //ta.setBackgroundColor(Color.rgb(255,68,68) );
                    // ta.setTextColor(Color.rgb(255,68,68)); //Color.RED);
                     ta.setTextColor(Color.RED);
@@ -184,11 +180,11 @@ public class primera extends android.support.v4.app.Fragment {
                     String cant = txt.substring(0,txt.indexOf("*"));
                   //  System.out.println("STRIIIIIIIIIIIING " + txt + " - " + cant);
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
-                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    String txF = txt.substring(txt.indexOf("*")+1);
                 //    System.out.println("PRI1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
-                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    TextView ta = this.getActivity().findViewById(resID); // getView().findViewById(resID);
                     ta.setText(cant);
                 }
             }
@@ -207,10 +203,10 @@ public class primera extends android.support.v4.app.Fragment {
                 String txt = (String) I.next(); //2*textView10728
                 if (txt.length()>1){
                //         String cant = txt.substring(0,txt.indexOf("*"));
-                    String txF = txt.substring(txt.indexOf("*")+1,txt.length());
+                    String txF = txt.substring(txt.indexOf("*")+1);
 
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
-                    TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
+                    TextView ta = this.getActivity().findViewById(resID); //view.findViewById(resID);
                     // ta.setText(cant);
                 //    System.out.println("PrimeraM: " + txt + " -- " + txF );
                     ta.setBackgroundColor(Color.GREEN);
@@ -226,12 +222,12 @@ public class primera extends android.support.v4.app.Fragment {
         for (int i=1;i<17; i++){
             for (int j=1;j<7;j++){
                 if (i<10){
-                    S = "0"+String.valueOf(i);
+                    S = "0"+ i;
                 }else{
                     S = String.valueOf(i);
                 }
                 int resID = getResources().getIdentifier("textView1"+S+j, "id", getActivity().getPackageName());
-                TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
+                TextView ta = this.getActivity().findViewById(resID); //view.findViewById(resID);
                 ta.setText("-");
                 ta.setBackgroundColor(Color.TRANSPARENT);
             }
@@ -247,23 +243,23 @@ public class primera extends android.support.v4.app.Fragment {
         //  getEventosSemana();
         //  getEventosUsuario();
 
-        TextView d1 = (TextView) view.findViewById(R.id.textView1001);
+        TextView d1 = view.findViewById(R.id.textView1001);
         cal2.add(Calendar.DAY_OF_WEEK,0);
         d1.setText(String.valueOf(cal2.get(Calendar.DAY_OF_MONTH )));
 
-        TextView d2 = (TextView) view.findViewById(R.id.textView1002);
+        TextView d2 = view.findViewById(R.id.textView1002);
         cal2.add(Calendar.DAY_OF_WEEK,1);
         d2.setText(String.valueOf(cal2.get(Calendar.DAY_OF_MONTH )));
-        TextView d3 = (TextView) view.findViewById(R.id.textView1003);
+        TextView d3 = view.findViewById(R.id.textView1003);
         cal2.add(Calendar.DAY_OF_WEEK,1);
         d3.setText(String.valueOf(cal2.get(Calendar.DAY_OF_MONTH )));
-        TextView d4 = (TextView) view.findViewById(R.id.textView1004);
+        TextView d4 = view.findViewById(R.id.textView1004);
         cal2.add(Calendar.DAY_OF_WEEK,1);
         d4.setText(String.valueOf(cal2.get(Calendar.DAY_OF_MONTH )));
-        TextView d5 = (TextView) view.findViewById(R.id.textView1005);
+        TextView d5 = view.findViewById(R.id.textView1005);
         cal2.add(Calendar.DAY_OF_WEEK,1);
         d5.setText(String.valueOf(cal2.get(Calendar.DAY_OF_MONTH )));
-        TextView d6 = (TextView) view.findViewById(R.id.textView1006);
+        TextView d6 = view.findViewById(R.id.textView1006);
         cal2.add(Calendar.DAY_OF_WEEK,1);
         d6.setText(String.valueOf(cal2.get(Calendar.DAY_OF_MONTH )));
 

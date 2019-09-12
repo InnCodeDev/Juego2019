@@ -52,7 +52,7 @@ public class JSONPopUpMail extends AsyncTask<String, String, String>  {
 
             ServerID server = ServerID.getInstance();
 
-            String urlString = server.DBserver+"PopUpMail.php?user="+ usuario+"&userMail="+userMail+"&msjTxt=" + txtMsj;
+            String urlString = ServerID.DBserver +"PopUpMail.php?user="+ usuario+"&userMail="+userMail+"&msjTxt=" + txtMsj;
 
             urlString.replace(" ",      "%20");
             URL url = new URL(urlString);
@@ -128,7 +128,7 @@ public class JSONPopUpMail extends AsyncTask<String, String, String>  {
     }
 
     public  interface Callback {
-        public void onComplete(String myData);
+        void onComplete(String myData);
     }
     @Override
     protected void onPostExecute(String result) {

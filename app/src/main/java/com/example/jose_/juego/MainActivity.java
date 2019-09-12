@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity
 
         semana = btn.substring(btn.indexOf("w") + 1, btn.indexOf("w") + 2);//1
         NroTurno = btn.substring(btn.length() - 3, btn.length() - 1);//07
-        dia = btn.substring(btn.length() - 1, btn.length());//3
+        dia = btn.substring(btn.length() - 1);//3
 
 
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
@@ -418,9 +418,9 @@ public class MainActivity extends AppCompatActivity
         while (I.hasNext()) {
             String t = (String) I.next(); //5/12  - 7/30
             if (t.substring(0, t.indexOf("/")).compareTo("5") == 0){
-                CantF5 = Integer.valueOf(t.substring(t.indexOf("/")+1, t.length()));
+                CantF5 = Integer.valueOf(t.substring(t.indexOf("/")+1));
             }else
-                CantF7 = Integer.valueOf(t.substring(t.indexOf("/")+1, t.length()));
+                CantF7 = Integer.valueOf(t.substring(t.indexOf("/")+1));
         }
         System.out.println(ar.size() + "...........CANCHA 5: " + CantF5 + " -- Cancha 7: " + CantF7);
 
@@ -455,7 +455,7 @@ public class MainActivity extends AppCompatActivity
             String t = (String) I.next();   //24-06-2019*6*0
             fecha = t.substring(0, t.indexOf("*"));
             turno = t.substring(t.indexOf("*") + 1, t.lastIndexOf("*"));
-            cant = t.substring(t.lastIndexOf("*") + 1, t.length()); //t.indexOf("/"));
+            cant = t.substring(t.lastIndexOf("*") + 1); //t.indexOf("/"));
             //   cancha = t.substring(t.indexOf("/")+1, t.length());
 
             if (turno.length() == 1) {
@@ -466,7 +466,7 @@ public class MainActivity extends AppCompatActivity
             if (dia.length() == 1)
                 dia = "0" + dia;
             int mes = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 1, fecha.indexOf("-") + 3));
-            int ano = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 4, fecha.length()));
+            int ano = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 4));
             System.out.println("------ " + t + " --- " + dia + " /-/ " + mes + " /-/ " + ano);  //t = 12*15-11-2018*9
 
             SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
@@ -521,7 +521,7 @@ public class MainActivity extends AppCompatActivity
             String cant1 = txt.substring(0, txt.indexOf("*"));
             String tur = txt.substring(txt.indexOf("-") + 1, txt.indexOf("/"));
             String semana1 = txt.substring(txt.indexOf("w") + 1, txt.indexOf("w") + 2);
-            String fech = txt.substring(txt.indexOf("/") + 1, txt.length()); //Fecha real del evento
+            String fech = txt.substring(txt.indexOf("/") + 1); //Fecha real del evento
 
             long r = 0;
             try {
@@ -530,7 +530,7 @@ public class MainActivity extends AppCompatActivity
 
                 date1.setDate(Integer.valueOf(fech.substring(0, 2)));
                 date1.setMonth(Integer.valueOf(fech.substring(3, 5)) - 1);
-                date1.setYear(Integer.valueOf(fech.substring(6, fech.length())) - 1900);
+                date1.setYear(Integer.valueOf(fech.substring(6)) - 1900);
                 date1.setHours(0);
                 date1.setMinutes(0);
                 date1.setSeconds(0);
@@ -631,7 +631,7 @@ public class MainActivity extends AppCompatActivity
          //   System.out.println("JJJJJJJJ... " + t);
             fecha = t.substring(0, t.indexOf("*"));
             turno = t.substring(t.indexOf("*") + 1, t.lastIndexOf("*"));
-            cant = t.substring(t.lastIndexOf("*") + 1, t.length()); //t.indexOf("/"));
+            cant = t.substring(t.lastIndexOf("*") + 1); //t.indexOf("/"));
             //   cancha = t.substring(t.indexOf("/")+1, t.length());
 
             if (turno.length() == 1) {
@@ -642,7 +642,7 @@ public class MainActivity extends AppCompatActivity
             if (dia.length() == 1)
                 dia = "0" + dia;
             int mes = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 1, fecha.indexOf("-") + 3));
-            int ano = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 4, fecha.length()));
+            int ano = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 4));
             //System.out.println("------ " + t + " --- " + dia + " /-/ " + mes + " /-/ " + ano);  //t = 12*15-11-2018*9
 
             SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
@@ -702,7 +702,7 @@ public class MainActivity extends AppCompatActivity
             String cant1 = txt.substring(0, txt.indexOf("*"));
             String tur = txt.substring(txt.indexOf("-") + 1, txt.indexOf("/"));
             String semana1 = txt.substring(txt.indexOf("w") + 1, txt.indexOf("w") + 2);
-            String fech = txt.substring(txt.indexOf("/") + 1, txt.length()); //Fecha real del evento
+            String fech = txt.substring(txt.indexOf("/") + 1); //Fecha real del evento
 
             long r = 0;
             try {
@@ -711,7 +711,7 @@ public class MainActivity extends AppCompatActivity
 
                 date1.setDate(Integer.valueOf(fech.substring(0, 2)));
                 date1.setMonth(Integer.valueOf(fech.substring(3, 5)) - 1);
-                date1.setYear(Integer.valueOf(fech.substring(6, fech.length())) - 1900);
+                date1.setYear(Integer.valueOf(fech.substring(6)) - 1900);
                 date1.setHours(0);
                 date1.setMinutes(0);
                 date1.setSeconds(0);
@@ -814,7 +814,7 @@ public class MainActivity extends AppCompatActivity
                 String t = (String) I.next();  //7*28-09-2018 turno*fecha
   //              System.out.println("BBBBBBBBB: " + t); //2*02-11-2018*7
                 String turno = t.substring(0, t.indexOf("*"));
-                fecha = t.substring(t.indexOf("*") + 1, t.length());
+                fecha = t.substring(t.indexOf("*") + 1);
 //            int cant = Integer.valueOf(t.substring(t.lastIndexOf("*")+1),t.length());
 
                 String dia = (fecha.substring(0, fecha.indexOf("-")));
@@ -826,7 +826,7 @@ public class MainActivity extends AppCompatActivity
                 if (dia.length() == 1)
                     dia = "0" + dia;
                 int mes = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 1, fecha.lastIndexOf("-")));
-                int ano = Integer.valueOf(fecha.substring(fecha.lastIndexOf("-") + 1, fecha.length()));
+                int ano = Integer.valueOf(fecha.substring(fecha.lastIndexOf("-") + 1));
                 //      System.out.println("------ " + t + " --- " + dia + " /-/ " + mes + " /-/ " + ano);
 
                 Date da = new Date();
@@ -874,14 +874,14 @@ public class MainActivity extends AppCompatActivity
                 String txt = (String) I2.next(); //  textView1-02/13/11/2018
                 String tur = txt.substring(txt.indexOf("-") + 1, txt.indexOf("/"));
                 String semana1 = txt.substring(txt.indexOf("w") + 1, txt.indexOf("w") + 2);
-                String fech = txt.substring(txt.indexOf("/") + 1, txt.length()); //Fecha real del evento
+                String fech = txt.substring(txt.indexOf("/") + 1); //Fecha real del evento
 
                 long r = 0;
                 try {
                     Date date1 = new Date();
                     date1.setDate(Integer.valueOf(fech.substring(0, 2)));
                     date1.setMonth(Integer.valueOf(fech.substring(3, 5)) - 1);
-                    date1.setYear(Integer.valueOf(fech.substring(6, fech.length())) - 1900);
+                    date1.setYear(Integer.valueOf(fech.substring(6)) - 1900);
                     date1.setHours(0);
                     date1.setMinutes(0);
                     date1.setSeconds(0);
@@ -937,7 +937,7 @@ public class MainActivity extends AppCompatActivity
                     System.out.println("eventosUsuario  TXF: " + txF);
 
                     resID = getResources().getIdentifier(txF, "id", this.getPackageName());
-                    TextView ta = (TextView) this.findViewById(resID);
+                    TextView ta = this.findViewById(resID);
                     // ta.setText(cant1);
 //                ta.setBackgroundColor(Color.GREEN);
 
@@ -970,7 +970,7 @@ public class MainActivity extends AppCompatActivity
             System.out.println("AAAAAAAAAA... " + t);
             turno = t.substring(0, t.indexOf("*"));
             fecha = t.substring(t.indexOf("*") + 1, t.lastIndexOf("*"));
-            cant = t.substring(t.lastIndexOf("*") + 1, t.length()); //t.indexOf("/"));
+            cant = t.substring(t.lastIndexOf("*") + 1); //t.indexOf("/"));
          //   cancha = t.substring(t.indexOf("/")+1, t.length());
 
             if (turno.length() == 1) {
@@ -981,7 +981,7 @@ public class MainActivity extends AppCompatActivity
             if (dia.length() == 1)
                 dia = "0" + dia;
             int mes = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 1, fecha.indexOf("-") + 3));
-            int ano = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 4, fecha.length()));
+            int ano = Integer.valueOf(fecha.substring(fecha.indexOf("-") + 4));
             //System.out.println("------ " + t + " --- " + dia + " /-/ " + mes + " /-/ " + ano);  //t = 12*15-11-2018*9
 
             SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
@@ -1041,7 +1041,7 @@ public class MainActivity extends AppCompatActivity
             String cant1 = txt.substring(0, txt.indexOf("*"));
             String tur = txt.substring(txt.indexOf("-") + 1, txt.indexOf("/"));
             String semana1 = txt.substring(txt.indexOf("w") + 1, txt.indexOf("w") + 2);
-            String fech = txt.substring(txt.indexOf("/") + 1, txt.length()); //Fecha real del evento
+            String fech = txt.substring(txt.indexOf("/") + 1); //Fecha real del evento
 
             long r = 0;
             try {
@@ -1050,7 +1050,7 @@ public class MainActivity extends AppCompatActivity
 
                 date1.setDate(Integer.valueOf(fech.substring(0, 2)));
                 date1.setMonth(Integer.valueOf(fech.substring(3, 5)) - 1);
-                date1.setYear(Integer.valueOf(fech.substring(6, fech.length())) - 1900);
+                date1.setYear(Integer.valueOf(fech.substring(6)) - 1900);
                 date1.setHours(0);
                 date1.setMinutes(0);
                 date1.setSeconds(0);

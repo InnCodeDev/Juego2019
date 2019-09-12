@@ -52,12 +52,12 @@ public class PopUpEvento extends DialogFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView turno = (TextView) view.findViewById(R.id.textView3);
-        TextView dia = (TextView) view.findViewById(R.id.textView4);
-        final TextView sc = (TextView) view.findViewById(R.id.sc_particip);
-        TextView insF5 = (TextView) view.findViewById(R.id.textView5);
-        TextView insF7 = (TextView) view.findViewById(R.id.textView6);
-        sc_particip = (TextView) view.findViewById(R.id.sc_particip);
+        TextView turno = view.findViewById(R.id.textView3);
+        TextView dia = view.findViewById(R.id.textView4);
+        final TextView sc = view.findViewById(R.id.sc_particip);
+        TextView insF5 = view.findViewById(R.id.textView5);
+        TextView insF7 = view.findViewById(R.id.textView6);
+        sc_particip = view.findViewById(R.id.sc_particip);
         btn = view.findViewById(R.id.lbl_participantes);
 
         turno.setText(getArguments().getString("turn"));
@@ -69,7 +69,7 @@ public class PopUpEvento extends DialogFragment {
         getDialog().setTitle("INSCRIPCION A EVENTO!");
 
         //Boton cancha 5
-        TextView btnTView5 = (TextView) view.findViewById(R.id.textView61);
+        TextView btnTView5 = view.findViewById(R.id.textView61);
         btnTView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +84,7 @@ public class PopUpEvento extends DialogFragment {
             }
         });
         //Boton cancha 7
-        TextView btnTView7 = (TextView) view.findViewById(R.id.textView62);
+        TextView btnTView7 = view.findViewById(R.id.textView62);
         btnTView7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,12 +100,12 @@ public class PopUpEvento extends DialogFragment {
         });
 
         //Boton INDISTINTO
-        TextView btnTViewIndist = (TextView) view.findViewById(R.id.textView63);
+        TextView btnTViewIndist = view.findViewById(R.id.textView63);
         btnTViewIndist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView btnC5 = (TextView) view.findViewById(R.id.textView5);
-                TextView btnC7 = (TextView) view.findViewById(R.id.textView6);
+                TextView btnC5 = view.findViewById(R.id.textView5);
+                TextView btnC7 = view.findViewById(R.id.textView6);
                 int c5 = Integer.valueOf(getArguments().getString("cantF5")); //Integer.valueOf(btnC5.getText().toString());
                 int c7 = Integer.valueOf(getArguments().getString("cantF7")); // Integer.valueOf(btnC7.getText().toString());
                 int cancha = 5; //por defecto en caso que sean igual cantidad

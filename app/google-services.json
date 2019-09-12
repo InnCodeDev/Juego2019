@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "978743906549-od0a4npfhpokhqdlu808grkske4979ep.apps.googleusercontent.com",
+          "client_id": "978743906549-g6g8l694pksmu05l0pnnpittd8pcr954.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.jose_.juego",
-            "certificate_hash": "69bfbe8038c1afa2c8945e9e4d321d1df3fc5af9"
+            "certificate_hash": "96afec4169d4da853a45deb44b26ea902f55d7ff"
           }
         },
         {
@@ -28,6 +28,14 @@
           "android_info": {
             "package_name": "com.example.jose_.juego",
             "certificate_hash": "38cbc197162df8c2b4b3423258b0cc33a663212c"
+          }
+        },
+        {
+          "client_id": "978743906549-od0a4npfhpokhqdlu808grkske4979ep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jose_.juego",
+            "certificate_hash": "69bfbe8038c1afa2c8945e9e4d321d1df3fc5af9"
           }
         },
         {
@@ -41,22 +49,16 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "978743906549-pah03t5sv8a7iffsv7bfatqcjavecuau.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-5210550399898768~4967964499"
     }
   ],
   "configuration_version": "1"

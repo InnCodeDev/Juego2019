@@ -128,11 +128,11 @@ public class segunda extends android.support.v4.app.Fragment {
                 if (txt.length()>1){
                     String cant = txt.substring(0,txt.indexOf("*"));
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
-                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    String txF = txt.substring(txt.indexOf("*")+1);
                     //  System.out.println("PRI1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
-                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    TextView ta = this.getActivity().findViewById(resID); // getView().findViewById(resID);
                     //ta.setBackgroundColor(Color.rgb(255,68,68) );
                     ta.setTextColor(Color.RED);
                 }
@@ -152,11 +152,11 @@ public class segunda extends android.support.v4.app.Fragment {
                 if (txt.length()>1){
                     String cant = txt.substring(0,txt.indexOf("*"));
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
-                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    String txF = txt.substring(txt.indexOf("*")+1);
                   //  System.out.println("PRI1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
-                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    TextView ta = this.getActivity().findViewById(resID); // getView().findViewById(resID);
                     ta.setBackgroundColor(Color.LTGRAY);
                     ta.setText("");
                 }
@@ -176,11 +176,11 @@ public class segunda extends android.support.v4.app.Fragment {
                 if (txt.length()>1){
                     String cant = txt.substring(0,txt.indexOf("*"));
                     //        int r = (Integer.valueOf(txt.substring(txt.length()-2,txt.length())) - Integer.valueOf(minDay.substring(0,2)))+1;
-                    String txF = txt.substring(txt.indexOf("*")+1, txt.length());
+                    String txF = txt.substring(txt.indexOf("*")+1);
                   //  System.out.println("SEG1: " + txt + " -- " + txF);
 
                     resID = getResources().getIdentifier(txF, "id",  getActivity().getPackageName());
-                    TextView ta = (TextView) this.getActivity().findViewById(resID); // getView().findViewById(resID);
+                    TextView ta = this.getActivity().findViewById(resID); // getView().findViewById(resID);
                     ta.setText(cant);
                 }
             }
@@ -201,10 +201,10 @@ public class segunda extends android.support.v4.app.Fragment {
 //                        String cant = txt.substring(0,txt.indexOf("*"));
 
                     //         String cant = txt.substring(0,txt.indexOf("*"));
-                    String txF = txt.substring(txt.indexOf("*")+1,txt.length());
+                    String txF = txt.substring(txt.indexOf("*")+1);
 
                     resID = getResources().getIdentifier(txF, "id", getActivity().getPackageName());
-                    TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
+                    TextView ta = this.getActivity().findViewById(resID); //view.findViewById(resID);
 
 //                     ta.setText(cant);
                  //   System.out.println("segundaM: " + txt + " -- " + txF );
@@ -223,13 +223,13 @@ public class segunda extends android.support.v4.app.Fragment {
         for (int i=1;i<17; i++){
             for (int j=1;j<7;j++){
                 if (i<10){
-                    S = "0"+String.valueOf(i);
+                    S = "0"+ i;
                 }else{
                     S = String.valueOf(i);
                 }
 
                 int resID = getResources().getIdentifier("textView2"+S+j, "id", getActivity().getPackageName());
-                TextView ta = (TextView) this.getActivity().findViewById(resID); //view.findViewById(resID);
+                TextView ta = this.getActivity().findViewById(resID); //view.findViewById(resID);
                 ta.setText("-");
                 ta.setBackgroundColor(Color.TRANSPARENT);
             }
@@ -243,26 +243,26 @@ public class segunda extends android.support.v4.app.Fragment {
 
         getDiaSemana();
 
-        TextView d1 = (TextView) view.findViewById(R.id.textView2001);
+        TextView d1 = view.findViewById(R.id.textView2001);
         cal3.add(Calendar.DAY_OF_WEEK,7);
         d1.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
 
         //     SimpleDateFormat formateador = new SimpleDateFormat("dd/mm/yyyy");
         //     minDay = formateador.format(cal3); //cal2.getTime();
 
-        TextView d2 = (TextView) view.findViewById(R.id.textView2002);
+        TextView d2 = view.findViewById(R.id.textView2002);
         cal3.add(Calendar.DAY_OF_WEEK,1);
         d2.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
-        TextView d3 = (TextView) view.findViewById(R.id.textView2003);
+        TextView d3 = view.findViewById(R.id.textView2003);
         cal3.add(Calendar.DAY_OF_WEEK,1);
         d3.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
-        TextView d4 = (TextView) view.findViewById(R.id.textView2004);
+        TextView d4 = view.findViewById(R.id.textView2004);
         cal3.add(Calendar.DAY_OF_WEEK,1);
         d4.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
-        TextView d5 = (TextView) view.findViewById(R.id.textView2005);
+        TextView d5 = view.findViewById(R.id.textView2005);
         cal3.add(Calendar.DAY_OF_WEEK,1);
         d5.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
-        TextView d6 = (TextView) view.findViewById(R.id.textView2006);
+        TextView d6 = view.findViewById(R.id.textView2006);
         cal3.add(Calendar.DAY_OF_WEEK,1);
         d6.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH )));
 

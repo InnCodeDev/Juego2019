@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -67,7 +68,7 @@ public class JSONGetDisponibilidad extends AsyncTask<String, String, String> {
 
                 ServerID server = ServerID.getInstance();
 
-                String urlString = server.DBserver+"getDisponibilidad.php?user="+FB_user;
+                String urlString = ServerID.DBserver +"getDisponibilidad.php?user="+FB_user;
 
                 urlString.replace(" ", "%20");
                 URL url = new URL(urlString);
@@ -86,9 +87,9 @@ public class JSONGetDisponibilidad extends AsyncTask<String, String, String> {
             try{
                 if (responseCode == HttpsURLConnection.HTTP_OK) {
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(isr,"UTF-8"),8);
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(isr, StandardCharsets.UTF_8),8);
                     //BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder sb = new StringBuilder("");
+                    StringBuilder sb = new StringBuilder();
                     String line = "";
                     while ((line = reader.readLine()) != null) {
                         System.out.println("TOSTRING: " + reader.readLine());
@@ -135,7 +136,7 @@ public class JSONGetDisponibilidad extends AsyncTask<String, String, String> {
         }
 
         public  interface Callback {
-            public void onComplete(String myData);
+            void onComplete(String myData);
         }
         @Override
         protected void onPostExecute(String result) {

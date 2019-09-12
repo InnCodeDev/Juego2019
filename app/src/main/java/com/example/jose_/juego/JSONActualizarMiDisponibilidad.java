@@ -60,7 +60,7 @@ public class JSONActualizarMiDisponibilidad extends AsyncTask<String, String, St
 
             String parametros = "user=Jose&disponibilidad="+dispo;
 
-            String urlString = server.DBserver+"actualizarMiDisponibilidad.php?user="+FB_user+"&disponibilidad="+dispo;
+            String urlString = ServerID.DBserver +"actualizarMiDisponibilidad.php?user="+FB_user+"&disponibilidad="+dispo;
 
 
             urlString.replace(" ", "%20");
@@ -130,7 +130,7 @@ public class JSONActualizarMiDisponibilidad extends AsyncTask<String, String, St
     }
 
     public  interface Callback {
-        public void onComplete(String myData);
+        void onComplete(String myData);
     }
     @Override
     protected void onPostExecute(String result) {

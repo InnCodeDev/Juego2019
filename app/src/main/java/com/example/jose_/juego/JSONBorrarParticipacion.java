@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -54,7 +55,7 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
             System.out.println("POPUP: Fecha: " + fecha + " -User: " + usuario + " - turno: " + turno);
             String d = fecha.substring(0,fecha.indexOf("/"));
             String m = fecha.substring(fecha.indexOf("/")+1, fecha.lastIndexOf("/"));
-            String a = fecha.substring(fecha.lastIndexOf("/")+1, fecha.length());
+            String a = fecha.substring(fecha.lastIndexOf("/")+1);
             if (d.length()==1)
                 d = "0"+d;
             String fech = a+"/"+m+"/"+d;
@@ -62,7 +63,7 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
             System.out.println("FECHA PHP: " + fech);
 
             String parametros = "fecha="+ fech+"&user="+usuario+"&turno=" + turno;
-            String urlString = server.DBserver+"borrarParticipacion.php?"+parametros;
+            String urlString = ServerID.DBserver +"borrarParticipacion.php?"+parametros;
             //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
@@ -83,9 +84,9 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
         try{
             if (responseCode == HttpsURLConnection.HTTP_OK) {
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(isr,"UTF-8"),8);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(isr, StandardCharsets.UTF_8),8);
                 //BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder sb = new StringBuilder("");
+                StringBuilder sb = new StringBuilder();
                 String line = "";
                 while ((line = reader.readLine()) != null) {
                     System.out.println("borrarParticipacion TOSTRING: " + reader.readLine());
@@ -137,7 +138,7 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
     }
 
     public  interface Callback {
-        public void onComplete(String myData);
+        void onComplete(String myData);
     }
     @Override
     protected void onPostExecute(String result) {

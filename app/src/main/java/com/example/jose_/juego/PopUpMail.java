@@ -42,9 +42,9 @@ public class PopUpMail extends DialogFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView user = (TextView) view.findViewById(R.id.textView3);
-        TextView para = (TextView) view.findViewById(R.id.textView4);
-        final EditText txtMsj = (EditText) view.findViewById(R.id.editText);
+        TextView user = view.findViewById(R.id.textView3);
+        TextView para = view.findViewById(R.id.textView4);
+        final EditText txtMsj = view.findViewById(R.id.editText);
 
         btn = view.findViewById(R.id.textView63);
 

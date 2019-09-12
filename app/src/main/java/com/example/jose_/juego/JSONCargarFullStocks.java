@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -65,12 +66,12 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
 
             String d = minFecha.substring(0,minFecha.indexOf("/"));
             String m = minFecha.substring(minFecha.indexOf("/")+1, minFecha.lastIndexOf("/"));
-            String a = minFecha.substring(minFecha.lastIndexOf("/")+1, minFecha.length());
+            String a = minFecha.substring(minFecha.lastIndexOf("/")+1);
             if (d.length()==1)
                 d = "0"+d;
             String fech = a+"-"+m+"-"+d;
 
-            String urlString = server.DBserver+"cargarFullStock.php?fecha=" + fech; //+java.net.URLEncoder.encode(parametros); //Pasar la fecha a partir de cuando filtrar
+            String urlString = ServerID.DBserver +"cargarFullStock.php?fecha=" + fech; //+java.net.URLEncoder.encode(parametros); //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
             URL url = new URL(urlString);
@@ -88,9 +89,9 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
         try{
             if (responseCode == HttpsURLConnection.HTTP_OK) {
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(isr,"UTF-8"),8);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(isr, StandardCharsets.UTF_8),8);
                 //BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder sb = new StringBuilder("");
+                StringBuilder sb = new StringBuilder();
                 String line = "";
                 while ((line = reader.readLine()) != null) {
                     System.out.println("TOSTRING FULLSTOCK: " + reader.readLine());
@@ -144,7 +145,7 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
     }
 
     public  interface Callback {
-        public void onComplete(String myData);
+        void onComplete(String myData);
     }
     @Override
     protected void onPostExecute(String result) {

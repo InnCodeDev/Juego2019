@@ -25,7 +25,7 @@ public class Disponibilidad extends AppCompatActivity {
         FB_user = a.getExtras().getString("user");
         FB_mail = a.getExtras().getString("mail");
 
-        Button button = (Button) findViewById(R.id.button1);
+        Button button = findViewById(R.id.button1);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ActualizarMiDisponibilidad();
@@ -53,12 +53,12 @@ public class Disponibilidad extends AppCompatActivity {
         while(I.hasNext()){
             String comb = (String) I.next();
             String turno= comb.substring(0,comb.lastIndexOf("-"));
-            String dia=comb.substring(comb.lastIndexOf("-")+1,comb.length());
+            String dia=comb.substring(comb.lastIndexOf("-")+1);
 
             CheckBox ck=null;
 
             int resID = getResources().getIdentifier( "checkBox"+ Integer.valueOf(turno)+""+Integer.valueOf(dia), "id", this.getPackageName());
-            ck = (CheckBox) findViewById(resID);
+            ck = findViewById(resID);
             ck.setChecked(true);
 //            System.out.println("DISPONIBILIDAD:  Dia " + Integer.valueOf(dia) + " - Turno: " + Integer.valueOf(turno));
         }
@@ -70,7 +70,7 @@ public class Disponibilidad extends AppCompatActivity {
         for(int i=1; i<17; i++){ //turno
             for(int j=1; j<7; j++){ //dia
                 int resID = getResources().getIdentifier("checkBox"+i+""+j, "id", this.getPackageName());
-                ck = (CheckBox) findViewById(resID);
+                ck = findViewById(resID);
                 if (ck.isChecked()){
 //                    System.out.println("ACT DISPONIBILIDAD: Turno: " + j + " -- Dia " + i );
                     disp=disp +i + "-" + j + "*";

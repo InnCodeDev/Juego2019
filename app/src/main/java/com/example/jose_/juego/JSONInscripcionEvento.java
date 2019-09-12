@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -58,7 +59,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
             System.out.println("POPUP: Fecha: " + fecha + " -User: " + usuario + " - turno: " + turno + " - cancha: " + cancha);
             String d = fecha.substring(0,fecha.indexOf("/"));
             String m = fecha.substring(fecha.indexOf("/")+1, fecha.lastIndexOf("/"));
-            String a = fecha.substring(fecha.lastIndexOf("/")+1, fecha.length());
+            String a = fecha.substring(fecha.lastIndexOf("/")+1);
             if (d.length()==1)
                 d = "0"+d;
             String fech = a+"/"+m+"/"+d;
@@ -66,7 +67,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
             System.out.println("FECHA PHP: " + fech);
 
             String parametros = "fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha;
-            String urlString = server.DBserver+"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha; // +java.net.URLEncoder.encode(parametros, "UTF-8");
+            String urlString = ServerID.DBserver +"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha; // +java.net.URLEncoder.encode(parametros, "UTF-8");
             //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
@@ -87,9 +88,9 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
         try{
             if (responseCode == HttpsURLConnection.HTTP_OK) {
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(isr,"UTF-8"),8);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(isr, StandardCharsets.UTF_8),8);
                 //BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder sb = new StringBuilder("");
+                StringBuilder sb = new StringBuilder();
                 String line = "";
                 while ((line = reader.readLine()) != null) {
                     System.out.println("TOSTRING: " + reader.readLine());
@@ -106,7 +107,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
 
         String s = "";
 
-        resultado = result.toString();
+        resultado = result;
         System.out.println("JSONInscripcionEvento : " + result);
 /*
         try {
@@ -144,7 +145,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
     }
 
     public  interface Callback {
-        public void onComplete(String myData);
+        void onComplete(String myData);
     }
     @Override
     protected void onPostExecute(String result) {
