@@ -64,7 +64,7 @@ public class primera extends android.support.v4.app.Fragment {
         System.out.println("CREOOOOOOOOO VISTA 1 -- " ); //+ primera.size() + " -- " + primeraM.size());
         v = inflater.inflate(R.layout.fragment_primera, container, false);
 
-
+        MobileAds.initialize(getActivity(), "ca-app-pub-5210550399898768/7402556140");
         mAdView = v.findViewById(R.id.adView2);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);

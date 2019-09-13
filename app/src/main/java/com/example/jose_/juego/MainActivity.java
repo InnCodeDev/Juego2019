@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.math.BigDecimal;
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
         minDay = formateador.format(cal2.getTime());
         System.out.println("MINIMO DIA: " + minDay);
+
+
 
         bundleP = new Bundle();
         bundleS = new Bundle();
