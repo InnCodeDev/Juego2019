@@ -30,6 +30,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -71,6 +73,8 @@ public class MainActivity extends AppCompatActivity
     UbicacionFragment ubicFrag;
     SectionsPagerAdapter mSectionsPagerAdapter;
 
+    AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +98,7 @@ public class MainActivity extends AppCompatActivity
         seg = new segunda();
         ter = new tercera();
         cuar = new cuarta();
+
         ubicFrag = new UbicacionFragment();
 
         toolbar = findViewById(R.id.toolbar);
@@ -124,7 +129,8 @@ public class MainActivity extends AppCompatActivity
         jsonCargar.execute();
 
 
-        ejecutar1erJSON();
+   //     ejecutar1erJSON();
+
 
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
@@ -64,13 +65,21 @@ public class primera extends android.support.v4.app.Fragment {
         System.out.println("CREOOOOOOOOO VISTA 1 -- " ); //+ primera.size() + " -- " + primeraM.size());
         v = inflater.inflate(R.layout.fragment_primera, container, false);
 
-        MobileAds.initialize(getActivity(), "ca-app-pub-5210550399898768/7402556140");
+        MobileAds.initialize(this.getContext(), this.getResources().getString(R.string.app_ad_unit_id));
         mAdView = v.findViewById(R.id.adView2);
         AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.setAdSize(AdSize.BANNER);
+        mAdView.setAdUnitId(this.getResources().getString(R.string.banner_ad_unit_id));
         mAdView.loadAd(adRequest);
+        //mAdView.setEnabled(true);
+        mAdView.setBackgroundColor(Color.BLACK);
 
+
+//        ads:adSize="BANNER"
+//        ads:adUnitId="@string/app_ad_unit_id"
         return v;
     }
+
 
     public void Refresh(){
         LimpiarTodo();
