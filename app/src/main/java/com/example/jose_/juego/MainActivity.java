@@ -1,6 +1,5 @@
 package com.example.jose_.juego;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,17 +24,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -64,7 +58,6 @@ public class MainActivity extends AppCompatActivity
     PopUpEvento popEvento;
     String minDay = "";
     Calendar cal2;
-    int publicidad;
 
     // FragmentPagerAdapter adapter;
     private ViewPager mViewPager;
@@ -78,8 +71,6 @@ public class MainActivity extends AppCompatActivity
     UbicacionFragment ubicFrag;
     SectionsPagerAdapter mSectionsPagerAdapter;
 
-    InterstitialAd mInterstitialAd;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +83,7 @@ public class MainActivity extends AppCompatActivity
         minDay = formateador.format(cal2.getTime());
         System.out.println("MINIMO DIA: " + minDay);
 
-        publicidad = 0;
+
 
         bundleP = new Bundle();
         bundleS = new Bundle();
@@ -103,7 +94,6 @@ public class MainActivity extends AppCompatActivity
         seg = new segunda();
         ter = new tercera();
         cuar = new cuarta();
-
         ubicFrag = new UbicacionFragment();
 
         toolbar = findViewById(R.id.toolbar);
@@ -134,8 +124,7 @@ public class MainActivity extends AppCompatActivity
         jsonCargar.execute();
 
 
-   //     ejecutar1erJSON();
-
+        ejecutar1erJSON();
 
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
@@ -200,38 +189,6 @@ public class MainActivity extends AppCompatActivity
     //    }
     }
 
-    public void ShowInterstial (){
-        if (publicidad >= 1){
-            MobileAds.initialize(this, this.getResources().getString(R.string.app_ad_unit_id));
-            mInterstitialAd = new InterstitialAd(this);
-            // Defined in res/values/strings.xml
-            mInterstitialAd.setAdUnitId(this.getResources().getString(R.string.interstitial_ad_unit_id));
-            mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            mInterstitialAd.setAdListener(new com.google.android.gms.ads.AdListener() {
-                @Override
-                public void onAdLoaded() {
-                    mInterstitialAd.show();
-                    super.onAdLoaded();
-
-                }
-
-                @Override
-                public void onAdFailedToLoad(int errorCode) {
-                    Toast.makeText(getApplicationContext(),
-                            "onAdFailedToLoad() with error code: " + errorCode,
-                            Toast.LENGTH_SHORT).show();
-                    System.out.println("EROOOOOOOOOOOOOOOOOOOOOOOOOR " + errorCode);
-                }
-            }
-            );
-
-            publicidad = 0;
-
-            System.out.println("INSTERTITIAL CREADO!!!");
-        }else
-            publicidad ++;
-        System.out.println("CONTADOR INSTERTITIAL : " + publicidad);
-    }
 
 
     public void cargarFullStock(){
@@ -478,11 +435,8 @@ public class MainActivity extends AppCompatActivity
             //MainActivity cont, String turno, String dia, String usuario, String Nrotur, boolean inscripto, String F5, String F7) {
             popEvento = PopUpEvento.newInstance(this, TextoTurno, Fecha, FB_user, Nroturno, inscripto, CantF5, CantF7 );
             popEvento.show(getFragmentManager(), "INSCRIPCION A EVENTO!"); //turno, dia, "user"); //fm, "fragment_edit_name");
-
         }  //MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, int CantF5, int CantF7)
 
-
-        this.ShowInterstial(); //incrementa en +1 el contador para el banner grande
     }
 
     //Tiene cargado UNICAMENTE los turnos que estan completos
