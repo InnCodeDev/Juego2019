@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,6 +67,9 @@ public class segunda extends android.support.v4.app.Fragment {
 
 
         mAdView = v.findViewById(R.id.adView2);
+//        mAdView.setAdSize(AdSize.BANNER);
+//        mAdView.setAdUnitId("ca-app-pub-5210550399898768/7402556140");
+        //MobileAds.initialize(getActivity(), "ca-app-pub-5210550399898768~4967964499");
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 

@@ -20,6 +20,8 @@
 
     <string name="app_ad_unit_id">ca-app-pub-5210550399898768~4967964499</string>
     <string name="banner_ad_unit_id">ca-app-pub-5210550399898768/7402556140</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-5210550399898768/8327597334</string>
+
 
     <!-- usar este codigo: ca-app-pub-5210550399898768/7402556140
          codigo Manifest.xml: ca-app-pub-5210550399898768~4967964499 -->

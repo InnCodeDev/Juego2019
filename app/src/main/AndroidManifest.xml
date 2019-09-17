@@ -12,14 +12,11 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <!--
-
     SHA-1
     69:BF:BE:80:38:C1:AF:A2:C8:94:5E:9E:4D:32:1D:1D:F3:FC:5A:F9
     96:AF:EC:41:69:D4:DA:85:3A:45:DE:B4:4B:26:EA:90:2F:55:D7:FF  //Ultimo Agregado A FireBase
-
     ID CLIENTE GOOGLE
      978743906549-od0a4npfhpokhqdlu808grkske4979ep.apps.googleusercontent.com
-
      Google Sign-In
     978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com
     -->
@@ -56,15 +53,12 @@
 
 
     </application>
-<!--    "com.google.android.gms.ads.APPLICATION_ID"
-"
-        <meta-data
-            android:name="com.google.android.version" />
-            android:value="978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com" />
-
-
-
-            Nueva: APP ID   ca-app-pub-5210550399898768~1294067508
-                    BANNER: ca-app-pub-5210550399898768/9008712474
--->
+    <!--    "com.google.android.gms.ads.APPLICATION_ID"
+    "
+            <meta-data
+                android:name="com.google.android.version" />
+                android:value="978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com" />
+                Nueva: APP ID   ca-app-pub-5210550399898768~1294067508
+                        BANNER: ca-app-pub-5210550399898768/9008712474
+    -->
 </manifest>

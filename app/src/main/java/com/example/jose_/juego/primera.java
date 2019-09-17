@@ -14,7 +14,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -65,18 +64,15 @@ public class primera extends android.support.v4.app.Fragment {
         System.out.println("CREOOOOOOOOO VISTA 1 -- " ); //+ primera.size() + " -- " + primeraM.size());
         v = inflater.inflate(R.layout.fragment_primera, container, false);
 
-        MobileAds.initialize(this.getContext(), this.getResources().getString(R.string.app_ad_unit_id));
+        MobileAds.initialize(this.getContext(), this.getResources().getString(R.string.banner_ad_unit_id));
         mAdView = v.findViewById(R.id.adView2);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.setAdSize(AdSize.BANNER);
-        mAdView.setAdUnitId(this.getResources().getString(R.string.banner_ad_unit_id));
+//       mAdView.setAdSize(AdSize.BANNER);
+//        mAdView.setAdUnitId(this.getResources().getString(R.string.banner_ad_unit_id));
         mAdView.loadAd(adRequest);
         //mAdView.setEnabled(true);
         mAdView.setBackgroundColor(Color.BLACK);
 
-
-//        ads:adSize="BANNER"
-//        ads:adUnitId="@string/app_ad_unit_id"
         return v;
     }
 

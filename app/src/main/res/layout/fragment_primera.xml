@@ -3118,7 +3118,8 @@
 
                     <com.google.android.gms.ads.AdView
                         android:id="@+id/adView2"
-                        android:backgroundTint="@color/browser_actions_bg_grey"
+                        ads:adSize="BANNER"
+                        ads:adUnitId="@string/banner_ad_unit_id"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_centerHorizontal="true"
@@ -3126,8 +3127,9 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginBottom="10dp"
-                        android:visibility="visible">
-                    </com.google.android.gms.ads.AdView>
+                        android:backgroundTint="@color/browser_actions_bg_grey"
+                        android:visibility="visible"
+                        tools:visibility="visible"></com.google.android.gms.ads.AdView>
                 </RelativeLayout>
             </LinearLayout>
 

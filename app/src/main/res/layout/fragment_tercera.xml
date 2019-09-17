@@ -3105,18 +3105,26 @@
             </LinearLayout>
         </TableRow>
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id">
-        </com.google.android.gms.ads.AdView>
+        <RelativeLayout
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView2"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/app_ad_unit_id"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/browser_actions_bg_grey"
+                android:visibility="visible"
+                tools:visibility="visible"></com.google.android.gms.ads.AdView>
+        </RelativeLayout>
 
     </LinearLayout>
     </ScrollView>
