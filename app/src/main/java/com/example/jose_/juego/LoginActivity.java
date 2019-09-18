@@ -163,6 +163,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 .build();
     }
 
+    @Override
+    public void onBackPressed() {
+        //Execute your code here
+  //      super.onBackPressed();
+ //       finish();
+
+    }
+
     private void signIn(){
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);

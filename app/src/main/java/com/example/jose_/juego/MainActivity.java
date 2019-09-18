@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity
         jsonCargar.execute();
 
 
-   //     ejecutar1erJSON();
+        ejecutar1erJSON();
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void ShowInterstial (){
-        if (publicidad >= 1){
+        if (publicidad >= 5){
             MobileAds.initialize(this, this.getResources().getString(R.string.app_ad_unit_id));
             mInterstitialAd = new InterstitialAd(this);
             // Defined in res/values/strings.xml
@@ -210,9 +210,8 @@ public class MainActivity extends AppCompatActivity
             mInterstitialAd.setAdListener(new com.google.android.gms.ads.AdListener() {
                 @Override
                 public void onAdLoaded() {
-                    mInterstitialAd.show();
                     super.onAdLoaded();
-
+                    mInterstitialAd.show();
                 }
 
                 @Override

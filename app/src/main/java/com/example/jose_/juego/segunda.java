@@ -66,12 +66,14 @@ public class segunda extends android.support.v4.app.Fragment {
         View v = inflater.inflate(R.layout.fragment_segunda, container, false);
 
 
+        MobileAds.initialize(this.getContext(), this.getResources().getString(R.string.banner_ad_unit_id));
         mAdView = v.findViewById(R.id.adView2);
-//        mAdView.setAdSize(AdSize.BANNER);
-//        mAdView.setAdUnitId("ca-app-pub-5210550399898768/7402556140");
-        //MobileAds.initialize(getActivity(), "ca-app-pub-5210550399898768~4967964499");
         AdRequest adRequest = new AdRequest.Builder().build();
+//       mAdView.setAdSize(AdSize.BANNER);
+//        mAdView.setAdUnitId(this.getResources().getString(R.string.banner_ad_unit_id));
         mAdView.loadAd(adRequest);
+        //mAdView.setEnabled(true);
+        mAdView.setBackgroundColor(Color.BLACK);
 
         return v;
     }
