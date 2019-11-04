@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.jose_.juego.segunda">
+    tools:context="com.CirculoFutbol.segunda">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -3116,8 +3116,8 @@
 
             <com.google.android.gms.ads.AdView
                 android:id="@+id/adView2"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/app_ad_unit_id"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="@string/banner_ad_unit_id"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"

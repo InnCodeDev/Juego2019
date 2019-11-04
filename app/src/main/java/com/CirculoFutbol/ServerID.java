@@ -1,0 +1,21 @@
+package com.CirculoFutbol;
+
+/**
+ * Created by jose_ on 9/9/2018.
+ */
+public class ServerID {
+    private static ServerID serverID;
+    static String DBserver;
+
+    public static synchronized ServerID getInstance(){
+        if (serverID == null){
+            serverID = new ServerID();
+        }
+        return serverID;
+    }
+
+    public ServerID(){
+        DBserver = "http://micancha.000webhostapp.com/"; //"http://inncode.comoj.com/";
+    }
+
+}
