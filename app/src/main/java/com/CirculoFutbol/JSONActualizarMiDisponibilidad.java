@@ -1,42 +1,42 @@
-package com.example.jose_.juego;
+package com.CirculoFutbol;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-import javax.net.ssl.HttpsURLConnection;
-
-public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
+/**
+ * Created by jose_ on 13/9/2018.
+ */
+public class JSONActualizarMiDisponibilidad extends AsyncTask<String, String, String> {
+    Callback callback;
     String txtFinal = "";
     ArrayList<String> arrayDispo = new ArrayList <String> ();
     ProgressDialog pDialog;
     Context context;
-    String turno;
-    String usuario;
-    String fecha;
-    int cancha;
-    String resultado;
+    String dispo="";
+    String FB_user="";
+    String FB_mail="";
 
-    public JSONInscripcionEvento (MainActivity disp, String t, String u, String f, int c){//Ademas tiene que recibir el nombre de usuario loggeado
+    public ArrayList <String> getarrayDispo (){
+        return arrayDispo;
+    }
+
+    public JSONActualizarMiDisponibilidad (Disponibilidad disp, String dis, String user, String mail){//Ademas tiene que recibir el nombre de usuario loggeado
+        //User = u;
+        dispo=dis;
+        FB_user=user;
+        FB_mail=mail;
+
         context = disp;
-        turno = t;
-        usuario = u;
-        fecha = f;
-        cancha = c;
         pDialog = new ProgressDialog(disp);
         pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
-        pDialog.setMessage("Inscribiendote al evento... \n\nAguarde!");
+        pDialog.setMessage("Actualizando su disponibilidad. \nPor favor espere..");
         pDialog.setCancelable(false);
         pDialog.setCanceledOnTouchOutside(false);
     }
@@ -56,20 +56,11 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
         try{
 
             ServerID server = ServerID.getInstance();
-            System.out.println("POPUP: Fecha: " + fecha + " -User: " + usuario + " - turno: " + turno + " - cancha: " + cancha);
-            String d = fecha.substring(0,fecha.indexOf("/"));
-            String m = fecha.substring(fecha.indexOf("/")+1, fecha.lastIndexOf("/"));
-            String a = fecha.substring(fecha.lastIndexOf("/")+1);
-            if (d.length()==1)
-                d = "0"+d;
-            String fech = a+"/"+m+"/"+d;
 
-            System.out.println("FECHA PHP: " + fech);
+            String parametros = "user=Jose&disponibilidad="+dispo;
 
-            String parametros = "fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha;
-            String urlString = ServerID.DBserver +"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha; // +java.net.URLEncoder.encode(parametros, "UTF-8");
-            //Pasar la fecha a partir de cuando filtrar
-            //Pasar el usuario para ver si participa en ese evento!!!
+            String urlString = ServerID.DBserver +"actualizarMiDisponibilidad.php?user="+FB_user+"&disponibilidad="+dispo;
+
 
             urlString.replace(" ", "%20");
             URL url = new URL(urlString);
@@ -81,19 +72,19 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
         }catch(Exception e){
             Log.e("log_tag", "-Error in http connection- "+e.toString());
 
-            txtFinal = "JSONInscripcionEvento - Couldnt connect to database - " + e.toString();
+            txtFinal = "Couldnt connect to database - " + e.toString();
         }
 
         //convert response to string
+/*
         try{
             if (responseCode == HttpsURLConnection.HTTP_OK) {
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(isr, StandardCharsets.UTF_8),8);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(isr,"UTF-8"),8);
                 //BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new StringBuilder("");
                 String line = "";
                 while ((line = reader.readLine()) != null) {
-                    System.out.println("TOSTRING: " + reader.readLine());
                     sb.append(line);
                 }
                 isr.close();
@@ -101,15 +92,12 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
             }else
                 System.out.println("HTTPS RESPONSE CODE FALSE - "+responseCode);
         } catch(Exception e){
-            Log.e("log_tag", "JSONInscripcionEvento - Error converting result - "+e.toString());
+            Log.e("log_tag", "-Error converting result - "+e.toString());
         }
-
-
+*/
+/*
         String s = "";
 
-        resultado = result;
-        System.out.println("JSONInscripcionEvento : " + result);
-/*
         try {
             System.out.println("JSONListaCategorias : " + result);
 
@@ -127,17 +115,13 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);
                     //String id = (String) b.get("id");
-                    String turno = (String) b.get("turno");
-                    String dia = (String) b.get("fecha");
-                    String cantidad = (String) b.get("Cantidad");
-                    System.out.println("Turno: " + turno + " - Dia: " + dia + " - Cantidad: " + cantidad);
+                    String estadoFinal = (String) b.get("estadoFinal");
+                    System.out.println("estadoFinal: " + estadoFinal);
 
-                    s =  turno + "*" + dia + "*" + cantidad; //Formato: 10-2-16
-                    arrayDispo.add(s); //Agrega cada combinacion Turno-Dia en el Array
                 }
             }
         }catch (Exception e){
-            Log.e("log_tag", "JSONInscripcionEvento - Error analizando Archivo JSON from PHP- " + e.toString());
+            Log.e("log_tag", "-Error analizando Archivo JSON from PHP- " + e.toString());
         }
 */
         return AsyncTask.Status.FINISHED.toString();
@@ -151,8 +135,8 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
     protected void onPostExecute(String result) {
         try {
             pDialog.dismiss();
-            this.cancel(true); //finalize();d
-            ((MainActivity) context).continuarJSONPopUP(false, resultado);
+            this.cancel(true); //finalize();
+            ((Disponibilidad) context).continuarJSONDisponibilidad(this.getarrayDispo());
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -160,5 +144,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
 
     @Override
     protected void onProgressUpdate(String... values) {
+
     }
+
 }

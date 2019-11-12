@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     //'28.0.2'
     defaultConfig {
-        applicationId "com.example.jose_.juego"
+        applicationId "com.CirculoFutbol"
         minSdkVersion 23
         targetSdkVersion 27
         versionCode 1
@@ -12,15 +12,24 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-    }
+//    compileOptions {
+//        sourceCompatibility 'JavaVersion.VERSION_1_7'
+//    }
     dexOptions {
         javaMaxHeapSize "4G"
+    }
+
+    android {
+        lintOptions {
+            checkReleaseBuilds false
+            // Or, if you prefer, you can continue to check for errors in release builds,
+            // but continue the build even when errors are found:
+            abortOnError false
+        }
     }
 }
 

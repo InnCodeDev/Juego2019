@@ -1,10 +1,9 @@
-package com.example.jose_.juego;
+package com.CirculoFutbol;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,41 +22,34 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * Created by jose_ on 15/9/2018.
  */
-public class JSONDetalleEvento extends AsyncTask<String, String, String>{
-    Callback callback;
-    String txtFinal = "";
-    ArrayList<String> arrayDispo = new ArrayList <String> ();
-    ProgressDialog pDialog;
-    Context context;
-    String Fecha, turno, TextoTurno, fut5, fut7 = "";
-    //        private final Handler handler = new Handler();
-    boolean fromPopUp, inscripto;
-    View view;
-    String user_FB;
+public class JSONCargarStocks extends AsyncTask<String, String, String>{
+        Callback callback;
+        String txtFinal = "";
+        ArrayList<String> arrayDispo = new ArrayList <String> ();
+        ProgressDialog pDialog;
+        Context context;
+        String minFecha = "";
+//        private final Handler handler = new Handler();
+        boolean fromPopUp;
 
-    public ArrayList <String> getarrayDispo (){
+        public ArrayList <String> getarrayDispo (){
         return arrayDispo;
     }
-                            //this, v, tviewDia, NroTurno, tviewTurno, true, inscripto);
-    public JSONDetalleEvento(MainActivity disp, View v, String min, String TextoT, String tur, boolean fromPop, boolean inscr){
+
+        public JSONCargarStocks(MainActivity disp, String min, boolean fromPop){//Ademas tiene que recibir el nombre de usuario loggeado
         //User = u;
-        context = disp;
-        view = v;
-        Fecha = min;
-        TextoTurno = TextoT;
-        turno = tur;
-        fromPopUp = fromPop;
-        //user_FB = usuario;
-        inscripto = inscr;
-        pDialog = new ProgressDialog(disp);
-        pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
-        pDialog.setMessage("Cargando detalles...");
-        pDialog.setCancelable(false);
-        pDialog.setCanceledOnTouchOutside(false);
+            context = disp;
+            minFecha = min;
+            fromPopUp = fromPop;
+            pDialog = new ProgressDialog(disp);
+            pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
+            pDialog.setMessage("Cargando Disponibilidades...");
+            pDialog.setCancelable(false);
+            pDialog.setCanceledOnTouchOutside(false);
     }
 
-    @Override
-    protected void onPreExecute() {
+        @Override
+        protected void onPreExecute() {
         pDialog.show();
     }
 
@@ -72,8 +64,8 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
 
             ServerID server = ServerID.getInstance();
 
-            String parametros = "fecha="+Fecha+"&turn="+turno;
-            String urlString = ServerID.DBserver +"cargarDetalleEvento.php?"+parametros; // + java.net.URLEncoder.encode(parametros, "UTF-8"); //Pasar la fecha a partir de cuando filtrar
+            String parametros = "fecha="+minFecha;
+            String urlString = ServerID.DBserver +"cargarStock.php?"+parametros; //+java.net.URLEncoder.encode(parametros); //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
             URL url = new URL(urlString);
@@ -83,6 +75,7 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
 
         }catch(Exception e){
             Log.e("log_tag", "-Error in http connection- "+e.toString());
+
             txtFinal = "JSONCargarEventos - Couldnt connect to database - " + e.toString();
         }
 
@@ -100,19 +93,19 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
                 }
                 isr.close();
                 result = sb.toString();
-            }else
+             }else
                 System.out.println("HTTPS RESPONSE CODE FALSE - "+responseCode);
         } catch(Exception e){
-            Log.e("log_tag", "JSONDetalleEventos - Error converting result - "+e.toString());
+            Log.e("log_tag", "JSONCargarEventos - Error converting result - "+e.toString());
         }
 
 
         String s = "";
 
         try {
-            System.out.println("JSONListaUsuarios: " + result);
+            System.out.println("JSONListaCategorias : " + result);
 
-            if (result.compareTo("null") != 0) { //!= null){
+            if (result.compareTo("") != 0){ //.toString().compareTo() != 0
 
                 JSONParser jsonParser = new JSONParser();
 
@@ -121,26 +114,30 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
                 JSONArray jsonArrayResult = (JSONArray) jsonParser.parse(r);
 
 
-                System.out.println("jSONDetalleEventos ArrayResult: " + jsonArrayResult.toString());
+          //      System.out.println("jSONArrayResult: " + jsonArrayResult.toString());
 
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);
                     //String id = (String) b.get("id");
-                    String cancha = (String) b.get("cancha");
-                    String cantidad = (String) b.get("Cantidad");
-                    System.out.println("Cancha: " + cancha + " - Cantidad: " + cantidad  );
+                    String dia = (String) b.get("fecha");
+                    String turno = (String) b.get("turno");
+                    String cantidad = (String) b.get("cantidad");
+                  //  String cancha = (String) b.get("cancha");
+                   // System.out.println("Dia: " + dia + " - Turno: " + turno + " - Cantidad: " + cantidad); // + " - Cancha: " + cancha);
 
-                    s =  cancha + "/" + cantidad; //Formato: 5/10  o 7/2
-                    System.out.println("...JSONDetalleEventos " + s);
-                    arrayDispo.add(s);
+                    //Agrega solo los dias/turnos que no tienen disponibilidad
+                    if (Integer.valueOf(cantidad) == 0){
+                        s =  dia + "*" + turno + "*" + cantidad; //+ "/"+ cancha; //Formato: 10-2-16/5
+                        arrayDispo.add(s); //Agrega cada combinacion Turno-Dia en el Array
+                    }
+
                 }
-
             }
         }catch (Exception e){
-            Log.e("log_tag", "JSONDetalleEventos - Error analizando Archivo JSON from PHP- " + e.toString());
+            Log.e("log_tag", "JSONCargarEventos - Error analizando Archivo JSON from PHP- " + e.toString());
         }
 
-        return AsyncTask.Status.FINISHED.toString();
+        return Status.FINISHED.toString();
 
     }
 
@@ -151,8 +148,8 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
     protected void onPostExecute(String result) {
         try {
             pDialog.dismiss();
-            this.cancel(true); //View v, String min, String TextoT, String tur, boolean fromPop, String usuario, boolean inscr)
-            ((MainActivity) context).ContinuarOnClickEvento(this.view, this.Fecha, this.TextoTurno, this.turno, this.fromPopUp, this.inscripto, this.arrayDispo);
+            this.cancel(true); //finalize();d
+            ((MainActivity) context).continuarJSONCargarStock(arrayDispo, fromPopUp);
         } catch (Throwable e) {
             e.printStackTrace();
         }

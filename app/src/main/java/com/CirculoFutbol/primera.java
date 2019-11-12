@@ -1,4 +1,4 @@
-package com.example.jose_.juego;
+package com.CirculoFutbol;
 
 import android.app.Fragment;
 import android.graphics.Color;
@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 

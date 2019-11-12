@@ -1612,7 +1612,7 @@
                     android:layout_height="wrap_content"
                     android:text="Actualizar"
                     android:clickable="true"
-                    tools:context="com.example.jose_.juego.Disponibilidad"/>
+                    tools:context="com.CirculoFutbol.Disponibilidad"/>
             </TableRow>
 
         </LinearLayout>

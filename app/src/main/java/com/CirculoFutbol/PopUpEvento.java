@@ -1,13 +1,11 @@
-package com.example.jose_.juego;
+package com.CirculoFutbol;
 
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 /**

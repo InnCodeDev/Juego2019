@@ -1,10 +1,14 @@
-package com.example.jose_.juego;
+package com.CirculoFutbol;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -16,23 +20,38 @@ import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
+/**
+ * Created by jose_ on 15/9/2018.
+ */
+public class JSONDetalleEvento extends AsyncTask<String, String, String>{
+    Callback callback;
     String txtFinal = "";
     ArrayList<String> arrayDispo = new ArrayList <String> ();
     ProgressDialog pDialog;
     Context context;
-    String turno;
-    String usuario;
-    String fecha;
+    String Fecha, turno, TextoTurno, fut5, fut7 = "";
+    //        private final Handler handler = new Handler();
+    boolean fromPopUp, inscripto;
+    View view;
+    String user_FB;
 
-    public JSONBorrarParticipacion (MainActivity disp, String t, String u, String f){//Ademas tiene que recibir el nombre de usuario loggeado
+    public ArrayList <String> getarrayDispo (){
+        return arrayDispo;
+    }
+                            //this, v, tviewDia, NroTurno, tviewTurno, true, inscripto);
+    public JSONDetalleEvento(MainActivity disp, View v, String min, String TextoT, String tur, boolean fromPop, boolean inscr){
+        //User = u;
         context = disp;
-        turno = t;
-        usuario = u;
-        fecha = f;
+        view = v;
+        Fecha = min;
+        TextoTurno = TextoT;
+        turno = tur;
+        fromPopUp = fromPop;
+        //user_FB = usuario;
+        inscripto = inscr;
         pDialog = new ProgressDialog(disp);
         pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
-        pDialog.setMessage("Eliminandote del evento... \n\nAguarde!");
+        pDialog.setMessage("Cargando detalles...");
         pDialog.setCancelable(false);
         pDialog.setCanceledOnTouchOutside(false);
     }
@@ -40,7 +59,7 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
     @Override
     protected void onPreExecute() {
         pDialog.show();
-    }   
+    }
 
     protected String doInBackground(String... arg0) {
         //INSERTAR EN BD
@@ -52,32 +71,19 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
         try{
 
             ServerID server = ServerID.getInstance();
-            System.out.println("POPUP: Fecha: " + fecha + " -User: " + usuario + " - turno: " + turno);
-            String d = fecha.substring(0,fecha.indexOf("/"));
-            String m = fecha.substring(fecha.indexOf("/")+1, fecha.lastIndexOf("/"));
-            String a = fecha.substring(fecha.lastIndexOf("/")+1);
-            if (d.length()==1)
-                d = "0"+d;
-            String fech = a+"/"+m+"/"+d;
 
-            System.out.println("FECHA PHP: " + fech);
-
-            String parametros = "fecha="+ fech+"&user="+usuario+"&turno=" + turno;
-            String urlString = ServerID.DBserver +"borrarParticipacion.php?"+parametros;
-            //Pasar la fecha a partir de cuando filtrar
+            String parametros = "fecha="+Fecha+"&turn="+turno;
+            String urlString = ServerID.DBserver +"cargarDetalleEvento.php?"+parametros; // + java.net.URLEncoder.encode(parametros, "UTF-8"); //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
-            urlString.replace(" ", "%20");
             URL url = new URL(urlString);
-
             conn = (HttpURLConnection) url.openConnection();
             responseCode = conn.getResponseCode();
             isr = conn.getInputStream();
 
         }catch(Exception e){
             Log.e("log_tag", "-Error in http connection- "+e.toString());
-
-            txtFinal = "JSONInscripcionEvento - Couldnt connect to database - " + e.toString();
+            txtFinal = "JSONCargarEventos - Couldnt connect to database - " + e.toString();
         }
 
         //convert response to string
@@ -89,7 +95,7 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
                 StringBuilder sb = new StringBuilder();
                 String line = "";
                 while ((line = reader.readLine()) != null) {
-                    System.out.println("borrarParticipacion TOSTRING: " + reader.readLine());
+                    System.out.println("TOSTRING: " + reader.readLine());
                     sb.append(line);
                 }
                 isr.close();
@@ -97,16 +103,16 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
             }else
                 System.out.println("HTTPS RESPONSE CODE FALSE - "+responseCode);
         } catch(Exception e){
-            Log.e("log_tag", "JSONInscripcionEvento - Error converting result - "+e.toString());
+            Log.e("log_tag", "JSONDetalleEventos - Error converting result - "+e.toString());
         }
 
 
         String s = "";
-/*
-        try {
-            System.out.println("JSONListaCategorias : " + result);
 
-            if (result != null){
+        try {
+            System.out.println("JSONListaUsuarios: " + result);
+
+            if (result.compareTo("null") != 0) { //!= null){
 
                 JSONParser jsonParser = new JSONParser();
 
@@ -115,24 +121,25 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
                 JSONArray jsonArrayResult = (JSONArray) jsonParser.parse(r);
 
 
-                System.out.println("jSONArrayResult: " + jsonArrayResult.toString());
+                System.out.println("jSONDetalleEventos ArrayResult: " + jsonArrayResult.toString());
 
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);
                     //String id = (String) b.get("id");
-                    String turno = (String) b.get("turno");
-                    String dia = (String) b.get("fecha");
+                    String cancha = (String) b.get("cancha");
                     String cantidad = (String) b.get("Cantidad");
-                    System.out.println("Turno: " + turno + " - Dia: " + dia + " - Cantidad: " + cantidad);
+                    System.out.println("Cancha: " + cancha + " - Cantidad: " + cantidad  );
 
-                    s =  turno + "*" + dia + "*" + cantidad; //Formato: 10-2-16
-                    arrayDispo.add(s); //Agrega cada combinacion Turno-Dia en el Array
+                    s =  cancha + "/" + cantidad; //Formato: 5/10  o 7/2
+                    System.out.println("...JSONDetalleEventos " + s);
+                    arrayDispo.add(s);
                 }
+
             }
         }catch (Exception e){
-            Log.e("log_tag", "JSONInscripcionEvento - Error analizando Archivo JSON from PHP- " + e.toString());
+            Log.e("log_tag", "JSONDetalleEventos - Error analizando Archivo JSON from PHP- " + e.toString());
         }
-*/
+
         return AsyncTask.Status.FINISHED.toString();
 
     }
@@ -144,8 +151,8 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         try {
             pDialog.dismiss();
-            ((MainActivity) context).continuarJSONPopUP(true, "");
-            this.cancel(true); //finalize();d
+            this.cancel(true); //View v, String min, String TextoT, String tur, boolean fromPop, String usuario, boolean inscr)
+            ((MainActivity) context).ContinuarOnClickEvento(this.view, this.Fecha, this.TextoTurno, this.turno, this.fromPopUp, this.inscripto, this.arrayDispo);
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -153,6 +160,7 @@ public class JSONBorrarParticipacion extends AsyncTask<String, String, String> {
 
     @Override
     protected void onProgressUpdate(String... values) {
-    }
-}
 
+    }
+
+}

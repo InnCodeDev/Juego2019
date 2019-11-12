@@ -1,13 +1,9 @@
-package com.example.jose_.juego;
+package com.CirculoFutbol;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -19,37 +15,29 @@ import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * Created by jose_ on 15/9/2018.
- */
-public class JSONCargarStocks extends AsyncTask<String, String, String>{
-        Callback callback;
-        String txtFinal = "";
-        ArrayList<String> arrayDispo = new ArrayList <String> ();
-        ProgressDialog pDialog;
-        Context context;
-        String minFecha = "";
-//        private final Handler handler = new Handler();
-        boolean fromPopUp;
+public class JSONRegistrarUsuario extends AsyncTask<String, String, String>  {
+    String txtFinal = "";
+    ArrayList<String> arrayDispo = new ArrayList <String> ();
+    ProgressDialog pDialog;
+    Context context;
+    String usuario;
+    String mail;
+    String resultado;
 
-        public ArrayList <String> getarrayDispo (){
-        return arrayDispo;
+    public JSONRegistrarUsuario(MainActivity disp, String u, String m){
+        context = disp;
+        usuario = u;
+        mail = m;
+
+        pDialog = new ProgressDialog(disp);
+        pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
+      //  pDialog.setMessage("Inscribiendote al evento... \n\nAguarde!");
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
     }
 
-        public JSONCargarStocks(MainActivity disp, String min, boolean fromPop){//Ademas tiene que recibir el nombre de usuario loggeado
-        //User = u;
-            context = disp;
-            minFecha = min;
-            fromPopUp = fromPop;
-            pDialog = new ProgressDialog(disp);
-            pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
-            pDialog.setMessage("Cargando Disponibilidades...");
-            pDialog.setCancelable(false);
-            pDialog.setCanceledOnTouchOutside(false);
-    }
-
-        @Override
-        protected void onPreExecute() {
+    @Override
+    protected void onPreExecute() {
         pDialog.show();
     }
 
@@ -63,11 +51,12 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
         try{
 
             ServerID server = ServerID.getInstance();
-
-            String parametros = "fecha="+minFecha;
-            String urlString = ServerID.DBserver +"cargarStock.php?"+parametros; //+java.net.URLEncoder.encode(parametros); //Pasar la fecha a partir de cuando filtrar
+            System.out.println("Registrando al Usuario: " + usuario + " -- " + mail);
+            String urlString = ServerID.DBserver +"registrarUsuario.php?user="+usuario+"&mail=" + mail; //
+            //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
+            urlString.replace(" ", "%20");
             URL url = new URL(urlString);
             conn = (HttpURLConnection) url.openConnection();
             responseCode = conn.getResponseCode();
@@ -76,7 +65,7 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
         }catch(Exception e){
             Log.e("log_tag", "-Error in http connection- "+e.toString());
 
-            txtFinal = "JSONCargarEventos - Couldnt connect to database - " + e.toString();
+            txtFinal = "JSONRegistrarUsuario - Couldnt connect to database - " + e.toString();
         }
 
         //convert response to string
@@ -93,19 +82,22 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
                 }
                 isr.close();
                 result = sb.toString();
-             }else
+            }else
                 System.out.println("HTTPS RESPONSE CODE FALSE - "+responseCode);
         } catch(Exception e){
-            Log.e("log_tag", "JSONCargarEventos - Error converting result - "+e.toString());
+            Log.e("log_tag", "JSONInscripcionEvento - Error converting result - "+e.toString());
         }
 
 
         String s = "";
 
+        resultado = result;
+        System.out.println("JSONRegistrarUsuario : " + result);
+/*
         try {
             System.out.println("JSONListaCategorias : " + result);
 
-            if (result.compareTo("") != 0){ //.toString().compareTo() != 0
+            if (result != null){
 
                 JSONParser jsonParser = new JSONParser();
 
@@ -114,29 +106,24 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
                 JSONArray jsonArrayResult = (JSONArray) jsonParser.parse(r);
 
 
-          //      System.out.println("jSONArrayResult: " + jsonArrayResult.toString());
+                System.out.println("jSONArrayResult: " + jsonArrayResult.toString());
 
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);
                     //String id = (String) b.get("id");
-                    String dia = (String) b.get("fecha");
                     String turno = (String) b.get("turno");
-                    String cantidad = (String) b.get("cantidad");
-                  //  String cancha = (String) b.get("cancha");
-                   // System.out.println("Dia: " + dia + " - Turno: " + turno + " - Cantidad: " + cantidad); // + " - Cancha: " + cancha);
+                    String dia = (String) b.get("fecha");
+                    String cantidad = (String) b.get("Cantidad");
+                    System.out.println("Turno: " + turno + " - Dia: " + dia + " - Cantidad: " + cantidad);
 
-                    //Agrega solo los dias/turnos que no tienen disponibilidad
-                    if (Integer.valueOf(cantidad) == 0){
-                        s =  dia + "*" + turno + "*" + cantidad; //+ "/"+ cancha; //Formato: 10-2-16/5
-                        arrayDispo.add(s); //Agrega cada combinacion Turno-Dia en el Array
-                    }
-
+                    s =  turno + "*" + dia + "*" + cantidad; //Formato: 10-2-16
+                    arrayDispo.add(s); //Agrega cada combinacion Turno-Dia en el Array
                 }
             }
         }catch (Exception e){
-            Log.e("log_tag", "JSONCargarEventos - Error analizando Archivo JSON from PHP- " + e.toString());
+            Log.e("log_tag", "JSONInscripcionEvento - Error analizando Archivo JSON from PHP- " + e.toString());
         }
-
+*/
         return Status.FINISHED.toString();
 
     }
@@ -149,7 +136,7 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
         try {
             pDialog.dismiss();
             this.cancel(true); //finalize();d
-            ((MainActivity) context).continuarJSONCargarStock(arrayDispo, fromPopUp);
+            //((MainActivity) context).continuarJSONPopUP(false, resultado);
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -157,7 +144,5 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
 
     @Override
     protected void onProgressUpdate(String... values) {
-
     }
-
 }

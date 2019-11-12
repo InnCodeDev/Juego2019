@@ -1,4 +1,4 @@
-package com.example.jose_.juego;
+package com.CirculoFutbol;
 
 import android.app.DialogFragment;
 import android.content.Context;

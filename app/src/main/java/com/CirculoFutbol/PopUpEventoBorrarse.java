@@ -1,16 +1,12 @@
-package com.example.jose_.juego;
+package com.CirculoFutbol;
 
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by jose_ on 27/8/2018.

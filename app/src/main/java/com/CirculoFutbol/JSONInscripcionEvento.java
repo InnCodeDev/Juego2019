@@ -1,8 +1,7 @@
-package com.example.jose_.juego;
+package com.CirculoFutbol;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -11,29 +10,31 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class JSONRegistrarUsuario extends AsyncTask<String, String, String>  {
+public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
     String txtFinal = "";
     ArrayList<String> arrayDispo = new ArrayList <String> ();
     ProgressDialog pDialog;
     Context context;
+    String turno;
     String usuario;
-    String mail;
+    String fecha;
+    int cancha;
     String resultado;
 
-    public JSONRegistrarUsuario(MainActivity disp, String u, String m){
+    public JSONInscripcionEvento (MainActivity disp, String t, String u, String f, int c){//Ademas tiene que recibir el nombre de usuario loggeado
         context = disp;
+        turno = t;
         usuario = u;
-        mail = m;
-
+        fecha = f;
+        cancha = c;
         pDialog = new ProgressDialog(disp);
         pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
-      //  pDialog.setMessage("Inscribiendote al evento... \n\nAguarde!");
+        pDialog.setMessage("Inscribiendote al evento... \n\nAguarde!");
         pDialog.setCancelable(false);
         pDialog.setCanceledOnTouchOutside(false);
     }
@@ -53,13 +54,24 @@ public class JSONRegistrarUsuario extends AsyncTask<String, String, String>  {
         try{
 
             ServerID server = ServerID.getInstance();
-            System.out.println("Registrando al Usuario: " + usuario + " -- " + mail);
-            String urlString = ServerID.DBserver +"registrarUsuario.php?user="+usuario+"&mail=" + mail; //
+            System.out.println("POPUP: Fecha: " + fecha + " -User: " + usuario + " - turno: " + turno + " - cancha: " + cancha);
+            String d = fecha.substring(0,fecha.indexOf("/"));
+            String m = fecha.substring(fecha.indexOf("/")+1, fecha.lastIndexOf("/"));
+            String a = fecha.substring(fecha.lastIndexOf("/")+1);
+            if (d.length()==1)
+                d = "0"+d;
+            String fech = a+"/"+m+"/"+d;
+
+            System.out.println("FECHA PHP: " + fech);
+
+            String parametros = "fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha;
+            String urlString = ServerID.DBserver +"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha; // +java.net.URLEncoder.encode(parametros, "UTF-8");
             //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
             urlString.replace(" ", "%20");
             URL url = new URL(urlString);
+
             conn = (HttpURLConnection) url.openConnection();
             responseCode = conn.getResponseCode();
             isr = conn.getInputStream();
@@ -67,7 +79,7 @@ public class JSONRegistrarUsuario extends AsyncTask<String, String, String>  {
         }catch(Exception e){
             Log.e("log_tag", "-Error in http connection- "+e.toString());
 
-            txtFinal = "JSONRegistrarUsuario - Couldnt connect to database - " + e.toString();
+            txtFinal = "JSONInscripcionEvento - Couldnt connect to database - " + e.toString();
         }
 
         //convert response to string
@@ -94,7 +106,7 @@ public class JSONRegistrarUsuario extends AsyncTask<String, String, String>  {
         String s = "";
 
         resultado = result;
-        System.out.println("JSONRegistrarUsuario : " + result);
+        System.out.println("JSONInscripcionEvento : " + result);
 /*
         try {
             System.out.println("JSONListaCategorias : " + result);
@@ -126,7 +138,7 @@ public class JSONRegistrarUsuario extends AsyncTask<String, String, String>  {
             Log.e("log_tag", "JSONInscripcionEvento - Error analizando Archivo JSON from PHP- " + e.toString());
         }
 */
-        return Status.FINISHED.toString();
+        return AsyncTask.Status.FINISHED.toString();
 
     }
 
@@ -138,7 +150,7 @@ public class JSONRegistrarUsuario extends AsyncTask<String, String, String>  {
         try {
             pDialog.dismiss();
             this.cancel(true); //finalize();d
-            //((MainActivity) context).continuarJSONPopUP(false, resultado);
+            ((MainActivity) context).continuarJSONPopUP(false, resultado);
         } catch (Throwable e) {
             e.printStackTrace();
         }

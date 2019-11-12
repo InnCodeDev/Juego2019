@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jose_.juego">
+    package="com.CirculoFutbol">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -34,14 +34,14 @@
             android:value="@string/app_ad_unit_id"/>
 
         <activity
-            android:name=".LoginActivity"
+            android:name="com.CirculoFutbol.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".Disponibilidad"
+            android:name="com.CirculoFutbol.Disponibilidad"
             android:label="@string/title_activity_login" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.CirculoFutbol.MainActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
