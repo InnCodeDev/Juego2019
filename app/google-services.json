@@ -8,59 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:978743906549:android:ee009ff849f80282ef35bc",
-        "android_client_info": {
-          "package_name": "com.CirculoFutbol"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "978743906549-t2k157nc2vi9iktjs8osl86a1oiqu0a8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.CirculoFutbol",
-            "certificate_hash": "96afec4169d4da853a45deb44b26ea902f55d7ff"
-          }
-        },
-        {
-          "client_id": "978743906549-g6g8l694pksmu05l0pnnpittd8pcr954.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.CirculoFutbol",
-            "certificate_hash": "38cbc197162df8c2b4b3423258b0cc33a663212c"
-          }
-        },
-        {
-          "client_id": "978743906549-od0a4npfhpokhqdlu808grkske4979ep.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.CirculoFutbol",
-            "certificate_hash": "6f44a2da32d1f1d9f8b8bd91071e1e181559e77d"
-          }
-        },
-        {
-          "client_id": "978743906549-pah03t5sv8a7iffsv7bfatqcjavecuau.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyABzTxSKMDX121DTQoyv9Lek8tKab-VlDU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "978743906549-pah03t5sv8a7iffsv7bfatqcjavecuau.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:978743906549:android:bb6c27c7e2b06fcd",
         "android_client_info": {
           "package_name": "com.example.jose_.juego"
@@ -68,23 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "978743906549-kqkiesnpirf2e382gv6ac5umtomvracr.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.jose_.juego",
-            "certificate_hash": "6f44a2da32d1f1d9f8b8bd91071e1e181559e77d"
-          }
-        },
-        {
-          "client_id": "978743906549-cdo1oo8t107hf2klhej59l63ef46lag7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.jose_.juego",
-            "certificate_hash": "69bfbe8038c1afa2c8945e9e4d321d1df3fc5af9"
-          }
-        },
-        {
-          "client_id": "978743906549-mm06vnj0b89s05mt0iuesa9ton5ike45.apps.googleusercontent.com",
+          "client_id": "978743906549-g6g8l694pksmu05l0pnnpittd8pcr954.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.jose_.juego",
@@ -97,6 +28,14 @@
           "android_info": {
             "package_name": "com.example.jose_.juego",
             "certificate_hash": "38cbc197162df8c2b4b3423258b0cc33a663212c"
+          }
+        },
+        {
+          "client_id": "978743906549-od0a4npfhpokhqdlu808grkske4979ep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jose_.juego",
+            "certificate_hash": "69bfbe8038c1afa2c8945e9e4d321d1df3fc5af9"
           }
         },
         {

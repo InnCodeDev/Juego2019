@@ -39,7 +39,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 
-public class MainActivity extends AppCompatActivity
+public class  MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ArrayList primera, primeraM, segunda, segundaM, tercera, terceraM, cuarta, cuartaM = new ArrayList();
@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity
                             Toast.LENGTH_SHORT).show();
                     System.out.println("EROOOOOOOOOOOOOOOOOOOOOOOOOR " + errorCode);
                 }
-            }
+                }
             );
 
             publicidad = 0;
@@ -320,7 +320,6 @@ public class MainActivity extends AppCompatActivity
     public void continuarJSONEmostrarUsuarios(View v, TextView bt, TextView s, ArrayList a){
 
         ArrayList usuarios = a;
-        TextView sc;
         String btn = getResources().getResourceEntryName(bt.getId());
         String lbl_sc = getResources().getResourceEntryName(s.getId());
 
