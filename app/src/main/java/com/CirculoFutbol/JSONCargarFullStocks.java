@@ -82,7 +82,7 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
         }catch(Exception e){
             Log.e("log_tag", "-Error in http connection- "+e.toString());
 
-            txtFinal = "JSONCargarEventos - Couldnt connect to database - " + e.toString();
+            txtFinal = "JSONCargarFullStocks - Couldnt connect to database - " + e.toString();
         }
 
         //convert response to string
@@ -102,7 +102,7 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
              }else
                 System.out.println("HTTPS RESPONSE CODE FALSE - "+responseCode);
         } catch(Exception e){
-            Log.e("log_tag", "JSONCargarEventos - Error converting result - "+e.toString());
+            Log.e("log_tag", "JSONCargarFullStocks - Error converting result - "+e.toString());
         }
 
 
@@ -120,7 +120,7 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
                 JSONArray jsonArrayResult = (JSONArray) jsonParser.parse(r);
 
 
-                System.out.println("jSONArrayResult JSONFullStock: " + jsonArrayResult.toString());
+                System.out.println("jSONArrayResult JSONCargarFullStocks: " + jsonArrayResult.toString());
 
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);
@@ -137,7 +137,7 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
                 }
             }
         }catch (Exception e){
-            Log.e("log_tag", "JSONFullStock - Error analizando Archivo JSON from PHP- " + e.toString());
+            Log.e("log_tag", "JSONCargarFullStocks - Error analizando Archivo JSON from PHP- " + e.toString());
         }
 
         return Status.FINISHED.toString();
