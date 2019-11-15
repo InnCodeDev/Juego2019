@@ -25,13 +25,15 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
     String fecha;
     int cancha;
     String resultado;
+    int cantParticip;
 
-    public JSONInscripcionEvento (MainActivity disp, String t, String u, String f, int c){//Ademas tiene que recibir el nombre de usuario loggeado
+    public JSONInscripcionEvento (MainActivity disp, String t, String u, String f, int c, int canti){//Ademas tiene que recibir el nombre de usuario loggeado
         context = disp;
         turno = t;
         usuario = u;
         fecha = f;
         cancha = c;
+        cantParticip = canti;
         pDialog = new ProgressDialog(disp);
         pDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
         pDialog.setMessage("Inscribiendote al evento... \n\nAguarde!");
@@ -65,7 +67,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
             System.out.println("FECHA PHP: " + fech);
 
             String parametros = "fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha;
-            String urlString = ServerID.DBserver +"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha; // +java.net.URLEncoder.encode(parametros, "UTF-8");
+            String urlString = ServerID.DBserver +"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha + "&cant=" + cantParticip; // +java.net.URLEncoder.encode(parametros, "UTF-8");
             //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 

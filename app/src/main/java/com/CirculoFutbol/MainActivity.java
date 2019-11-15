@@ -1170,18 +1170,16 @@ public class  MainActivity extends AppCompatActivity
     }
 
     public void  continuarJSONPopUP(boolean fromPopU, String res) {
-        switch (res){
-            case "OK":
-                Toast.makeText(this.getApplicationContext(),"Se Inscribio correctamente.",Toast.LENGTH_SHORT).show();
-                break;
-            case "NOK1":
-                Toast.makeText(this.getApplicationContext(),"Error al inscribirse. No hay cupo disponible.",Toast.LENGTH_LONG).show();
-                cargarFullStock();
-                break;
-            case "NOK2":
+        if (res.compareTo("OK") == 0){
+            Toast.makeText(this.getApplicationContext(),"Se Inscribio correctamente.",Toast.LENGTH_SHORT).show();
+        }else{
+            if (res.compareTo("NOK2") == 0){
                 Toast.makeText(this.getApplicationContext(),"Error al inscribirse. Turno NO Disponible.",Toast.LENGTH_LONG).show();
-                break;
+            }else{
+                Toast.makeText(this.getApplicationContext(),"Error. No hay cupo disponible./n Saldo: " + res.substring(5,res.length()),Toast.LENGTH_LONG).show();
+            }
         }
+
         JSONEventos(fromPopU);
         this.ReloadALL(true);
     }
