@@ -68,12 +68,10 @@ public class JSONEventosUsuario extends AsyncTask<String, String, String>
             ServerID server = ServerID.getInstance();
            // System.out.println("min fecha:   " + minFecha);
 
-            String parametros = "fecha="+minFecha+"&user="+user;
             String urlString = ServerID.DBserver +"cargarEventosUsuario.php?fecha="+minFecha+"&user="+user;// +java.net.URLEncoder.encode(parametros, "UTF-8"); //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
-            urlString.replace(" ", "%20");
-            URL url = new URL(urlString);
+            URL url = new URL(urlString.replace(" ", "%20"));
 
             conn = (HttpURLConnection) url.openConnection();
             responseCode = conn.getResponseCode();

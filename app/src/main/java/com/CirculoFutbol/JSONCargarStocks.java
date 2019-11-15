@@ -70,13 +70,27 @@ public class JSONCargarStocks extends AsyncTask<String, String, String>{
 
             URL url = new URL(urlString);
             conn = (HttpURLConnection) url.openConnection();
+            //      conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setUseCaches(false);
+
             responseCode = conn.getResponseCode();
             isr = conn.getInputStream();
 
-        }catch(Exception e){
-            Log.e("log_tag", "-Error in http connection- "+e.toString());
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
 
-            txtFinal = "JSONCargarEventos - Couldnt connect to database - " + e.toString();
+                url = new URL(urlString);
+                conn = (HttpURLConnection) url.openConnection();
+                //      conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setUseCaches(false);
+
+                responseCode = conn.getResponseCode();
+                isr = conn.getInputStream();
+
+            }
+        }catch(Exception e){
+            Log.e("log_tag", "JSONCargarStocks -Error in http connection- "+e.toString() );
         }
 
         //convert response to string
