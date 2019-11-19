@@ -74,7 +74,7 @@ TextView btn, sc;
             isr = conn.getInputStream();
 
         }catch(Exception e){
-            Log.e("log_tag", "-Error in http connection- "+e.toString());
+            Log.e("log_tag", "JSONmostrarUsuarios -Error in http connection- "+e.toString());
 
             txtFinal = "JSONMostarUsuarios - Couldnt connect to database - " + e.toString();
         }
@@ -103,9 +103,9 @@ TextView btn, sc;
         String s = "";
 
         try {
-            System.out.println("JSONListaUsuarios : " + result);
+            System.out.println("JSONmostrarUsuarios : " + result);
 
-            if (result.compareTo("<br />null") != 0) { //== null){
+            if (result.compareTo("") != 0) { //== null){
 
                 JSONParser jsonParser = new JSONParser();
 
@@ -114,7 +114,7 @@ TextView btn, sc;
                 JSONArray jsonArrayResult = (JSONArray) jsonParser.parse(r);
 
 
-                System.out.println("jSONArrayResult: " + jsonArrayResult.toString());
+                System.out.println("JSONmostrarUsuarios: " + jsonArrayResult.toString());
 
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);
@@ -128,7 +128,7 @@ TextView btn, sc;
                 }
             }
         }catch (Exception e){
-            Log.e("log_tag", "JSONListaUsuario - Error analizando Archivo JSON from PHP- " + e.toString());
+            Log.e("log_tag", "JSONmostrarUsuarios - Error analizando Archivo JSON from PHP- " + e.toString());
         }
 
         return AsyncTask.Status.FINISHED.toString();

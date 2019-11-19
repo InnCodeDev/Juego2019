@@ -70,7 +70,7 @@ public class JSONActualizarMiDisponibilidad extends AsyncTask<String, String, St
             isr = conn.getInputStream();
 
         }catch(Exception e){
-            Log.e("log_tag", "-Error in http connection- "+e.toString());
+            Log.e("log_tag", "JSONActualizarMiDisponibilidad -Error in http connection- "+e.toString());
 
             txtFinal = "Couldnt connect to database - " + e.toString();
         }

@@ -58,7 +58,7 @@ public class JSONPopUpMail extends AsyncTask<String, String, String>  {
             isr = conn.getInputStream();
 
         }catch(Exception e){
-            Log.e("log_tag", "-Error in http connection- "+e.toString());
+            Log.e("log_tag", "JSONPopUpMail -Error in http connection- "+e.toString());
 
             txtFinal = "JsonPopUpMail - Couldnt connect to database - " + e.toString();
         }

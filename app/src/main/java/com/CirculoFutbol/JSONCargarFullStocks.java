@@ -80,7 +80,7 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
             isr = conn.getInputStream();
 
         }catch(Exception e){
-            Log.e("log_tag", "-Error in http connection- "+e.toString());
+            Log.e("log_tag", "JSONCargarFullStocks -Error in http connection- "+e.toString());
 
             txtFinal = "JSONCargarFullStocks - Couldnt connect to database - " + e.toString();
         }
@@ -109,7 +109,7 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
         String s = "";
 
         try {
-            System.out.println("JSONFullStock : " + result);
+            System.out.println("JSONCargarFullStocks : " + result);
 
             if (result.compareTo("") != 0){ //.toString().compareTo() != 0
 
@@ -120,7 +120,7 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
                 JSONArray jsonArrayResult = (JSONArray) jsonParser.parse(r);
 
 
-                System.out.println("jSONArrayResult JSONCargarFullStocks: " + jsonArrayResult.toString());
+                System.out.println("JSONCargarFullStocks: " + jsonArrayResult.toString());
 
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);

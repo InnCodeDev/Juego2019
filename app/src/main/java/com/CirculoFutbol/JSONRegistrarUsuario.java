@@ -63,7 +63,7 @@ public class JSONRegistrarUsuario extends AsyncTask<String, String, String>  {
             isr = conn.getInputStream();
 
         }catch(Exception e){
-            Log.e("log_tag", "-Error in http connection- "+e.toString());
+            Log.e("log_tag", "JSONRegistrarUsuario -Error in http connection- "+e.toString());
 
             txtFinal = "JSONRegistrarUsuario - Couldnt connect to database - " + e.toString();
         }
@@ -85,7 +85,7 @@ public class JSONRegistrarUsuario extends AsyncTask<String, String, String>  {
             }else
                 System.out.println("HTTPS RESPONSE CODE FALSE - "+responseCode);
         } catch(Exception e){
-            Log.e("log_tag", "JSONInscripcionEvento - Error converting result - "+e.toString());
+            Log.e("log_tag", "JSONRegistrarUsuario - Error converting result - "+e.toString());
         }
 
 

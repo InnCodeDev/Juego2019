@@ -56,7 +56,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
         try{
 
             ServerID server = ServerID.getInstance();
-            System.out.println("POPUP: Fecha: " + fecha + " -User: " + usuario + " - turno: " + turno + " - cancha: " + cancha);
+            System.out.println("POPUP: Fecha: " + fecha + " -User: " + usuario + " - turno: " + turno + " - cancha: " + cancha + " - CANT: " + cantParticip);
             String d = fecha.substring(0,fecha.indexOf("/"));
             String m = fecha.substring(fecha.indexOf("/")+1, fecha.lastIndexOf("/"));
             String a = fecha.substring(fecha.lastIndexOf("/")+1);
@@ -66,7 +66,6 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
 
             System.out.println("FECHA PHP: " + fech);
 
-            String parametros = "fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha;
             String urlString = ServerID.DBserver +"inscripcionEvento.php?fecha="+ fech+"&user="+usuario+"&turno=" + turno + "&cancha=" + cancha + "&cant=" + cantParticip; // +java.net.URLEncoder.encode(parametros, "UTF-8");
             //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
@@ -79,7 +78,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
             isr = conn.getInputStream();
 
         }catch(Exception e){
-            Log.e("log_tag", "-Error in http connection- "+e.toString());
+            Log.e("log_tag", "JSONInscripcionEvento -Error in http connection- "+e.toString());
 
             txtFinal = "JSONInscripcionEvento - Couldnt connect to database - " + e.toString();
         }

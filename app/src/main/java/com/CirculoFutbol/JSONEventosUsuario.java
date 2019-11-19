@@ -107,7 +107,7 @@ public class JSONEventosUsuario extends AsyncTask<String, String, String>
         String s = "";
 
         try {
-            System.out.println("JSONListaCategorias : " + result);
+            System.out.println("JSONEventosUsuario : " + result);
 
             if (result.compareTo("") != 0) { //== null){
 
@@ -118,7 +118,7 @@ public class JSONEventosUsuario extends AsyncTask<String, String, String>
                 JSONArray jsonArrayResult = (JSONArray) jsonParser.parse(r);
 
 
-                System.out.println("jSONArrayResult: " + jsonArrayResult.toString());
+                System.out.println("JSONEventosUsuario: " + jsonArrayResult.toString());
 
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);

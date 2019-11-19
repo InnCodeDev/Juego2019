@@ -83,7 +83,7 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
 
         }catch(Exception e){
             Log.e("log_tag", "-Error in http connection- "+e.toString());
-            txtFinal = "JSONCargarEventos - Couldnt connect to database - " + e.toString();
+            txtFinal = "JSONDetalleEvento - Couldnt connect to database - " + e.toString();
         }
 
         //convert response to string
@@ -103,14 +103,14 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
             }else
                 System.out.println("HTTPS RESPONSE CODE FALSE - "+responseCode);
         } catch(Exception e){
-            Log.e("log_tag", "JSONDetalleEventos - Error converting result - "+e.toString());
+            Log.e("log_tag", "JSONDetalleEvento - Error converting result - "+e.toString());
         }
 
 
         String s = "";
 
         try {
-            System.out.println("JSONListaUsuarios: " + result);
+            System.out.println("JSONDetalleEvento: " + result);
 
             if (result.compareTo("null") != 0) { //!= null){
 
@@ -121,7 +121,7 @@ public class JSONDetalleEvento extends AsyncTask<String, String, String>{
                 JSONArray jsonArrayResult = (JSONArray) jsonParser.parse(r);
 
 
-                System.out.println("jSONDetalleEventos ArrayResult: " + jsonArrayResult.toString());
+                System.out.println("JSONDetalleEvento ArrayResult: " + jsonArrayResult.toString());
 
                 for (int i=0; i<jsonArrayResult.size() ;i++){
                     JSONObject b = (JSONObject) jsonArrayResult.get(i);

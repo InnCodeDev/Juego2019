@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 /**
@@ -19,9 +20,13 @@ public class PopUpEvento extends DialogFragment {
     TextView btn;
     boolean viendoPart;
 
-    public PopUpEvento(){
+    RadioButton rb1;
+    RadioButton rb2;
+    EditText editText;
 
-    }//this, TextoTurno, Fecha, FB_user, turno, inscripto, cantF5, cantF7 );
+    public PopUpEvento(){ }
+
+    //this, TextoTurno, Fecha, FB_user, turno, inscripto, cantF5, cantF7 );
     public static PopUpEvento newInstance(MainActivity context, String TextoTurno, String Fecha, String User, String NroTurno, boolean inscripto, int CantF5, int CantF7){
         PopUpEvento pop = new PopUpEvento();
         c=context;
@@ -67,20 +72,27 @@ public class PopUpEvento extends DialogFragment {
 
         getDialog().setTitle("INSCRIPCION A EVENTO!");
 
-        view.findViewById(R.id.editText2).setEnabled(false);
+        rb1 = view.findViewById(R.id.radioButton);
+        rb2 = view.findViewById(R.id.radioButton2);
 
-        view.findViewById(R.id.radioButton2).setOnClickListener(new View.OnClickListener() {
+        editText = view.findViewById(R.id.editText2);
+        editText.setEnabled(false);
+
+        rb1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.findViewById(R.id.editText2).setEnabled(true);
+                editText.setEnabled(false);
+                editText.setText("");
             }
         });
-        view.findViewById(R.id.radioButton).setOnClickListener(new View.OnClickListener() {
+
+        rb2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.findViewById(R.id.editText2).setEnabled(false);
+                editText.setEnabled(true);
             }
         });
+
 
         //Boton cancha 5
         TextView btnTView5 = view.findViewById(R.id.textView61);
@@ -89,16 +101,14 @@ public class PopUpEvento extends DialogFragment {
             public void onClick(View view) {
                 System.out.println("A PARTICIPAR en Cancha 5!!");
                 try {
-                    if (view.findViewById(R.id.radioButton2).isSelected() == true){
-                        EditText cant = view.findViewById(R.id.editText2);
-                        JSONInscripcionEvento json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 5, Integer.valueOf(cant.getText().toString()));
-                        json.execute();
-                        PopUpEvento.this.dismiss();
+                    JSONInscripcionEvento json;
+                    if (rb2.isSelected() == true){
+                        json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 5, Integer.valueOf(editText.getText().toString()));
                     }else{
-                        JSONInscripcionEvento json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 5, 1);
-                        json.execute();
-                        PopUpEvento.this.dismiss();
+                        json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 5, 1);
                     }
+                    json.execute();
+                    PopUpEvento.this.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -111,16 +121,14 @@ public class PopUpEvento extends DialogFragment {
             public void onClick(View view) {
                 System.out.println("A PARTICIPAR en Cancha 7!!");
                 try {
-                    if (view.findViewById(R.id.radioButton2).isSelected() == true){
-                        EditText cant = view.findViewById(R.id.editText2);
-                        JSONInscripcionEvento json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 7, Integer.valueOf(cant.getText().toString()));
-                        json.execute();
-                        PopUpEvento.this.dismiss();
+                    JSONInscripcionEvento json;
+                    if (rb2.isSelected() == true){
+                        json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 7, Integer.valueOf(editText.getText().toString()));
                     }else{
-                        JSONInscripcionEvento json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 7, 1);
-                        json.execute();
-                        PopUpEvento.this.dismiss();
+                        json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 7, 1);
                     }
+                    json.execute();
+                    PopUpEvento.this.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -142,16 +150,13 @@ public class PopUpEvento extends DialogFragment {
                 }
                 System.out.println("A PARTICIPAR en cancha " + cancha + " !! " );
                 try {
+                    JSONInscripcionEvento json;
                     if (view.findViewById(R.id.radioButton2).isSelected() == true){
-                        EditText cant = view.findViewById(R.id.editText2);
-                        JSONInscripcionEvento json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), cancha, Integer.valueOf(cant.getText().toString()));
-                        json.execute();
-                        PopUpEvento.this.dismiss();
+                        json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), cancha, Integer.valueOf(editText.getText().toString()));
                     }else{
-                        JSONInscripcionEvento json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), cancha, 1);
-                        json.execute();
-                        PopUpEvento.this.dismiss();
+                        json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), cancha, 1);
                     }
+                    json.execute();
                     PopUpEvento.this.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
