@@ -102,7 +102,7 @@ public class PopUpEvento extends DialogFragment {
                 System.out.println("A PARTICIPAR en Cancha 5!!");
                 try {
                     JSONInscripcionEvento json;
-                    if (rb2.isSelected() == true){
+                    if (rb2.isSelected() ){
                         json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 5, Integer.valueOf(editText.getText().toString()));
                     }else{
                         json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 5, 1);
@@ -122,7 +122,7 @@ public class PopUpEvento extends DialogFragment {
                 System.out.println("A PARTICIPAR en Cancha 7!!");
                 try {
                     JSONInscripcionEvento json;
-                    if (rb2.isSelected() == true){
+                    if (rb2.isSelected() ){
                         json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 7, Integer.valueOf(editText.getText().toString()));
                     }else{
                         json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 7, 1);

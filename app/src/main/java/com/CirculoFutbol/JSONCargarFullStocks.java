@@ -107,11 +107,10 @@ public class JSONCargarFullStocks extends AsyncTask<String, String, String>{
 
 
         String s = "";
-
         try {
             System.out.println("JSONCargarFullStocks : " + result);
 
-            if (result.compareTo("") != 0){ //.toString().compareTo() != 0
+            if (result.compareTo("null") != 0){ //.toString().compareTo() != 0
 
                 JSONParser jsonParser = new JSONParser();
 
