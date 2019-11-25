@@ -121,9 +121,10 @@ TextView btn, sc;
                    // String turno = (String) b.get("turno");
                   //  String dia = (String) b.get("fecha");
                     String usuario = (String) b.get("USUARIO");
-                    System.out.println("Usuario: " + usuario);
+                    String cantidad = (String) b.get("cantidad");
+                    System.out.println("Usuario: " + usuario + " - cant:" + cantidad);
 
-                    s =  usuario; //turno + "*" + dia; //Formato: "turno":"2","fecha":"13-11-2018"
+                    s =  usuario + "    -- (" + cantidad +")"; //turno + "*" + dia; //Formato: "turno":"2","fecha":"13-11-2018"
                     arrayDispo.add(s); //Agrega cada combinacion Turno-Dia en el Array
                 }
             }

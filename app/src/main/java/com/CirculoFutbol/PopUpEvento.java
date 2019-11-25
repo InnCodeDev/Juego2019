@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by jose_ on 27/8/2018.
@@ -90,6 +92,9 @@ public class PopUpEvento extends DialogFragment {
             @Override
             public void onClick(View view) {
                 editText.setEnabled(true);
+                editText.requestFocus();
+                InputMethodManager imm = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
             }
         });
 
@@ -97,18 +102,25 @@ public class PopUpEvento extends DialogFragment {
         //Boton cancha 5
         TextView btnTView5 = view.findViewById(R.id.textView61);
         btnTView5.setOnClickListener(new View.OnClickListener() {
+            JSONInscripcionEvento json;
             @Override
             public void onClick(View view) {
                 System.out.println("A PARTICIPAR en Cancha 5!!");
                 try {
-                    JSONInscripcionEvento json;
-                    if (rb2.isSelected() ){
-                        json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 5, Integer.valueOf(editText.getText().toString()));
-                    }else{
+                    if (rb2.isChecked() ){
+                        if (editText.getText().toString().compareTo("") == 0){
+                            Toast.makeText(c,"Ingrese una cantidad correcta!",Toast.LENGTH_SHORT).show();
+                        }else{
+                            System.out.println("VAN A PARTICIPAR: " + Integer.valueOf(editText.getText().toString()));
+                            json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 5, Integer.valueOf(editText.getText().toString()));
+                            json.execute();
+                            PopUpEvento.this.dismiss();
+                        }
+                        }else{
                         json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 5, 1);
+                        json.execute();
+                        PopUpEvento.this.dismiss();
                     }
-                    json.execute();
-                    PopUpEvento.this.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -121,14 +133,22 @@ public class PopUpEvento extends DialogFragment {
             public void onClick(View view) {
                 System.out.println("A PARTICIPAR en Cancha 7!!");
                 try {
-                    JSONInscripcionEvento json;
-                    if (rb2.isSelected() ){
-                        json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 7, Integer.valueOf(editText.getText().toString()));
+                    JSONInscripcionEvento json = null;
+                    if (rb2.isChecked() ){
+                        if (editText.getText().toString().compareTo("") == 0){
+                            Toast.makeText(c,"Ingrese una cantidad correcta!",Toast.LENGTH_SHORT).show();
+                        }else{
+                            System.out.println("VAN A PARTICIPAR: " + Integer.valueOf(editText.getText().toString()));
+                            json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 7, Integer.valueOf(editText.getText().toString()));
+                            json.execute();
+                            PopUpEvento.this.dismiss();
+                        }
+
                     }else{
                         json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), 7, 1);
+                        json.execute();
+                        PopUpEvento.this.dismiss();
                     }
-                    json.execute();
-                    PopUpEvento.this.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -140,8 +160,6 @@ public class PopUpEvento extends DialogFragment {
         btnTViewIndist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView btnC5 = view.findViewById(R.id.textView5);
-                TextView btnC7 = view.findViewById(R.id.textView6);
                 int c5 = Integer.valueOf(getArguments().getString("cantF5")); //Integer.valueOf(btnC5.getText().toString());
                 int c7 = Integer.valueOf(getArguments().getString("cantF7")); // Integer.valueOf(btnC7.getText().toString());
                 int cancha = 5; //por defecto en caso que sean igual cantidad
@@ -150,14 +168,20 @@ public class PopUpEvento extends DialogFragment {
                 }
                 System.out.println("A PARTICIPAR en cancha " + cancha + " !! " );
                 try {
-                    JSONInscripcionEvento json;
-                    if (view.findViewById(R.id.radioButton2).isSelected() == true){
-                        json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), cancha, Integer.valueOf(editText.getText().toString()));
+                    JSONInscripcionEvento json=null;
+                    if (rb2.isChecked()){
+                        if (editText.getText().toString().compareTo("") == 0){
+                            Toast.makeText(c,"Ingrese una cantidad correcta!",Toast.LENGTH_SHORT).show();
+                        }else{
+                            json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), cancha, Integer.valueOf(editText.getText().toString()));
+                            json.execute();
+                            PopUpEvento.this.dismiss();
+                        }
                     }else{
                         json = new JSONInscripcionEvento((MainActivity) c,getArguments().getString("Nroturn"), getArguments().getString("user"), getArguments().getString("di"), cancha, 1);
+                        json.execute();
+                        PopUpEvento.this.dismiss();
                     }
-                    json.execute();
-                    PopUpEvento.this.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 } catch (Throwable throwable) {

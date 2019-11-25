@@ -92,7 +92,7 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
                 StringBuilder sb = new StringBuilder();
                 String line = "";
                 while ((line = reader.readLine()) != null) {
-                    System.out.println("TOSTRING: " + reader.readLine());
+              //      System.out.println("TOSTRING: " + reader.readLine());
                     sb.append(line);
                 }
                 isr.close();
@@ -149,9 +149,9 @@ public class JSONInscripcionEvento extends AsyncTask<String, String, String>  {
     @Override
     protected void onPostExecute(String result) {
         try {
+            ((MainActivity) context).continuarJSONPopUP(false, resultado);
             pDialog.dismiss();
             this.cancel(true); //finalize();d
-            ((MainActivity) context).continuarJSONPopUP(false, resultado);
         } catch (Throwable e) {
             e.printStackTrace();
         }

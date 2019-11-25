@@ -19,9 +19,11 @@
      978743906549-od0a4npfhpokhqdlu808grkske4979ep.apps.googleusercontent.com
      Google Sign-In
     978743906549-p116gnee4ppeerertabrln9mou4hse28.apps.googleusercontent.com
+
+    android:hardwareAccelerated="false"
     -->
     <application
-        android:hardwareAccelerated="false"
+
         android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/logoicon"

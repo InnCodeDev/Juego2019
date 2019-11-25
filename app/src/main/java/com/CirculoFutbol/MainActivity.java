@@ -1176,7 +1176,10 @@ public class  MainActivity extends AppCompatActivity
             if (res.compareTo("NOK2") == 0){
                 Toast.makeText(this.getApplicationContext(),"Error al inscribirse. Turno NO Disponible.",Toast.LENGTH_LONG).show();
             }else{
-                Toast.makeText(this.getApplicationContext(),"Error. No hay cupo disponible./n Saldo: " + res.substring(5,res.length()),Toast.LENGTH_LONG).show();
+                if (res.substring(0,4).compareTo("NOK1") == 0){
+                    Toast.makeText(this.getApplicationContext(),"Error. No hay cupo disponible./n Saldo: " + res.substring(5,res.length()),Toast.LENGTH_LONG).show();
+                }
+                //si no muestra nada, es porque viene del JSONBorrarParticipacion
             }
         }
 

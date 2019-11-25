@@ -67,12 +67,13 @@ public class Disponibilidad extends AppCompatActivity {
     public void ActualizarMiDisponibilidad(){
 
         CheckBox ck;
-        for(int i=1; i<17; i++){ //turno
+        for(int i=3; i<19; i++){ //turno
             for(int j=1; j<7; j++){ //dia
+                System.out.println("ACT DISPONIBILIDAD: Turno: " + j + " -- Dia " + i );
                 int resID = getResources().getIdentifier("checkBox"+i+""+j, "id", this.getPackageName());
                 ck = findViewById(resID);
                 if (ck.isChecked()){
-//                    System.out.println("ACT DISPONIBILIDAD: Turno: " + j + " -- Dia " + i );
+
                     disp=disp +i + "-" + j + "*";
                 }
             }
