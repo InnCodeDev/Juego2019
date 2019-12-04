@@ -377,8 +377,6 @@ public class  MainActivity extends AppCompatActivity
         //Verificar que la fecha y turno que se seleccionó sea futura, no haya pasado
         //El dia minimo de la semana + los dias desplazados del lunes, tiene que ser mayor a la fecha de hoy
 
-
-
             tviewTurno = NroTurno;
             Calendar aux2 = cal;
             try {
