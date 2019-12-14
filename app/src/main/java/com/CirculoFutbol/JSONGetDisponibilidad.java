@@ -67,7 +67,7 @@ public class JSONGetDisponibilidad extends AsyncTask<String, String, String> {
 
                 ServerID server = ServerID.getInstance();
 
-                String urlString = ServerID.DBserver +"getDisponibilidad.php?user="+FB_user;
+                String urlString = ServerID.DBserver +"getDisponibilidad.php?user="+FB_user.replace(" ", "%20");
 
                 urlString.replace(" ", "%20");
                 URL url = new URL(urlString);

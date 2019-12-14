@@ -52,12 +52,14 @@ public class JSONRegistrarUsuario extends AsyncTask<String, String, String>  {
 
             ServerID server = ServerID.getInstance();
             System.out.println("Registrando al Usuario: " + usuario + " -- " + mail);
-            String urlString = ServerID.DBserver +"registrarUsuario.php?user="+usuario+"&mail=" + mail; //
+
+            String urlString = ServerID.DBserver +"registrarUsuario.php?user="+usuario.replace(" ", "%20")+"&mail=" + mail; //
             //Pasar la fecha a partir de cuando filtrar
             //Pasar el usuario para ver si participa en ese evento!!!
 
-            urlString.replace(" ", "%20");
+//            urlString.replace(" ", "%20");
             URL url = new URL(urlString);
+            System.out.println("STRING REGISTRAR USUARIO: " + urlString);
             conn = (HttpURLConnection) url.openConnection();
             responseCode = conn.getResponseCode();
             isr = conn.getInputStream();
