@@ -7,6 +7,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -80,6 +82,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     GoogleApiClient mGoogleClient;
     private final static int RC_SIGN_IN = 2;
     FirebaseAuth.AuthStateListener mAuthListener;
+    private static long back_pressed;
 
     @Override
     protected void onStart(){
@@ -122,6 +125,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 */
+        TextView txtVersion = findViewById(R.id.textView8);
+        try {
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            txtVersion.setText("Version: " + pInfo.versionName);
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+
         button = findViewById(R.id.sign_in_button);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -165,10 +179,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     public void onBackPressed() {
-        //Execute your code here
-  //      super.onBackPressed();
- //       finish();
-
+        if (back_pressed + 2000 > System.currentTimeMillis()){
+            mAuth.signOut();
+            mGoogleClient.disconnect();
+            super.onBackPressed();
+        }
+        else{
+            Toast.makeText(getBaseContext(), "Presione de nuevo para salir.",
+                    Toast.LENGTH_SHORT).show();
+            back_pressed = System.currentTimeMillis();
+        }
     }
 
     private void signIn(){
