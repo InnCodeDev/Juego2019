@@ -59,7 +59,7 @@ public class JSONActualizarMiDisponibilidad extends AsyncTask<String, String, St
 
             String parametros = "user=Jose&disponibilidad="+dispo;
 
-            String urlString = ServerID.DBserver +"actualizarMiDisponibilidad.php?user="+FB_user+"&disponibilidad="+dispo;
+            String urlString = ServerID.DBserver +"actualizarMiDisponibilidad.php?user="+FB_user.replace(" ", "%20")+"&disponibilidad="+dispo;
 
 
             urlString.replace(" ", "%20");
