@@ -15,8 +15,9 @@ public class ServerID {
     }
 
     public ServerID(){
-        DBserver = "http://circulohost.esy.es/"; //micancha.000webhostapp.com/"; //hostingerapp.com/"; //"http://inncode.comoj.com/";
+      //  DBserver = "http://circulohost.esy.es/"; //micancha.000webhostapp.com/"; //hostingerapp.com/"; //"http://inncode.comoj.com/";
                             //";
+        DBserver = "http://micancha.hostingerapp.com/";
     }
 
 }

@@ -1271,6 +1271,7 @@ public class  MainActivity extends AppCompatActivity
 
             Intent nvo = new Intent(this, LoginActivity.class);
             this.startActivity(nvo);
+            finish();
 
       //  } else if (id == R.id.nav_share) {
             //ESTE MENU ESTA OCULTO EN EL xml

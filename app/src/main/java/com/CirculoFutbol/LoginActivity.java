@@ -98,33 +98,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Set up the login form.
- /*       mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
-*/
         TextView txtVersion = findViewById(R.id.textView8);
         try {
             PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -133,7 +107,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-
 
 
         button = findViewById(R.id.sign_in_button);
@@ -167,7 +140,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         };
 
         mGoogleClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
+                .enableAutoManage(LoginActivity.this, new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
                         Toast.makeText(LoginActivity.this, "Algo anda mal con FireBase", Toast.LENGTH_SHORT).show();
@@ -182,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (back_pressed + 2000 > System.currentTimeMillis()){
             mAuth.signOut();
             mGoogleClient.disconnect();
-            super.onBackPressed();
+          // super.onBackPressed();
         }
         else{
             Toast.makeText(getBaseContext(), "Presione de nuevo para salir.",
